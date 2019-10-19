@@ -1,0 +1,39 @@
+image: node:latest
+
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  cache:
+    key: "$CI_COMMIT_REF_SLUG"
+    paths:
+      - node_modules/
+  script:
+    - npm install
+    - npm test
+
+build_production:
+  stage: build
+  script:
+    - apt-get update
+  artifacts:
+    paths:
+      - build
+  only:
+    - master
+
+deploy_production:
+  image: python:3.6-stretch
+  type: deploy
+  before_script:
+    - pip install awscli
+  script:
+    - aws s3 sync --acl public-read --delete build $S3_BUCKET_PRODUCTION
+    - aws s3 cp $S3_BUCKET_PRODUCTION/service-worker.js $S3_BUCKET_PRODUCTION/service-worker.js --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type application/javascript --acl public-read
+    - aws s3 cp $S3_BUCKET_PRODUCTION/index.html $S3_BUCKET_PRODUCTION/index.html --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type text/html --acl public-read
+  stage: deploy
+  only:
+    - master
