@@ -32,8 +32,6 @@ deploy_production:
     - pip install awscli
   script:
     - aws s3 sync --acl public-read --delete build $S3_BUCKET_PRODUCTION
-    - aws s3 cp $S3_BUCKET_PRODUCTION/service-worker.js $S3_BUCKET_PRODUCTION/service-worker.js --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type application/javascript --acl public-read
-    - aws s3 cp $S3_BUCKET_PRODUCTION/index.html $S3_BUCKET_PRODUCTION/index.html --metadata-directive REPLACE --cache-control max-age=0,no-cache,no-store,must-revalidate --content-type text/html --acl public-read
   stage: deploy
   only:
     - master
