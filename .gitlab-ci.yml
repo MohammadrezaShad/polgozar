@@ -20,7 +20,7 @@ build_production:
   script:
     - apt-get update
     - npm install
-    - npm run build
+    - REACT_APP_ENV=production npm run build
   artifacts:
     paths:
       - build

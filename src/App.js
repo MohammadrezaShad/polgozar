@@ -1,20 +1,24 @@
 import React from 'react';
+import AppStyle from './App.style';
+import { ThemeProvider } from 'styled-components';
 import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Home from './containers/Home';
+import theme from './settings/theme';
 
-function App() {
-  return (
-    <div className="App">
-      <div className="bgimg">
-        <div className="topleft">
-          <p>POLGOZAR</p>
-        </div>
-        <div className="middle">   
-          <h1>COMING SOON</h1>
-          <hr/>
-        </div>
-      </div>
-    </div>
-  );
-}
-
+const App = () => (
+  <div>
+    <ThemeProvider theme={theme}>
+      <AppStyle id="appRoot">
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </Router>
+      </AppStyle>
+    </ThemeProvider>
+  </div>
+);
 export default App;
