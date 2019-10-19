@@ -19,6 +19,8 @@ build_production:
   stage: build
   script:
     - apt-get update
+    - npm install
+    - npm run build
   artifacts:
     paths:
       - build
