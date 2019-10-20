@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Bg from 'assets/images/bg.jpg';
 import Logo from 'assets/images/logo-light.svg';
+import moment from 'moment';
+import { Icon } from 'antd';
+
 class Home extends Component {
+  state = {
+    dateIdx: 0
+  };
+  setDate = idx => {
+    this.setState({ dateIdx: idx });
+  };
   render() {
+    const { dateIdx } = this.state;
     return (
       <WrapperStyle>
         <div className="innerContentWrapper">
@@ -12,6 +22,27 @@ class Home extends Component {
               <img src={Logo} alt="" className="logo" />
             </div>
             <h3 className="commingSoon">COMING SOON</h3>
+            <div className="calendarCont">
+              <div className="dateController">
+                <button onClick={() => this.setDate(dateIdx - 1)}>
+                  <Icon type="caret-left" />
+                </button>
+                <button onClick={() => this.setDate(0)} className="todayBtn">
+                  Today
+                </button>
+                <button onClick={() => this.setDate(dateIdx + 1)}>
+                  <Icon type="caret-right" />
+                </button>
+              </div>
+
+              <div className="contentCont">
+                <p>
+                  {moment()
+                    .add(dateIdx, 'day')
+                    .format('dddd, MMMM D YYYY')}
+                </p>
+              </div>
+            </div>
             <div className="subscribtionForm">
               <form
                 action="https://gmail.us20.list-manage.com/subscribe/post?u=fc29e5a1d31ba746a460139cc&amp;id=2bb6ad23d9"
@@ -69,10 +100,10 @@ const WrapperStyle = styled.div`
         height: 100vh;
     }
     .innerCont{
+        padding: 2.5em 1em;
         position: absolute;
         width: 80%;
         margin: auto;
-        height: 500px;
         border-radius: 10px;
         background: linear-gradient(94deg, rgba(255,227,162,0.5) 0%, rgba(24,86,111,0.5) 100%);
         position: absolute;
@@ -84,7 +115,6 @@ const WrapperStyle = styled.div`
         .logoCont{
             width: 250px;
             margin: auto;
-            margin-top: 2em;
             padding: 0 2em 1em 2em;
             border-bottom: 1px solid #404e59;
         }
@@ -92,9 +122,9 @@ const WrapperStyle = styled.div`
             padding: 0.5em 0;
             font-size: 3em;
             font-weight: 600;
+            color: #fff;
         }
         .subscribtionForm{
-            margin-top 3em;
             form{
                 color: #000;
                 font-size: 0.9em;
@@ -124,6 +154,59 @@ const WrapperStyle = styled.div`
                 &:hover{
                     cursor: pointer;
                     background-color: #9acee2;
+                }
+            }
+        }
+        .calendarCont{
+            border: 1px solid ${theme.palette.primary};
+            display: inline-block;
+            padding: 2em 5em;
+            margin-bottom: 5em;
+            margin-top: 1.5em;
+            border-radius: 5px;
+            -webkit-box-shadow: 0px 21px 42px -11px rgba(255,179,0,1);
+            -moz-box-shadow: 0px 21px 42px -11px rgba(255,179,0,1);
+            box-shadow: 0px 21px 42px -11px rgba(255,179,0,1);
+            min-width: 600px;
+            ${theme.media.xs`
+                 min-width: initial;
+                 padding: 2em 1em;
+            `}
+            p{
+                font-size: 1.5em;
+                font-weight: 500;
+            }
+            .dateController{
+                position: relative;
+                margin-bottom: 1em;
+                position: relative;
+                font-weight: 600;
+                font-size: 1.2em;
+                &:after{
+                    content:'';
+                    position: absolute;
+                    margin: auto;
+                    bottom: 0;
+                    width: 50%;
+                    height: 1px;
+                    background-color: #fff;
+                    opacity: 0.6;
+                    right:0;
+                    left: 0;
+                }
+                button{
+                    transition: all 0.2s;
+                    border: none;
+                    outline: none;
+                    box-shadow: none;
+                    padding: 1em;
+                    &:hover{
+                        cursor: pointer;
+                        color: ${theme.palette.primary};
+                    }
+                    &.todayBtn{
+                        padding: 1em 2em;
+                    }
                 }
             }
         }
