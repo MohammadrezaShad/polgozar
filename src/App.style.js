@@ -1,11 +1,10 @@
 import styled, { css } from 'styled-components';
 
-const GlobalStyle = styled.div`
+const AppStyle = styled.div`
   ${({ theme }) => css`
     font-family: ${theme.fonts.primary};
     font-variant-numeric: initial;
     font-weight: 300;
-    body,
     a,
     button,
     input,
@@ -20,7 +19,11 @@ const GlobalStyle = styled.div`
       font-size: inherit;
       margin: 0;
     }
+    .innercontentwidth: {
+      margin: auto;
+      max-width: 1300px;
+    }
   `}
 `;
 
-export default GlobalStyle;
+export default AppStyle;
