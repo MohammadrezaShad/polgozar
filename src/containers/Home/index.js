@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled, { css } from 'styled-components';
 import Bg from 'assets/images/bg.jpg';
 import Logo from 'assets/images/logo-light.svg';
-import moment from 'moment';
+import moment from 'moment-jalaali';
 import { Icon } from 'antd';
 
 class Home extends Component {
@@ -14,6 +14,7 @@ class Home extends Component {
   };
   render() {
     const { dateIdx } = this.state;
+    const date = moment().add(dateIdx, 'day');
     return (
       <WrapperStyle>
         <div className="innerContentWrapper">
@@ -36,11 +37,8 @@ class Home extends Component {
               </div>
 
               <div className="contentCont">
-                <p>
-                  {moment()
-                    .add(dateIdx, 'day')
-                    .format('dddd, MMMM D YYYY')}
-                </p>
+                <p>{date.format('dddd, MMMM D YYYY')}</p>
+                <p>{date.format('jD jMMMM jYYYY')}</p>
               </div>
             </div>
             <div className="subscribtionForm">
@@ -106,6 +104,8 @@ const WrapperStyle = styled.div`
         margin: auto;
         border-radius: 10px;
         background: linear-gradient(94deg, rgba(255,227,162,0.5) 0%, rgba(24,86,111,0.5) 100%);
+        background: -moz-linear-gradient(94deg, rgba(255,227,162,0.5) 0%, rgba(24,86,111,0.5) 100%);
+        background: -o-linear-gradient(94deg, rgba(255,227,162,0.5) 0%, rgba(24,86,111,0.5) 100%);
         position: absolute;
         top: 50%;
         left: 50%;
