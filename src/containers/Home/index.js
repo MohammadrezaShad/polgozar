@@ -4,7 +4,40 @@ import Bg from 'assets/images/bg.jpg';
 import Logo from 'assets/images/logo-light.svg';
 import moment from 'moment-jalaali';
 import { Icon } from 'antd';
+import _ from 'lodash';
 
+const ZDays = [
+  'urmazd',
+  'vahman',
+  'ardibehesht',
+  'shahrivar',
+  'spandarmaz',
+  'khordad',
+  'amordad',
+  'dey be azar',
+  'azar',
+  'aban',
+  'khor(khir)',
+  'mah',
+  'tir',
+  'goosh',
+  'dey be mehr',
+  'mehr',
+  'soroush',
+  'rashn',
+  'farvardin',
+  'verahram',
+  'ram',
+  'bad',
+  'dey be din',
+  'din',
+  'ard ',
+  'ashtad',
+  'asman',
+  'zamiyad',
+  'mantraspand',
+  'anaram'
+];
 class Home extends Component {
   state = {
     dateIdx: 0
@@ -15,6 +48,8 @@ class Home extends Component {
   render() {
     const { dateIdx } = this.state;
     const date = moment().add(dateIdx, 'day');
+    console.log(date.format('DDD'), date.format('jDDD'), 'dayyyy');
+    const ZDayName = _.capitalize(ZDays[(parseInt(date.format('jDDD')) % 30) - 1]);
     return (
       <WrapperStyle>
         <div className="innerContentWrapper">
@@ -39,6 +74,7 @@ class Home extends Component {
               <div className="contentCont">
                 <p>{date.format('dddd, MMMM D YYYY')}</p>
                 <p>{date.format('jD jMMMM jYYYY')}</p>
+                <p>{ZDayName}</p>
               </div>
             </div>
             <div className="subscribtionForm">
