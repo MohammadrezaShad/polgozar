@@ -1,43 +1,45 @@
-import React, { Component } from 'react';
-import styled, { css } from 'styled-components';
-import Bg from 'assets/images/bg.jpg';
-import Logo from 'assets/images/logo-light.svg';
-import moment from 'moment-jalaali';
-import { Icon } from 'antd';
-import _ from 'lodash';
+import React, { Component } from "react";
+import styled, { css } from "styled-components";
+import Bg from "assets/images/bg.jpg";
+import Logo from "assets/images/logo-light.svg";
+import moment from "moment-jalaali";
+import { Icon } from "antd";
+import _ from "lodash";
 
 const ZDays = [
-  'urmazd',
-  'vahman',
-  'ardibehesht',
-  'shahrivar',
-  'spandarmaz',
-  'khordad',
-  'amordad',
-  'dey be azar',
-  'azar',
-  'aban',
-  'khor(khir)',
-  'mah',
-  'tir',
-  'goosh',
-  'dey be mehr',
-  'mehr',
-  'soroush',
-  'rashn',
-  'farvardin',
-  'verahram',
-  'ram',
-  'bad',
-  'dey be din',
-  'din',
-  'ard ',
-  'ashtad',
-  'asman',
-  'zamiyad',
-  'mantraspand',
-  'anaram'
+  "anaram",
+  "urmazd",
+  "vahman",
+  "ardibehesht",
+  "shahrivar",
+  "spandarmaz",
+  "khordad",
+  "amordad",
+  "dey be azar",
+  "azar",
+  "aban",
+  "khor(khir)",
+  "mah",
+  "tir",
+  "goosh",
+  "dey be mehr",
+  "mehr",
+  "soroush",
+  "rashn",
+  "farvardin",
+  "verahram",
+  "ram",
+  "bad",
+  "dey be din",
+  "din",
+  "ard ",
+  "ashtad",
+  "asman",
+  "zamiyad",
+  "mantraspand"
 ];
+const extraZdays = ["vahooshtoesh", "ahnavad", "oshtavad", "sepantamad", "vahookhashatr"];
+const NaborsDay = ["vahman", "mah", "goosh", "ram"];
 class Home extends Component {
   state = {
     dateIdx: 0
@@ -47,9 +49,11 @@ class Home extends Component {
   };
   render() {
     const { dateIdx } = this.state;
-    const date = moment().add(dateIdx, 'day');
-    console.log(date.format('DDD'), date.format('jDDD'), 'dayyyy');
-    const ZDayName = _.capitalize(ZDays[(parseInt(date.format('jDDD')) % 30) - 1]);
+    const date = moment().add(dateIdx, "day");
+    const dayInYear = parseInt(date.format("jDDD"));
+    const ZDayName = dayInYear > 360 ? extraZdays[dayInYear % 5] : ZDays[dayInYear % 30];
+    const isNabor = NaborsDay.includes(ZDayName);
+    console.log(dayInYear, "sffsakgjha");
     return (
       <WrapperStyle>
         <div className="innerContentWrapper">
@@ -72,9 +76,11 @@ class Home extends Component {
               </div>
 
               <div className="contentCont">
-                <p>{date.format('dddd, MMMM D YYYY')}</p>
-                <p>{date.format('jD jMMMM jYYYY')}</p>
-                <p>{ZDayName}</p>
+                <p>{date.format("dddd, MMMM D YYYY")}</p>
+                <p>{date.format("jD jMMMM jYYYY")}</p>
+                <p>
+                  {_.capitalize(ZDayName)} {isNabor && <span className="naborDay">(Nabor)</span>}
+                </p>
               </div>
             </div>
             <div className="subscribtionForm">
@@ -101,7 +107,7 @@ class Home extends Component {
                   className="submitBtn"
                 />
                 <input
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   type="text"
                   name="b_fc29e5a1d31ba746a460139cc_2bb6ad23d9"
                   tabIndex="-1"
@@ -132,6 +138,10 @@ const WrapperStyle = styled.div`
         margin: auto;
         position:relative;
         height: 100vh;
+    }
+    .naborDay{
+      font-size: 0.6em;
+      color: ${theme.palette.secondary};
     }
     .innerCont{
         padding: 2.5em 1em;
@@ -241,7 +251,12 @@ const WrapperStyle = styled.div`
                         color: ${theme.palette.primary};
                     }
                     &.todayBtn{
-                        padding: 1em 2em;
+                      padding: 0.2em 2em;
+                      border-radius: 50px;  
+                      border: 1px solid #ffffff;
+                      &:hover{
+                        border-color: ${theme.palette.primary};
+                      }
                     }
                 }
             }
