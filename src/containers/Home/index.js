@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import styled, { css } from "styled-components";
 import Bg from "assets/images/bg.jpg";
 import Logo from "assets/images/logo-light.svg";
-import _ from "lodash";
 import ZCalendar from "./zCalendar";
 
 class Home extends Component {
