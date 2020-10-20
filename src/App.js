@@ -1,24 +1,24 @@
-import React from 'react';
-import AppStyle from './App.style';
-import { ThemeProvider } from 'styled-components';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Home from './containers/Home';
-import theme from './settings/theme';
+import React from "react";
+import GlobalStyle from "./global.style";
+import "./assets/fonts/style.css";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./containers/Home";
+import { ApolloProvider } from "@apollo/client";
+import { client } from "helpers/client";
+import "antd/dist/antd.less";
 
 const App = () => (
-  <div>
-    <ThemeProvider theme={theme}>
-      <AppStyle id="appRoot">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </Router>
-      </AppStyle>
-    </ThemeProvider>
+  <div id="appRoot">
+    <ApolloProvider client={client}>
+      <GlobalStyle />
+      <Router>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </Router>
+    </ApolloProvider>
   </div>
 );
 export default App;
