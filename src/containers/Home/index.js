@@ -28,28 +28,6 @@ const Home = () => {
     <div>
       <Header light />
       <HeroImage img={BgImage} overlay />
-      <Form layout={"vertical"} form={form}>
-        <FormItem label="Form Layout" name="layout" theme="dark">
-          <Radio.Group>
-            <Radio.Button value="horizontal">Horizontal</Radio.Button>
-            <Radio.Button value="vertical">Vertical</Radio.Button>
-            <Radio.Button value="inline">Inline</Radio.Button>
-          </Radio.Group>
-        </FormItem>
-        <FormItem label="Field A">
-          <Input placeholder="input placeholder" />
-        </FormItem>
-        <FormItem label="Field B">
-          <Input placeholder="input placeholder" />
-        </FormItem>
-        <FormItem name="field" noStyle>
-          <Input />
-        </FormItem>
-        // that will bind input
-        <FormItem>
-          <Button type="primary">Submit</Button>
-        </FormItem>
-      </Form>
     </div>
   );
 };

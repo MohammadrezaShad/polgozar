@@ -63,6 +63,7 @@ const FormItemWrapper = styled.div`
     }
     .ant-form-item-label > label {
       color: ${colors[mappedColors.label[color]]};
+      padding-left: ${spacer.xs};
     }
   `}
 `;
