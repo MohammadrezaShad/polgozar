@@ -1,3 +1,4 @@
+const React = require("react");
 const { css } = require("styled-components");
 const { rgba } = require("polished");
 
@@ -8,6 +9,11 @@ const sizes = {
   lg: "992px",
   xl: "1200px",
   xxl: "1500px",
+};
+
+const maxWinSize = (size) => {
+  const windowSize = window.innerWidth;
+  return windowSize <= parseInt(sizes[size].replace("px", ""));
 };
 
 const media = Object.keys(sizes).reduce(
@@ -21,6 +27,23 @@ const media = Object.keys(sizes).reduce(
   },
   { ...sizes }
 );
+
+const snippet = {
+  underline: (color = colors.font) => css`
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    margin-bottom: ${spacer.xl};
+    &:before {
+      content: "";
+      position: absolute;
+      width: 90%;
+      height: 2px;
+      background-color: ${color};
+      bottom: -0.15rem;
+    }
+  `,
+};
 
 const colors = {
   primary: "#91c8de",
@@ -50,7 +73,7 @@ const colors = {
   gray900: "#212529",
 
   // '#5c5c5c'
-
+  // '#02192b'
   cream100: "#FFF2D4",
 
   red100: "#ffd6dd",
@@ -69,18 +92,26 @@ const fonts = {
 const fontWeight = {
   light: "300",
   normal: "400",
-  bold: "500",
-  bolder: "800",
+  bold: "600",
+  bolder: "700",
+  heavy: "800",
 };
 
 const fontSize = {
   xs: ".75rem", // 12px
   sm: ".875rem", // 14 px
   base: "1rem", // 16px
-  md: "1.125", // 18px
+  md: "1.125rem", // 18px
   lg: "1.25rem", // 20 px
   xl: "1.5rem", // 24 px
   xxl: "1.75rem",
+};
+
+const fontType = {
+  sm: { "font-size": fontSize.sm, "font-weight": fontWeight.light },
+  md: { "font-size": fontSize.md, "font-weight": fontWeight.bold },
+  lg: { "font-size": fontSize.lg, "font-weight": fontWeight.bolder },
+  xl: { "font-size": fontSize.xl, "font-weight": fontWeight.heavy },
 };
 
 const baseSpace = 1;
@@ -95,9 +126,9 @@ const spacer = {
 };
 
 const shadow = {
-  sm: `0 .5rem 1rem ${rgba(colors.black, 0.15)}`,
-  md: `0 .125rem .25rem ${rgba(colors.black, 0.075)}`,
-  lg: `0 1rem 3rem ${rgba(colors.black, 0.175)}`,
+  sm: `0 .125rem .25rem ${rgba(colors.black, 0.075)}`,
+  md: `0 .5rem 1rem ${rgba(colors.black, 0.15)}`,
+  lg: `0 1rem 3rem ${rgba(colors.black, 0.3)}`,
   insent: `inset 0 1px 2px ${rgba(colors.black, 0.075)}`,
 };
 
@@ -132,4 +163,7 @@ module.exports = {
   fonts,
   rem,
   heights,
+  maxWinSize,
+  fontType,
+  snippet,
 };

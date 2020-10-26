@@ -1,5 +1,11 @@
 const CracoLessPlugin = require("craco-less");
-const { colors, spacer, heights } = require("./src/settings/style");
+const {
+  colors,
+  spacer,
+  heights,
+  fonts,
+  fontSize,
+} = require("./src/settings/style");
 
 module.exports = {
   plugins: [
@@ -21,6 +27,16 @@ module.exports = {
               white: colors.white,
               black: colors.black,
 
+              "@font-size-base": "15px",
+              "@text-color": colors.font,
+              "@font-family": fonts.primary,
+              "@heading-color": colors.font,
+              "@heading-1-size": fontSize.xxl,
+              "@heading-2-size": fontSize.xl,
+              "@heading-3-size": fontSize.lg,
+              "@heading-4-size": fontSize.md,
+              "@heading-5-size": fontSize.base,
+              "@divider-text-padding": "0",
               // vertical paddings
               //   "@padding-lg": spacer.xl,
               //   "@padding-md": spacer.lg,

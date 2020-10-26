@@ -1,18 +1,23 @@
 import React from "react";
-import GlobalStyle from "./global.style";
-import "./assets/fonts/style.css";
 import Home from "./containers/Home";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "helpers/client";
+
+// library CSS
 import "antd/dist/antd.less";
+import "./assets/fonts/style.css";
+import "swiper/swiper.scss";
+
+import GlobalStyle from "./global.style";
+
 import RouterWrapper from "./RouterWrapper";
 
 const App = () => (
-  <div id="appRoot">
+  <React.Fragment>
     <ApolloProvider client={client}>
-      <GlobalStyle />
       <RouterWrapper />
     </ApolloProvider>
-  </div>
+    <GlobalStyle />
+  </React.Fragment>
 );
 export default App;

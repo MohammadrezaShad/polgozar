@@ -1,6 +1,6 @@
 import React from "react";
 import { Modal } from "antd";
-import { Button } from "components";
+import { Button } from "components/elements";
 import styled, { css } from "styled-components";
 import { rgba, colors, spacer, fontWeight } from "settings/style";
 
@@ -14,7 +14,7 @@ const ModalWrapper = ({
   return (
     <Modal
       getContainer={() =>
-        window.document.getElementById("appRoot") || window.document.body
+        window.document.getElementById("root") || window.document.body
       }
       {...props}
       footer={null}

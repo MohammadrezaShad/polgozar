@@ -25,6 +25,9 @@ export const getALlGroups = gql`
         lat
         lng
       }
+      categories {
+        title
+      }
     }
   }
 `;

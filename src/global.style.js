@@ -36,7 +36,6 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: ${fonts.primary};
-    color: ${colors.font};
     font-size: inherit;
     margin: 0;
   }
@@ -70,12 +69,12 @@ const GlobalStyle = createGlobalStyle`
   input,
   textarea,
   button {
-    border: 1px solid gray;
+    border: none;
   }
 
   /* Some defaults for one-liner buttons */
   button {
-    padding: 0.75em 1em;
+    padding:0 ;
     border-radius: 0;
     line-height: 1;
     background-color: transparent;
@@ -118,8 +117,8 @@ const GlobalStyle = createGlobalStyle`
    *******************/
   noscript {
     display: block;
-    margin-bottom: 1em;
-    margin-top: 1em;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
   }
 
   /*******************
@@ -141,17 +140,17 @@ const GlobalStyle = createGlobalStyle`
 
   /* ant design overwrite styles */
   /* MODAL */
-  .ant-modal-mask{
+  .ant-modal-mask, .ant-drawer-mask{
     backdrop-filter: blur(15px);
     background-color: rgba(255, 255, 255, 0.15) !important;
   }
-  .ant-modal-content, .ant-modal-header {
+  .ant-modal-content, .ant-modal-header, .ant-drawer-wrapper-body {
     transition: all 0.2s;
     background-color: ${rgba(colors.gray600, 0.9)} !important;
     p,h1,h2,span{
       color: white;
     }
-    .ant-modal-header{
+    .ant-modal-header, .ant-drawer-header{
       background-color: ${rgba(colors.gray600, 0.9)} !important;
       border-bottom: 1px solid ${rgba(colors.gray500, 0.5)};
       padding: ${spacer.lg} ${spacer.xl};
@@ -160,7 +159,7 @@ const GlobalStyle = createGlobalStyle`
       }
     }
     
-    .ant-modal-title{
+    .ant-modal-title, .ant-drawer-title{
       color: ${colors.accent}
     }
     .ant-modal-body{
