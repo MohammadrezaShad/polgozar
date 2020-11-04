@@ -1,25 +1,25 @@
-import React, { useState } from "react";
-import Logo from "assets/images/logo-light.svg";
-import styled, { css } from "styled-components";
-import { rgba, colors, spacer, fontWeight, media } from "settings/style";
-import { Container, Button, Modal, FormItem } from "components/elements";
-import { Input, Form, Drawer } from "antd";
-import { NavLink as Link } from "react-router-dom";
-import { ThreeBarsIcon } from "@primer/octicons-react";
+import React, { useState } from 'react'
+import Logo from 'assets/images/logo-light.svg'
+import styled, { css } from 'styled-components'
+import { rgba, colors, spacer, fontWeight, media } from 'settings/style'
+import { Container, Button, Modal, FormItem } from 'components/elements'
+import { Input, Form, Drawer } from 'antd'
+import { NavLink as Link } from 'react-router-dom'
+import { ThreeBarsIcon } from '@primer/octicons-react'
 
 const headerRoutes = [
-  { name: "Home", path: "/" },
-  { name: "Group and Event search", path: "/fsa" },
-  { name: "Start new Group / Event", path: "/fsa" },
-];
+  { name: 'Home', path: '/' },
+  { name: 'Group and Event search', path: '/fsa' },
+  { name: 'Start new Group / Event', path: '/fsa' },
+]
 export const Header = ({ light = true }) => {
-  const [modalVisibility, setModal] = useState(false);
-  const [drawer, setDrawer] = useState(false);
+  const [modalVisibility, setModal] = useState(false)
+  const [drawer, setDrawer] = useState(false)
   return (
     <HeaderWrapper light={light}>
       <Drawer
         title="Basic Drawer"
-        placement={"left"}
+        placement="left"
         closable={false}
         onClose={() => setDrawer(false)}
         visible={drawer}
@@ -63,7 +63,7 @@ export const Header = ({ light = true }) => {
             <div className="login-signup">
               <Button
                 type="link"
-                color={light ? "white" : "primary"}
+                color={light ? 'white' : 'primary'}
                 onClick={() => setModal(true)}
               >
                 Login
@@ -76,10 +76,10 @@ export const Header = ({ light = true }) => {
         </div>
       </Container>
     </HeaderWrapper>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const Menu = (light) => {
   return (
@@ -92,8 +92,8 @@ const Menu = (light) => {
         </li>
       ))}
     </ul>
-  );
-};
+  )
+}
 const MenuLink = styled(({ light, ...props }) => <Link {...props} />)`
   color: ${({ light }) => (light ? colors.white : colors.primary)};
   font-weight: ${fontWeight.bold};
@@ -105,7 +105,7 @@ const MenuLink = styled(({ light, ...props }) => <Link {...props} />)`
   &.selected {
     color: ${colors.accent};
   }
-`;
+`
 const HeaderWrapper = styled.header`
   ${({ light }) => css`
     position: absolute;
@@ -114,7 +114,7 @@ const HeaderWrapper = styled.header`
     width: 100%;
     z-index: 999;
     padding: ${spacer.lg} 0;
-    background-color: ${light ? "transparent" : colors.gray600};
+    background-color: ${light ? 'transparent' : colors.gray600};
     .header-row {
       flex-direction: row;
       display: flex;
@@ -169,4 +169,4 @@ const HeaderWrapper = styled.header`
       }
     }
   `}
-`;
+`

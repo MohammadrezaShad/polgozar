@@ -1,15 +1,15 @@
-import { ApolloLink } from "@apollo/client";
-import { onError } from "@apollo/client/link/error";
+import { ApolloLink } from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
 
 export const authLink = new ApolloLink((operation, forward) => {
   operation.setContext(({ headers }) => ({
     headers: {
-      authorization: "Bearer 123", // however you get your token
+      authorization: 'Bearer 123', // however you get your token
       ...headers,
     },
-  }));
-  return forward(operation);
-});
+  }))
+  return forward(operation)
+})
 
 export const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors)
@@ -17,7 +17,7 @@ export const errorLink = onError(({ graphQLErrors, networkError }) => {
       console.log(
         `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
       )
-    );
+    )
 
-  if (networkError) console.log(`[Network error]: ${networkError}`);
-});
+  if (networkError) console.log(`[Network error]: ${networkError}`)
+})

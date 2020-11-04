@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const getALlGroups = gql`
   query {
@@ -30,7 +30,7 @@ export const getALlGroups = gql`
       }
     }
   }
-`;
+`
 
 export const getGroupById = gql`
   query groupByIdSlug($id: String, $slug: String) {
@@ -39,4 +39,4 @@ export const getGroupById = gql`
       name
     }
   }
-`;
+`

@@ -1,47 +1,47 @@
-import React, { useState } from "react";
-import moment from "moment-jalaali";
-import _ from "lodash";
-import { Events, ZDays, NaborsDay } from "./data";
-import { Icon } from "antd";
-import styled, { css } from "styled-components";
+import React, { useState } from 'react'
+import moment from 'moment-jalaali'
+import _ from 'lodash'
+import { Icon } from 'antd'
+import styled, { css } from 'styled-components'
+import { Events, ZDays, NaborsDay } from './data'
 
 const ZCalendar = () => {
-  const [dateIdx, setDate] = useState(0);
-  const date = moment().add(dateIdx, "day");
-  const dayInYear = parseInt(date.format("jDDD"));
-  let dayInZMonth = (dayInYear % 30) - 1;
-  dayInZMonth = dayInZMonth < 0 ? 29 : dayInZMonth;
-  dayInZMonth = dayInYear > 360 ? dayInZMonth + 30 : dayInZMonth;
-  const ZDayName = ZDays[dayInZMonth]["en"];
-  const isNabor = NaborsDay.includes(dayInZMonth);
-  const events = Events[dayInYear];
+  const [dateIdx, setDate] = useState(0)
+  const date = moment().add(dateIdx, 'day')
+  const dayInYear = parseInt(date.format('jDDD'), 10)
+  let dayInZMonth = (dayInYear % 30) - 1
+  dayInZMonth = dayInZMonth < 0 ? 29 : dayInZMonth
+  dayInZMonth = dayInYear > 360 ? dayInZMonth + 30 : dayInZMonth
+  const ZDayName = ZDays[dayInZMonth].en
+  const isNabor = NaborsDay.includes(dayInZMonth)
+  const events = Events[dayInYear]
   return (
     <CalendarCont>
       <div className="dateController">
-        <button onClick={() => setDate(dateIdx - 1)}>
+        <button onClick={() => setDate(dateIdx - 1)} type="button">
           <Icon type="caret-left" />
         </button>
-        <button onClick={() => setDate(0)} className="todayBtn">
+        <button onClick={() => setDate(0)} className="todayBtn" type="button">
           Today
         </button>
-        <button onClick={() => setDate(dateIdx + 1)}>
+        <button onClick={() => setDate(dateIdx + 1)} type="button">
           <Icon type="caret-right" />
         </button>
       </div>
 
       <div className="contentCont">
-        <p>{date.format("dddd, MMMM D YYYY")}</p>
-        <p>{date.format("jD jMMMM jYYYY")}</p>
+        <p>{date.format('dddd, MMMM D YYYY')}</p>
+        <p>{date.format('jD jMMMM jYYYY')}</p>
         <p>
-          {_.capitalize(ZDayName)}{" "}
+          {_.capitalize(ZDayName)}{' '}
           {isNabor && <span className="naborDay">(Nabor)</span>}
         </p>
         {!!events && <p>{events.map((e) => e.fr)}</p>}
       </div>
     </CalendarCont>
-  );
-};
-export default ZCalendar;
+  )
+}
+export default ZCalendar
 
 const CalendarCont = styled.div`
   ${({ theme }) => css`
@@ -70,7 +70,7 @@ const CalendarCont = styled.div`
       font-weight: 600;
       font-size: 1.2em;
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         margin: auto;
         bottom: 0;
@@ -102,4 +102,4 @@ const CalendarCont = styled.div`
       }
     }
   `}
-`;
+`

@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react'
+import styled, { css } from 'styled-components'
 
 const SubscriptionForm = () => {
   return (
@@ -27,15 +27,15 @@ const SubscriptionForm = () => {
           className="submitBtn"
         />
         <input
-          style={{ display: "none" }}
+          style={{ display: 'none' }}
           type="text"
           name="b_fc29e5a1d31ba746a460139cc_2bb6ad23d9"
           tabIndex="-1"
         />
       </form>
     </SubscriptionFormCont>
-  );
-};
+  )
+}
 
 const SubscriptionFormCont = styled.div`
   ${({ theme }) => css`
@@ -71,6 +71,6 @@ const SubscriptionFormCont = styled.div`
       }
     }
   `}
-`;
+`
 
-export default SubscriptionForm;
+export default SubscriptionForm

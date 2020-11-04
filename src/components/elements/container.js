@@ -1,9 +1,5 @@
-import styled, { css } from "styled-components";
-import { fonts, colors, sizes, spacer, media } from "settings/style";
-
-// export const Header = () => {
-//   return <HeaderWrapper></HeaderWrapper>;
-// };
+import styled from 'styled-components'
+import { sizes, spacer, media } from 'settings/style'
 
 const Container = styled.div`
   max-width: ${sizes.xxl};
@@ -12,6 +8,6 @@ const Container = styled.div`
   ${media.lg`
     padding: 0 ${spacer.lg};
   `}
-`;
+`
 
-export default Container;
+export default Container

@@ -1,25 +1,25 @@
-import React from "react";
-import { Modal } from "antd";
-import { Button } from "components/elements";
-import styled, { css } from "styled-components";
-import { rgba, colors, spacer, fontWeight } from "settings/style";
+import React from 'react'
+import { Modal } from 'antd'
+import { Button } from 'components/elements'
+import styled from 'styled-components'
 
 const ModalWrapper = ({
   onLeft,
   onLeftText,
   onRight,
   onRightText,
+  children,
   ...props
 }) => {
   return (
     <Modal
       getContainer={() =>
-        window.document.getElementById("root") || window.document.body
+        window.document.getElementById('root') || window.document.body
       }
       {...props}
       footer={null}
     >
-      {props.children}
+      {children}
       <ModalFooterWrapper>
         <div className="left">
           {onLeft && (
@@ -42,12 +42,12 @@ const ModalWrapper = ({
         </div>
       </ModalFooterWrapper>
     </Modal>
-  );
-};
-export default ModalWrapper;
+  )
+}
+export default ModalWrapper
 
 const ModalFooterWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
+`

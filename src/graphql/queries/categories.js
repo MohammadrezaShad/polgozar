@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const getALlCategories = gql`
   query {
@@ -14,7 +14,7 @@ export const getALlCategories = gql`
       }
     }
   }
-`;
+`
 
 export const getCategoryById = gql`
   query {
@@ -24,4 +24,4 @@ export const getCategoryById = gql`
       slug
     }
   }
-`;
+`

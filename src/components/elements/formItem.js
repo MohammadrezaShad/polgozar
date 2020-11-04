@@ -1,42 +1,42 @@
-import React from "react";
-import styled, { css } from "styled-components";
-import { colors, spacer, rgba, radius } from "settings/style";
-import { Form } from "antd";
+import React from 'react'
+import styled, { css } from 'styled-components'
+import { colors, spacer, rgba, radius } from 'settings/style'
+import { Form } from 'antd'
 
 // interface InputProps {
-//   color: "primary" | "gray"
+//   color: 'primary' | 'gray';
 // }
 
-const FormItem = ({ theme = "primary", ...props }) => {
+const FormItem = ({ theme = 'primary', ...rest }) => {
   return (
     <FormItemWrapper color={theme}>
-      <Form.Item {...props} />
+      <Form.Item {...rest} />
     </FormItemWrapper>
-  );
-};
+  )
+}
 
 const mappedColors = {
   bg: {
-    primary: "primary",
-    dark: "gray400",
+    primary: 'primary',
+    dark: 'gray400',
   },
   placeholder: {
-    primary: "primary300",
-    dark: "gray500",
+    primary: 'primary300',
+    dark: 'gray500',
   },
   border: {
-    primary: "primary300",
-    dark: "transparent",
+    primary: 'primary300',
+    dark: 'transparent',
   },
   font: {
-    primary: "font",
-    dark: "white",
+    primary: 'font',
+    dark: 'white',
   },
   label: {
-    primary: "gray700",
-    dark: "gray300",
+    primary: 'gray700',
+    dark: 'gray300',
   },
-};
+}
 
 const FormItemWrapper = styled.div`
   ${({ color }) => css`
@@ -66,6 +66,6 @@ const FormItemWrapper = styled.div`
       padding-left: ${spacer.xs};
     }
   `}
-`;
+`
 
-export default FormItem;
+export default FormItem

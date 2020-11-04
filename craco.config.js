@@ -1,11 +1,5 @@
-const CracoLessPlugin = require("craco-less");
-const {
-  colors,
-  spacer,
-  heights,
-  fonts,
-  fontSize,
-} = require("./src/settings/style");
+const CracoLessPlugin = require('craco-less')
+const { colors, fonts, fontSize } = require('./src/settings/style')
 
 module.exports = {
   plugins: [
@@ -16,27 +10,27 @@ module.exports = {
           lessOptions: {
             modifyVars: {
               // -------- Colors -----------
-              "@primary-color": colors.accent,
-              "@info-color": colors.accent,
+              '@primary-color': colors.accent,
+              '@info-color': colors.accent,
               // "@success-color": green-6;
-              "@processing-color": colors.primary,
-              "@error-color": colors.errorColor,
-              "@highlight-color": colors.accent,
-              "@warning-color": colors.errorColor,
-              "@normal-color": colors.gray100,
+              '@processing-color': colors.primary,
+              '@error-color': colors.errorColor,
+              '@highlight-color': colors.accent,
+              '@warning-color': colors.errorColor,
+              '@normal-color': colors.gray100,
               white: colors.white,
               black: colors.black,
 
-              "@font-size-base": "15px",
-              "@text-color": colors.font,
-              "@font-family": fonts.primary,
-              "@heading-color": colors.font,
-              "@heading-1-size": fontSize.xxl,
-              "@heading-2-size": fontSize.xl,
-              "@heading-3-size": fontSize.lg,
-              "@heading-4-size": fontSize.md,
-              "@heading-5-size": fontSize.base,
-              "@divider-text-padding": "0",
+              '@font-size-base': '15px',
+              '@text-color': colors.font,
+              '@font-family': fonts.primary,
+              '@heading-color': colors.font,
+              '@heading-1-size': fontSize.xxl,
+              '@heading-2-size': fontSize.xl,
+              '@heading-3-size': fontSize.lg,
+              '@heading-4-size': fontSize.md,
+              '@heading-5-size': fontSize.base,
+              '@divider-text-padding': '0',
               // vertical paddings
               //   "@padding-lg": spacer.xl,
               //   "@padding-md": spacer.lg,
@@ -67,4 +61,4 @@ module.exports = {
       },
     },
   ],
-};
+}

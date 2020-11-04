@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql } from '@apollo/client'
 
 export const getALlUsers = gql`
   query {
@@ -11,7 +11,7 @@ export const getALlUsers = gql`
       avatarUrl
     }
   }
-`;
+`
 
 export const getMyAccount = gql`
   query {
@@ -41,7 +41,7 @@ export const getMyAccount = gql`
       }
     }
   }
-`;
+`
 
 export const getUserById = gql`
   query userById($id: String) {
@@ -52,4 +52,4 @@ export const getUserById = gql`
       email
     }
   }
-`;
+`

@@ -1,26 +1,20 @@
-import React, { useState } from "react";
-import Logo from "assets/images/logo-light.svg";
-import styled, { css } from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 import {
   radius,
   colors,
-  maxWinSize,
   spacer,
   shadow,
   fontSize,
-  rgba,
   fontType,
-} from "settings/style";
-import { Container, Button, Modal, FormItem } from "components/elements";
-import { Row, Col } from "antd";
-import { Link } from "react-router-dom";
-import { useQuery } from "@apollo/client";
-import { Swiper, SwiperSlide } from "swiper/react";
+} from 'settings/style'
+import { Button } from 'components/elements'
+import { Link } from 'react-router-dom'
 
-export const GroupCard = ({ group }) => {
+const GroupCard = ({ group }) => {
   return (
     <GroupCardWrapper img={group.coverPhotoUrl} to="/dsfa">
-      <div className="img-cont"></div>
+      <div className="img-cont" />
       <div className="content-cont">
         <h4 className="group-name">{group.name}</h4>
         <h5>{group.categories[0].title}</h5>
@@ -39,10 +33,10 @@ export const GroupCard = ({ group }) => {
         </div>
       </div>
     </GroupCardWrapper>
-  );
-};
+  )
+}
 
-export default GroupCard;
+export default GroupCard
 
 const GroupCardWrapper = styled(Link)`
   max-width: 500px;
@@ -85,4 +79,4 @@ const GroupCardWrapper = styled(Link)`
       }
     }
   }
-`;
+`

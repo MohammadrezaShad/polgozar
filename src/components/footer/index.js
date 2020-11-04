@@ -1,11 +1,9 @@
-import React, { useState } from "react";
-import Logo from "assets/images/logo-light.svg";
-import blurLogo from "assets/images/footer_blur_logo.svg";
-import styled, { css } from "styled-components";
-import { rgba, colors, spacer, fontSize, media } from "settings/style";
-import { Container, Button, FormItem } from "components/elements";
-import { Input, Form } from "antd";
-import { NavLink as Link } from "react-router-dom";
+import React from 'react'
+import Logo from 'assets/images/logo-light.svg'
+import blurLogo from 'assets/images/footer_blur_logo.svg'
+import styled from 'styled-components'
+import { rgba, colors, spacer, fontSize, media } from 'settings/style'
+import { Container, Button } from 'components/elements'
 
 const Footer = () => {
   return (
@@ -47,13 +45,13 @@ const Footer = () => {
           <div className="copy-right-container">
             <span>Copy right by …..</span>
             <div className="social-media">
-              <a href="">
+              <a href="/#">
                 <i className="icon-instagram" />
               </a>
-              <a href="">
+              <a href="/#">
                 <i className="icon-facebook" />
               </a>
-              <a href="">
+              <a href="/#">
                 <i className="icon-twitter" />
               </a>
             </div>
@@ -61,10 +59,10 @@ const Footer = () => {
         </Container>
       </div>
     </FooterWrapper>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer
 
 const FooterWrapper = styled.footer`
   border-top: 0.4rem solid ${colors.accent};
@@ -136,4 +134,4 @@ const FooterWrapper = styled.footer`
       }
     }
   }
-`;
+`

@@ -16,7 +16,9 @@
       {
         "semi": false
       }
-    ]
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": 0
   },
   "settings": {
     "import/resolver": {

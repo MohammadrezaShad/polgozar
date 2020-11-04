@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import Logo from "assets/images/logo-light.svg";
-import styled, { css } from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 import {
   radius,
   colors,
@@ -9,26 +8,24 @@ import {
   shadow,
   fontSize,
   rgba,
-} from "settings/style";
-import { Container, Button, Modal, FormItem } from "components/elements";
-import { Row, Col } from "antd";
-import { NavLink as Link } from "react-router-dom";
-import { getALlCategories } from "graphql/queries/categories";
-import { useQuery } from "@apollo/client";
-import { Swiper, SwiperSlide } from "swiper/react";
+} from 'settings/style'
+import { Container } from 'components/elements'
+import { getALlCategories } from 'graphql/queries/categories'
+import { useQuery } from '@apollo/client'
+import { Swiper, SwiperSlide } from 'swiper/react'
 
-let slidesPerView = 5;
-if (maxWinSize("sm")) {
-  slidesPerView = 1;
-} else if (maxWinSize("md")) {
-  slidesPerView = 3;
-} else if (maxWinSize("lg")) {
-  slidesPerView = 4;
+let slidesPerView = 5
+if (maxWinSize('sm')) {
+  slidesPerView = 1
+} else if (maxWinSize('md')) {
+  slidesPerView = 3
+} else if (maxWinSize('lg')) {
+  slidesPerView = 4
 }
 
-export const CategoriesList = () => {
-  const { loading, error, data } = useQuery(getALlCategories);
-  console.log("xxxx", slidesPerView, loading, error, data);
+const CategoriesList = () => {
+  const { loading, error, data } = useQuery(getALlCategories)
+  console.log('xxxx', slidesPerView, loading, error, data)
   return (
     <CategoriesWrapper>
       <Container>
@@ -36,7 +33,7 @@ export const CategoriesList = () => {
           <Swiper
             spaceBetween={40}
             slidesPerView={slidesPerView}
-            onSlideChange={() => console.log("slide change")}
+            onSlideChange={() => console.log('slide change')}
             onSwiper={(swiper) => console.log(swiper)}
           >
             {data &&
@@ -57,10 +54,10 @@ export const CategoriesList = () => {
         </div>
       </Container>
     </CategoriesWrapper>
-  );
-};
+  )
+}
 
-export default CategoriesList;
+export default CategoriesList
 
 const CategoriesWrapper = styled.div`
   position: absolute;
@@ -75,7 +72,7 @@ const CategoriesWrapper = styled.div`
   .swiper-container {
     overflow: visible;
   }
-`;
+`
 
 const CategoriesItem = styled.div`
   background: ${colors.gray600};
@@ -116,4 +113,4 @@ const CategoriesItem = styled.div`
       transform: translateY(-100%);
     }
   }
-`;
+`

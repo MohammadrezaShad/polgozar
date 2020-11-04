@@ -1,19 +1,12 @@
-import styled, { css } from "styled-components";
-import {
-  colors,
-  fontWeight,
-  spacer,
-  radius,
-  rgba,
-  media,
-} from "settings/style";
+import styled, { css } from 'styled-components'
+import { media } from 'settings/style'
 
 // prettier-ignore
 const HeroImg = styled.div`
   ${({ overlay, filter, img, parallex, height = "100vh" }) => css`
     background-image: ${overlay
         ? `linear-gradient( ${
-            filter ? filter : "rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)"
+            filter || "rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)"
           } ), `
         : ""}url(${img});
     background-position: center;
@@ -39,4 +32,4 @@ const HeroImg = styled.div`
   `}
 `;
 
-export default HeroImg;
+export default HeroImg
