@@ -1,5 +1,5 @@
-import styled, { css } from "styled-components";
-import { colors, fontWeight, spacer, radius, rgba } from "settings/style";
+import styled, { css } from 'styled-components'
+import { colors, fontWeight, spacer, radius, rgba } from 'settings/style'
 
 // interface buttonProps {
 //   rounded?: boolean;
@@ -9,7 +9,7 @@ import { colors, fontWeight, spacer, radius, rgba } from "settings/style";
 // }
 
 const Container = styled.button`
-  ${({ rounded = true, color = "accent", size = "md", type = "dark" }) => css`
+  ${({ rounded = true, color = 'accent', type = 'dark' }) => css`
     display: inline-block;
     border: none;
     outline: none;
@@ -32,25 +32,25 @@ const Container = styled.button`
     padding: ${spacer.sm} ${spacer.lg};
 
     ${
-      type === "dark" &&
+      type === 'dark' &&
       css`
         border-color: ${colors[color]};
         background: ${colors[color]};
-        color: ${color === "danger" ? colors.white : colors.black};
+        color: ${color === 'danger' ? colors.white : colors.black};
         &:hover {
           background-color: ${colors.white};
           border-color: ${colors.white};
-          color: ${color === "danger" ? colors.black : colors[color]};
+          color: ${color === 'danger' ? colors.black : colors[color]};
         }
       `
     }
 
     ${
-      ["outline", "opacity"].includes(type) &&
+      ['outline', 'opacity'].includes(type) &&
       css`
-        border-color: ${type === "outline" ? colors[color] : "transparent"};
-        background: ${type === "outline"
-          ? "transparent"
+        border-color: ${type === 'outline' ? colors[color] : 'transparent'};
+        background: ${type === 'outline'
+          ? 'transparent'
           : rgba(colors[color], 0.3)};
         color: ${colors[color]};
         &:hover {
@@ -61,16 +61,16 @@ const Container = styled.button`
     }
 
     ${
-      type === "link" &&
+      type === 'link' &&
       css`
         border: none;
         color: ${colors[color]};
         &:hover {
-          color: ${rgba(colors.accent, color === "accent" ? 0.7 : 1)};
+          color: ${rgba(colors.accent, color === 'accent' ? 0.7 : 1)};
         }
       `
     }
   `}
-`;
+`
 
-export default Container;
+export default Container
