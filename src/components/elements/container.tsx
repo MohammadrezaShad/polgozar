@@ -1,5 +1,5 @@
-import styled from 'styled-components'
-import { sizes, spacer, media } from 'settings/style'
+import styled from 'styled-components';
+import { sizes, spacer, media } from 'settings/style';
 
 const Container = styled.div`
   max-width: ${sizes.xxl};
@@ -8,6 +8,6 @@ const Container = styled.div`
   ${media.lg`
     padding: 0 ${spacer.lg};
   `}
-`
+`;
 
-export default Container
+export default Container;

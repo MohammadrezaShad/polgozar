@@ -1,29 +1,23 @@
-import React, { useState } from 'react'
-import Logo from 'assets/images/logo-light.svg'
-import styled, { css } from 'styled-components'
-import { rgba, colors, spacer, fontWeight, media } from 'settings/style'
-import { Container, Button, Modal, FormItem } from 'components/elements'
-import { Input, Form, Drawer } from 'antd'
-import { NavLink as Link } from 'react-router-dom'
-import { ThreeBarsIcon } from '@primer/octicons-react'
+import React, { useState } from 'react';
+import Logo from 'assets/images/logo-light.svg';
+import styled, { css } from 'styled-components';
+import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
+import { Container, Button, Modal, FormItem } from 'components/elements';
+import { Input, Form, Drawer } from 'antd';
+import { NavLink as Link } from 'react-router-dom';
+import { ThreeBarsIcon } from '@primer/octicons-react';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
   { name: 'Group and Event search', path: '/fsa' },
   { name: 'Start new Group / Event', path: '/fsa' },
-]
+];
 export const Header = ({ light = true }) => {
-  const [modalVisibility, setModal] = useState(false)
-  const [drawer, setDrawer] = useState(false)
+  const [modalVisibility, setModal] = useState(false);
+  const [drawer, setDrawer] = useState(false);
   return (
     <HeaderWrapper light={light}>
-      <Drawer
-        title="Basic Drawer"
-        placement="left"
-        closable={false}
-        onClose={() => setDrawer(false)}
-        visible={drawer}
-      >
+      <Drawer title="Basic Drawer" placement="left" closable={false} onClose={() => setDrawer(false)} visible={drawer}>
         <Menu light={light} />
       </Drawer>
 
@@ -48,11 +42,7 @@ export const Header = ({ light = true }) => {
         </Modal>
 
         <div className="header-row">
-          <Button
-            type="link"
-            className="hamburger-menu"
-            onClick={() => setDrawer(true)}
-          >
+          <Button type="link" className="hamburger-menu" onClick={() => setDrawer(true)}>
             <ThreeBarsIcon size="medium" />
           </Button>
           <div className="logo-cont">
@@ -61,11 +51,7 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              <Button
-                type="link"
-                color={light ? 'white' : 'primary'}
-                onClick={() => setModal(true)}
-              >
+              <Button type="link" color={light ? 'white' : 'primary'} onClick={() => setModal(true)}>
                 Login
               </Button>
               <Button color="accent" type="dark">
@@ -76,10 +62,10 @@ export const Header = ({ light = true }) => {
         </div>
       </Container>
     </HeaderWrapper>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
 
 const Menu = (light) => {
   return (
@@ -92,8 +78,8 @@ const Menu = (light) => {
         </li>
       ))}
     </ul>
-  )
-}
+  );
+};
 const MenuLink = styled(({ light, ...props }) => <Link {...props} />)`
   color: ${({ light }) => (light ? colors.white : colors.primary)};
   font-weight: ${fontWeight.bold};
@@ -105,7 +91,7 @@ const MenuLink = styled(({ light, ...props }) => <Link {...props} />)`
   &.selected {
     color: ${colors.accent};
   }
-`
+`;
 const HeaderWrapper = styled.header`
   ${({ light }) => css`
     position: absolute;
@@ -169,4 +155,4 @@ const HeaderWrapper = styled.header`
       }
     }
   `}
-`
+`;

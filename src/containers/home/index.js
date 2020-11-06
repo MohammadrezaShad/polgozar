@@ -1,18 +1,18 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Header, HeroImage, Container, Button } from 'components/elements'
-import BgImage from 'assets/images/intro_bg.jpg'
-import { Row, Col } from 'antd'
-import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style'
-import { getALlGroups } from 'graphql/queries/groups'
-import { useQuery } from '@apollo/client'
-import GroupCard from 'components/groupCard'
-import Footer from 'components/footer'
-import CategoriesList from './categories/categoriesList'
+import React from 'react';
+import styled from 'styled-components';
+import { Header, HeroImage, Container, Button } from 'components/elements';
+import BgImage from 'assets/images/intro_bg.jpg';
+import { Row, Col } from 'antd';
+import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style';
+import { getALlGroups } from 'graphql/queries/groups';
+import { useQuery } from '@apollo/client';
+import GroupCard from 'components/groupCard';
+import Footer from 'components/footer';
+import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
-  const { loading, error, data } = useQuery(getALlGroups)
-  console.log('xxxx', loading, error, data)
+  const { loading, error, data } = useQuery(getALlGroups);
+  console.log('xxxx', loading, error, data);
   return (
     <HomeWrapper>
       <Header light />
@@ -57,9 +57,9 @@ const Home = () => {
       </ContentContainer>
       <Footer />
     </HomeWrapper>
-  )
-}
-export default Home
+  );
+};
+export default Home;
 
 const ContentContainer = styled.div`
   background-color: ${colors.gray200};
@@ -71,7 +71,7 @@ const ContentContainer = styled.div`
   .row-cont {
     margin-bottom: ${spacer.xl};
   }
-`
+`;
 
 const HomeWrapper = styled.div`
   .hero-content {
@@ -126,4 +126,4 @@ const HomeWrapper = styled.div`
       );
     }
   }
-`
+`;

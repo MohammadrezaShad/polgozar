@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { media } from 'settings/style'
+import styled, { css } from 'styled-components';
+import { media } from 'settings/style';
 
 // prettier-ignore
 const HeroImg = styled.div`
@@ -32,4 +32,4 @@ const HeroImg = styled.div`
   `}
 `;
 
-export default HeroImg
+export default HeroImg;
