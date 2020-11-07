@@ -1,5 +1,6 @@
-const { css } = require('styled-components')
-const { rgba } = require('polished')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { css } = require('styled-components');
+const { rgba } = require('polished');
 
 const sizes = {
   xs: '480px',
@@ -8,12 +9,12 @@ const sizes = {
   lg: '992px',
   xl: '1200px',
   xxl: '1500px',
-}
+};
 
 const maxWinSize = (size) => {
-  const windowSize = window.innerWidth
-  return windowSize <= parseInt(sizes[size].replace('px', ''), 10)
-}
+  const windowSize = window.innerWidth;
+  return windowSize <= parseInt(sizes[size].replace('px', ''), 10);
+};
 
 const media = Object.keys(sizes).reduce(
   (acc, size) => {
@@ -21,11 +22,11 @@ const media = Object.keys(sizes).reduce(
       @media only screen and (max-width: ${sizes[size]}) {
         ${css(...args)}
       }
-    `
-    return acc
+    `;
+    return acc;
   },
-  { ...sizes }
-)
+  { ...sizes },
+);
 
 const colors = {
   primary: '#91c8de',
@@ -64,12 +65,12 @@ const colors = {
   red400: '#ff0031',
   transparent: 'transparent',
   // red: "#ff7b99",
-}
+};
 
 const fonts = {
   primary: 'Montserrat, sans-serif',
   secondary: 'Montserrat, sans-serif',
-}
+};
 
 const fontWeight = {
   light: '300',
@@ -77,7 +78,7 @@ const fontWeight = {
   bold: '600',
   bolder: '700',
   heavy: '800',
-}
+};
 
 const fontSize = {
   xs: '.75rem', // 12px
@@ -87,16 +88,16 @@ const fontSize = {
   lg: '1.25rem', // 20 px
   xl: '1.5rem', // 24 px
   xxl: '1.75rem',
-}
+};
 
 const fontType = {
   sm: { 'font-size': fontSize.sm, 'font-weight': fontWeight.light },
   md: { 'font-size': fontSize.md, 'font-weight': fontWeight.bold },
   lg: { 'font-size': fontSize.lg, 'font-weight': fontWeight.bolder },
   xl: { 'font-size': fontSize.xl, 'font-weight': fontWeight.heavy },
-}
+};
 
-const baseSpace = 1
+const baseSpace = 1;
 
 const spacer = {
   none: `${0}rem`,
@@ -105,31 +106,31 @@ const spacer = {
   md: `${baseSpace / 1.33}rem`,
   lg: `${baseSpace}rem`,
   xl: `${baseSpace * 1.5}rem`,
-}
+};
 
 const shadow = {
   sm: `0 .125rem .25rem ${rgba(colors.black, 0.075)}`,
   md: `0 .5rem 1rem ${rgba(colors.black, 0.15)}`,
   lg: `0 1rem 3rem ${rgba(colors.black, 0.3)}`,
   insent: `inset 0 1px 2px ${rgba(colors.black, 0.075)}`,
-}
+};
 
 const radius = {
   sm: '.2rem',
   md: '.25rem',
   lg: '1rem',
   xl: '2rem',
-}
+};
 
 const heights = {
   sm: '1.5rem',
   md: '2rem',
   lg: '2.5rem',
-}
+};
 
 const rem = (pixels) => {
-  return `${pixels / 16}rem;`
-}
+  return `${pixels / 16}rem;`;
+};
 
 const snippet = {
   underline: (color = colors.font) => css`
@@ -146,9 +147,8 @@ const snippet = {
       bottom: -0.15rem;
     }
   `,
-}
+};
 
-// { rgba } from "polished";
 module.exports = {
   sizes,
   colors,
@@ -165,4 +165,4 @@ module.exports = {
   maxWinSize,
   fontType,
   snippet,
-}
+};

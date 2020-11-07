@@ -1,15 +1,15 @@
-import styled, { css } from 'styled-components'
-import { colors, fontWeight, spacer, radius, rgba } from 'settings/style'
+import styled, { css } from 'styled-components';
+import { colors, fontWeight, spacer, radius, rgba } from 'settings/style';
 
-// interface buttonProps {
-//   rounded?: boolean;
-//   color?: "primary" | "accent" | "danger" | "white" | "font";
-//   size?: "sm" | "md" | "lg";
-//   type?: "outline" | "opacity" | "dark" | "link";
-// }
+interface ButtonProps {
+  rounded?: boolean;
+  color?: 'primary' | 'accent' | 'danger' | 'white' | 'font';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'outline' | 'opacity' | 'dark' | 'link';
+}
 
 const Container = styled.button`
-  ${({ rounded = true, color = 'accent', type = 'dark' }) => css`
+  ${({ rounded = true, color = 'accent', type = 'dark' }: ButtonProps) => css`
     display: inline-block;
     border: none;
     outline: none;
@@ -49,9 +49,7 @@ const Container = styled.button`
       ['outline', 'opacity'].includes(type) &&
       css`
         border-color: ${type === 'outline' ? colors[color] : 'transparent'};
-        background: ${type === 'outline'
-          ? 'transparent'
-          : rgba(colors[color], 0.3)};
+        background: ${type === 'outline' ? 'transparent' : rgba(colors[color], 0.3)};
         color: ${colors[color]};
         &:hover {
           background-color: ${colors[color]};
@@ -67,10 +65,10 @@ const Container = styled.button`
         color: ${colors[color]};
         &:hover {
           color: ${rgba(colors.accent, color === 'accent' ? 0.7 : 1)};
-        }
+        
       `
     }
   `}
-`
+`;
 
-export default Container
+export default Container;
