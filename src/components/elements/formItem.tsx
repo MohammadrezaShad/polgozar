@@ -1,16 +1,27 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { colors, spacer, rgba, radius } from 'settings/style';
+import { colors, spacer, rgba, radius, ColorTypes } from 'settings/style';
 import { Form } from 'antd';
+import { FormItemProps } from 'antd/lib/form';
 
-// type Keys = keyof typeof colors;
+type ThemeType = 'primary' | 'dark';
+type MappedColorItemType = {
+  [key in ThemeType]: ColorTypes;
+};
 
-// type ThemeType = 'primary' | 'dark';
-// interface TestType {
-//   [key: ThemeType]: Keys;
-// }
+interface MappedColorType {
+  bg: MappedColorItemType;
+  placeholder: MappedColorItemType;
+  border: MappedColorItemType;
+  font: MappedColorItemType;
+  label: MappedColorItemType;
+}
 
-const mappedColors = {
+interface FormItemPropTypes extends FormItemProps {
+  theme: ThemeType;
+}
+
+const mappedColors: MappedColorType = {
   bg: {
     primary: 'primary',
     dark: 'gray400',
@@ -33,12 +44,10 @@ const mappedColors = {
   },
 };
 
-const a = 'font';
-
-const FormItemWrapper = styled.div`
+const FormItemWrapper = styled.div<{ color: ThemeType }>`
   ${({ color }) => css`
     .ant-input {
-      background-color: ${rgba(colors[a.b], 0.3)};
+      background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
       border-color: ${colors[mappedColors.border[color]]};
       border-radius: ${radius.xl};
       padding: ${spacer.sm} ${spacer.lg};
@@ -65,7 +74,7 @@ const FormItemWrapper = styled.div`
   `}
 `;
 
-const FormItem = ({ theme = 'primary', ...rest }) => {
+const FormItem = ({ theme = 'primary', ...rest }: FormItemPropTypes) => {
   return (
     <FormItemWrapper color={theme}>
       <Form.Item {...rest} />

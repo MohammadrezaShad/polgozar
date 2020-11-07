@@ -31,8 +31,9 @@
     "react/jsx-props-no-spreading": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/prop-types": 0,
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": ["error", "always"],
     "prettier/prettier": [
       "error",

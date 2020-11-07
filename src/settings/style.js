@@ -149,7 +149,6 @@ const snippet = {
   `,
 };
 
-// { rgba } from "polished";
 module.exports = {
   sizes,
   colors,
