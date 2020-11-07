@@ -1,12 +1,14 @@
 import styled, { css } from 'styled-components';
 import { media } from 'settings/style';
 
+// prettier-ignore
 const HeroImg = styled.div`
-  ${({ overlay, filter, img, parallex, height = '100vh' }) => css`
+  ${({ overlay, filter, img, parallex, height = "100vh" }) => css`
     background-image: ${overlay
-        ? `linear-gradient( ${filter || 'rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)'} ), `
-        : ''}url
-      (${img});
+        ? `linear-gradient( ${
+            filter || "rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)"
+          } ), `
+        : ""}url(${img});
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -17,7 +19,7 @@ const HeroImg = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-
+    
     ${parallex &&
     css`
       background-attachment: fixed;
@@ -26,6 +28,7 @@ const HeroImg = styled.div`
     ${media.md`
      background-attachment: scroll;
   `}
+
   `}
 `;
 
