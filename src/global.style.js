@@ -1,5 +1,5 @@
-import { createGlobalStyle } from "styled-components";
-import { fonts, colors, spacer, fontSize, rgba, radius } from "settings/style";
+import { createGlobalStyle } from 'styled-components';
+import { fonts, colors, spacer, fontSize, rgba, radius } from 'settings/style';
 
 const GlobalStyle = createGlobalStyle`
   html {
@@ -172,6 +172,9 @@ const GlobalStyle = createGlobalStyle`
         opacity: 0.7;
       }
     }
+  }
+  .ant-message-error .anticon{
+    color: ${colors.danger}
   }
 `;
 

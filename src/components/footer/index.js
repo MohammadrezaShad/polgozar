@@ -1,9 +1,9 @@
-import React from 'react'
-import Logo from 'assets/images/logo-light.svg'
-import blurLogo from 'assets/images/footer_blur_logo.svg'
-import styled from 'styled-components'
-import { rgba, colors, spacer, fontSize, media } from 'settings/style'
-import { Container, Button } from 'components/elements'
+import React from 'react';
+import Logo from 'assets/images/logo-light.svg';
+import blurLogo from 'assets/images/footer_blur_logo.svg';
+import styled from 'styled-components';
+import { rgba, colors, spacer, fontSize, media } from 'settings/style';
+import { Container, Button } from 'components/elements';
 
 const Footer = () => {
   return (
@@ -27,13 +27,12 @@ const Footer = () => {
           </div>
           <div className="right-col">
             <p>
-              Sample : We make a living by what we get, But we make a life by
-              what we give.”“We make a living by what we get, But we make a life
-              by what we give.”“We make a living by what we get, But we make a
-              life by what we give.”
+              Sample : We make a living by what we get, But we make a life by what we give.”“We make a living by what we
+              get, But we make a life by what we give.”“We make a living by what we get, But we make a life by what we
+              give.”
             </p>
             <div className="donate-btn-cont">
-              <Button type="opacity" color="primary">
+              <Button shape="opacity" color="primary">
                 Donate here
               </Button>
             </div>
@@ -59,10 +58,10 @@ const Footer = () => {
         </Container>
       </div>
     </FooterWrapper>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;
 
 const FooterWrapper = styled.footer`
   border-top: 0.4rem solid ${colors.accent};
@@ -134,4 +133,4 @@ const FooterWrapper = styled.footer`
       }
     }
   }
-`
+`;

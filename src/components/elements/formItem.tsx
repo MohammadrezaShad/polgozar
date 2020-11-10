@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { colors, spacer, rgba, radius, ColorTypes } from 'settings/style';
+import { colors, spacer, rgba, radius, ColorTypes, fontSize } from 'settings/style';
 import { Form } from 'antd';
 import { FormItemProps } from 'antd/lib/form';
 
@@ -46,30 +46,54 @@ const mappedColors: MappedColorType = {
 
 const FormItemWrapper = styled.div<{ color: ThemeType }>`
   ${({ color }) => css`
-    .ant-input {
+    .ant-form-item-control-input {
       background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
       border-color: ${colors[mappedColors.border[color]]};
       border-radius: ${radius.xl};
       padding: ${spacer.sm} ${spacer.lg};
-      box-shadow: none;
-      color: ${colors[mappedColors.font[color]]};
       &:hover {
-        border-color: ${colors[mappedColors.border[color]]};
-      }
-      &:focus,
-      .ant-input-focused {
         background-color: ${rgba(colors[mappedColors.bg[color]], 0.2)};
-        border-color: ${colors[mappedColors.border[color]]};
-        box-shadow: none;
       }
-      ::placeholder {
-        color: ${colors[mappedColors.placeholder[color]]};
-        opacity: 1;
+      input {
+        box-shadow: none;
+        color: ${colors[mappedColors.font[color]]};
+        background: transparent;
+        border: none;
+        padding: 0;
+        &:hover {
+          border-color: ${colors[mappedColors.border[color]]};
+          background: transparent;
+        }
+        &:focus,
+        .ant-input-focused {
+          border: none;
+          box-shadow: none;
+        }
+        ::placeholder {
+          color: ${colors[mappedColors.placeholder[color]]};
+          opacity: 1;
+        }
+      }
+      .ant-input-affix-wrapper,
+      .ant-input-affix-wrapper-focused {
+        background-color: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        &:focus {
+          border: none;
+          box-shadow: none;
+        }
       }
     }
     .ant-form-item-label > label {
       color: ${colors[mappedColors.label[color]]};
       padding-left: ${spacer.xs};
+    }
+    .ant-form-item-explain {
+      font-size: ${fontSize.sm};
+      padding-left: ${spacer.md};
+      color: ${colors.danger};
     }
   `}
 `;

@@ -1,15 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import {
-  radius,
-  colors,
-  spacer,
-  shadow,
-  fontSize,
-  fontType,
-} from 'settings/style'
-import { Button } from 'components/elements'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { radius, colors, spacer, shadow, fontSize, fontType } from 'settings/style';
+import { Button } from 'components/elements';
+import { Link } from 'react-router-dom';
 
 const GroupCard = ({ group }) => {
   return (
@@ -23,20 +16,16 @@ const GroupCard = ({ group }) => {
             <i className="icon-user" />
             {group.members.length}
           </span>
-          <Button
-            color="accent"
-            type="opacity"
-            onClick={(e) => e.preventDefault()}
-          >
+          <Button color="accent" shape="opacity" onClick={(e) => e.preventDefault()}>
             Join Now
           </Button>
         </div>
       </div>
     </GroupCardWrapper>
-  )
-}
+  );
+};
 
-export default GroupCard
+export default GroupCard;
 
 const GroupCardWrapper = styled(Link)`
   max-width: 500px;
@@ -79,4 +68,4 @@ const GroupCardWrapper = styled(Link)`
       }
     }
   }
-`
+`;

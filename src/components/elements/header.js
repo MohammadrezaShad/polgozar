@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Logo from 'assets/images/logo-light.svg';
 import styled, { css } from 'styled-components';
 import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
@@ -6,6 +6,7 @@ import { Container, Button, Modal, FormItem } from 'components/elements';
 import { Input, Form, Drawer } from 'antd';
 import { NavLink as Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
+import useLogin from 'hooks/useLogin';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -15,6 +16,13 @@ const headerRoutes = [
 export const Header = ({ light = true }) => {
   const [modalVisibility, setModal] = useState(false);
   const [drawer, setDrawer] = useState(false);
+  const [loginForm] = Form.useForm();
+  const [loginLoading, onLogin] = useLogin();
+
+  const onFinish = (values) => {
+    console.log('Finish:', values);
+    onLogin(values, () => setModal(false));
+  };
   return (
     <HeaderWrapper light={light}>
       <Drawer title="Basic Drawer" placement="left" closable={false} onClose={() => setDrawer(false)} visible={drawer}>
@@ -25,24 +33,35 @@ export const Header = ({ light = true }) => {
         <Modal
           title="Log In"
           visible={modalVisibility}
-          onRight={() => setModal(false)}
+          onRight={() => loginForm.submit()}
+          onRightProps={{ isLoading: loginLoading }}
           onRightText="Login"
           onLeft={() => {}}
           onLeftText="I don’t have account"
           onCancel={() => setModal(false)}
         >
-          <Form layout="vertical">
-            <FormItem label="Email" theme="dark">
+          <Form layout="vertical" form={loginForm} onFinish={onFinish}>
+            <FormItem
+              name="email"
+              label="Email"
+              theme="dark"
+              rules={[{ required: true, message: 'Email is required!' }, { type: 'email' }]}
+            >
               <Input placeholder="Enter your email" />
             </FormItem>
-            <FormItem label="Password" theme="dark">
-              <Input placeholder="Enter your password" />
+            <FormItem
+              name="password"
+              label="Password"
+              theme="dark"
+              rules={[{ required: true, message: 'Password is required!' }]}
+            >
+              <Input.Password placeholder="Enter your password" />
             </FormItem>
           </Form>
         </Modal>
 
         <div className="header-row">
-          <Button type="link" className="hamburger-menu" onClick={() => setDrawer(true)}>
+          <Button shape="link" className="hamburger-menu" onClick={() => setDrawer(true)}>
             <ThreeBarsIcon size="medium" />
           </Button>
           <div className="logo-cont">
@@ -51,10 +70,10 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              <Button type="link" color={light ? 'white' : 'primary'} onClick={() => setModal(true)}>
+              <Button shape="link" color={light ? 'white' : 'primary'} onClick={() => setModal(true)}>
                 Login
               </Button>
-              <Button color="accent" type="dark">
+              <Button color="accent" shape="dark">
                 Sing up
               </Button>
             </div>
