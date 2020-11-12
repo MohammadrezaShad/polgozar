@@ -6,9 +6,11 @@ import { Container, Button, Modal, FormItem } from 'components/elements';
 import { Input, Form, Drawer, Select, Row, Col } from 'antd';
 import { NavLink as Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
-import useLogin from 'hooks/useLogin';
 import { getMyAccount } from 'graphql/queries/users';
 import { useLazyQuery } from '@apollo/client';
+import LoginModal from 'components/login';
+import SginupModal from 'components/signup';
+import { useGlobalStore, ActionConstantType } from 'stores/globalStore';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -16,189 +18,32 @@ const headerRoutes = [
   { name: 'Start new Group / Event', path: '/fsa' },
 ];
 export const Header = ({ light = true }) => {
-  const [loginVisibility, setLoginVisibility] = useState(false);
-  const [signupVisibility, setSignupVisibility] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const [loginForm] = Form.useForm();
-  const [signupForm] = Form.useForm();
-  const [loginLoading, onLogin] = useLogin();
   const [getMyProfile, { loading, error, data }] = useLazyQuery(getMyAccount);
+  const { dispatch } = useGlobalStore();
 
-  console.log('PROFILE DATA', loading, error, data);
   useEffect(() => {
-    console.log('PROFILE FETCCHHHHH CALLEDDD');
+    // get profile data
     getMyProfile();
   }, [getMyProfile]);
-  const onFinish = (values) => {
-    console.log('Finish:', values);
-    onLogin(values, () => setLoginVisibility(false));
+  console.log('MY PROFILE DATA: ', data);
+
+  const onSignup = () => {
+    dispatch({ type: ActionConstantType.SET_SIGNUP_VISIBLE, payload: true });
   };
 
-  const toSignup = useCallback(() => {
-    setLoginVisibility(false);
-    setSignupVisibility(true);
-  }, []);
-
-  const toLogin = useCallback(() => {
-    setSignupVisibility(false);
-    setLoginVisibility(true);
-  }, []);
-
-  const { Option } = Select;
-
-  const prefixSelector = (
-    <Form.Item name="prefix" noStyle>
-      <Select style={{ width: 80 }}>
-        <Option value="86">+1</Option>
-        <Option value="87">+98</Option>
-      </Select>
-    </Form.Item>
-  );
+  const onLogin = () => {
+    dispatch({ type: ActionConstantType.SET_LOGIN_VISIBLE, payload: true });
+  };
 
   return (
     <HeaderWrapper light={light}>
       <Drawer title="Basic Drawer" placement="left" closable={false} onClose={() => setDrawer(false)} visible={drawer}>
-        <Menu light={light} />
+        <Menu light />
       </Drawer>
-
       <Container>
-        <Modal
-          title="Log In"
-          visible={loginVisibility}
-          onRight={() => loginForm.submit()}
-          onRightProps={{ isLoading: loginLoading }}
-          onRightText="Login"
-          onLeft={toSignup}
-          onLeftText="I don’t have account"
-          onCancel={() => setLoginVisibility(false)}
-        >
-          <Form layout="vertical" form={loginForm} onFinish={onFinish}>
-            <FormItem
-              name="email"
-              label="Email"
-              theme="dark"
-              rules={[
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-                {
-                  required: true,
-                  message: 'Please input your Email!',
-                },
-              ]}
-            >
-              <Input placeholder="Enter your email" />
-            </FormItem>
-            <FormItem
-              name="password"
-              label="Password"
-              theme="dark"
-              rules={[{ required: true, message: 'Password is required!' }]}
-            >
-              <Input.Password placeholder="Enter your password" />
-            </FormItem>
-          </Form>
-        </Modal>
-
-        <Modal
-          title="Sign up"
-          visible={signupVisibility}
-          onRight={() => {}}
-          onRightProps={{ isLoading: false }}
-          onRightText="Continue"
-          onLeft={toLogin}
-          onLeftText="I have account"
-          onCancel={() => setSignupVisibility(false)}
-        >
-          <Form layout="vertical" form={signupForm} onFinish={onFinish}>
-            <Row gutter={[24]}>
-              <Col xs={24} md={12}>
-                <FormItem
-                  theme="dark"
-                  name="firstname"
-                  label="First Name"
-                  rules={[{ required: true, message: 'Please input your phone First Name!' }]}
-                >
-                  <Input />
-                </FormItem>
-              </Col>
-              <Col xs={24} md={12}>
-                <FormItem
-                  theme="dark"
-                  name="lastname"
-                  label="Last Name"
-                  rules={[{ required: true, message: 'Please input your phone Last Name!' }]}
-                >
-                  <Input />
-                </FormItem>
-              </Col>
-            </Row>
-            <FormItem
-              theme="dark"
-              name="phone"
-              label="Phone Number"
-              rules={[{ required: true, message: 'Please input your phone number!' }]}
-            >
-              <Input addonBefore={prefixSelector} />
-            </FormItem>
-            <FormItem
-              theme="dark"
-              name="email"
-              label="E-mail"
-              rules={[
-                {
-                  type: 'email',
-                  message: 'The input is not valid E-mail!',
-                },
-                {
-                  required: true,
-                  message: 'Please input your E-mail!',
-                },
-              ]}
-            >
-              <Input />
-            </FormItem>
-            <FormItem
-              theme="dark"
-              name="password"
-              label="Password"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-              hasFeedback
-            >
-              <Input.Password />
-            </FormItem>
-            <FormItem
-              theme="dark"
-              name="confirm"
-              label="Confirm Password"
-              dependencies={['password']}
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: 'Please confirm your password!',
-                },
-                ({ getFieldValue }) => ({
-                  validator(rule, value) {
-                    if (!value || getFieldValue('password') === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                  },
-                }),
-              ]}
-            >
-              <Input.Password />
-            </FormItem>
-          </Form>
-        </Modal>
-
+        <LoginModal />
+        <SginupModal />
         <div className="header-row">
           <Button shape="link" className="hamburger-menu" onClick={() => setDrawer(true)}>
             <ThreeBarsIcon size="medium" />
@@ -209,10 +54,10 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              <Button shape="link" color={light ? 'white' : 'primary'} onClick={() => setLoginVisibility(true)}>
+              <Button shape="link" color={light ? 'white' : 'primary'} onClick={onLogin}>
                 Login
               </Button>
-              <Button color="accent" shape="dark" onClick={() => setSignupVisibility(true)}>
+              <Button color="accent" shape="dark" onClick={onSignup}>
                 Sing up
               </Button>
             </div>

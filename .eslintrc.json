@@ -32,6 +32,8 @@
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": ["error"],
     "react/prop-types": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": ["error", "always"],
@@ -39,6 +41,16 @@
       "error",
       {
         "semi": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
       }
     ]
   },

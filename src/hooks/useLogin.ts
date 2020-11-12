@@ -15,7 +15,7 @@ function useLogin() {
       setLoading(false);
     }
   }, []);
-  return [loading, login];
+  return [loading, login] as const;
 }
 
 export default useLogin;
