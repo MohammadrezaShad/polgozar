@@ -51,6 +51,19 @@ const FormItemWrapper = styled.div<{ color: ThemeType }>`
       border-color: ${colors[mappedColors.border[color]]};
       border-radius: ${radius.xl};
       padding: ${spacer.sm} ${spacer.lg};
+      .ant-input-group-addon {
+        background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
+        border-color: ${colors[mappedColors.border[color]]};
+        border-radius: ${radius.xl};
+        .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
+          .ant-select-selector {
+          border: none;
+          box-shadow: none;
+        }
+        & + input {
+          margin-left: ${spacer.md};
+        }
+      }
       &:hover {
         background-color: ${rgba(colors[mappedColors.bg[color]], 0.2)};
       }

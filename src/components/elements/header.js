@@ -1,12 +1,16 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import Logo from 'assets/images/logo-light.svg';
 import styled, { css } from 'styled-components';
 import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
 import { Container, Button, Modal, FormItem } from 'components/elements';
-import { Input, Form, Drawer } from 'antd';
+import { Input, Form, Drawer, Select, Row, Col } from 'antd';
 import { NavLink as Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
-import useLogin from 'hooks/useLogin';
+import { getMyAccount } from 'graphql/queries/users';
+import { useLazyQuery } from '@apollo/client';
+import LoginModal from 'components/login';
+import SginupModal from 'components/signup';
+import { useGlobalStore, ActionConstantType } from 'stores/globalStore';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -14,52 +18,32 @@ const headerRoutes = [
   { name: 'Start new Group / Event', path: '/fsa' },
 ];
 export const Header = ({ light = true }) => {
-  const [modalVisibility, setModal] = useState(false);
   const [drawer, setDrawer] = useState(false);
-  const [loginForm] = Form.useForm();
-  const [loginLoading, onLogin] = useLogin();
+  const [getMyProfile, { loading, error, data }] = useLazyQuery(getMyAccount);
+  const { dispatch } = useGlobalStore();
 
-  const onFinish = (values) => {
-    console.log('Finish:', values);
-    onLogin(values, () => setModal(false));
+  useEffect(() => {
+    // get profile data
+    getMyProfile();
+  }, [getMyProfile]);
+  console.log('MY PROFILE DATA: ', data);
+
+  const onSignup = () => {
+    dispatch({ type: ActionConstantType.SET_SIGNUP_VISIBLE, payload: true });
   };
+
+  const onLogin = () => {
+    dispatch({ type: ActionConstantType.SET_LOGIN_VISIBLE, payload: true });
+  };
+
   return (
     <HeaderWrapper light={light}>
       <Drawer title="Basic Drawer" placement="left" closable={false} onClose={() => setDrawer(false)} visible={drawer}>
-        <Menu light={light} />
+        <Menu light />
       </Drawer>
-
       <Container>
-        <Modal
-          title="Log In"
-          visible={modalVisibility}
-          onRight={() => loginForm.submit()}
-          onRightProps={{ isLoading: loginLoading }}
-          onRightText="Login"
-          onLeft={() => {}}
-          onLeftText="I don’t have account"
-          onCancel={() => setModal(false)}
-        >
-          <Form layout="vertical" form={loginForm} onFinish={onFinish}>
-            <FormItem
-              name="email"
-              label="Email"
-              theme="dark"
-              rules={[{ required: true, message: 'Email is required!' }, { type: 'email' }]}
-            >
-              <Input placeholder="Enter your email" />
-            </FormItem>
-            <FormItem
-              name="password"
-              label="Password"
-              theme="dark"
-              rules={[{ required: true, message: 'Password is required!' }]}
-            >
-              <Input.Password placeholder="Enter your password" />
-            </FormItem>
-          </Form>
-        </Modal>
-
+        <LoginModal />
+        <SginupModal />
         <div className="header-row">
           <Button shape="link" className="hamburger-menu" onClick={() => setDrawer(true)}>
             <ThreeBarsIcon size="medium" />
@@ -70,10 +54,10 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              <Button shape="link" color={light ? 'white' : 'primary'} onClick={() => setModal(true)}>
+              <Button shape="link" color={light ? 'white' : 'primary'} onClick={onLogin}>
                 Login
               </Button>
-              <Button color="accent" shape="dark">
+              <Button color="accent" shape="dark" onClick={onSignup}>
                 Sing up
               </Button>
             </div>
