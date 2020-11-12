@@ -1,22 +1,11 @@
-import React from 'react'
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom'
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import Home from 'containers/home'
-import AdminApp from 'containers/admin'
-import page404 from 'containers/Page/404'
+import Home from 'containers/home';
+import AdminApp from 'containers/admin';
+import page404 from 'containers/Page/404';
 
-const PrivateRoute = ({
-  component: WrapperComponent,
-  isUser,
-  isAdmin,
-  location,
-  ...rest
-}) => {
+const PrivateRoute = ({ component: WrapperComponent, isUser, isAdmin, location, ...rest }) => {
   let comp = () => (
     <Redirect
       to={{
@@ -24,13 +13,13 @@ const PrivateRoute = ({
         state: { from: location },
       }}
     />
-  )
-  const { path } = rest
+  );
+  const { path } = rest;
   if ((isUser && path === '/account') || (isAdmin && path === '/admin')) {
-    comp = (props) => <WrapperComponent {...props} />
+    comp = (props) => <WrapperComponent {...props} />;
   }
-  return <Route {...rest} render={comp} />
-}
+  return <Route {...rest} render={comp} />;
+};
 
 export default function RouterWrapper() {
   return (
@@ -46,5 +35,5 @@ export default function RouterWrapper() {
         <Route component={page404} />
       </Switch>
     </Router>
-  )
+  );
 }

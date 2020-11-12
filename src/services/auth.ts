@@ -1,6 +1,6 @@
 import { secureClient, plainClient } from 'helpers/restClient';
-import { AxiosResponse } from 'axios';
 import LocalStore from 'store';
+import { AUTH_TOKEN } from 'constant';
 
 export interface LoginReq {
   email: string;
@@ -38,29 +38,26 @@ export const authLogin = async (data: LoginReq) => {
     if (!token) {
       throw new Error('Authenication Failed!');
     }
-    LocalStore.set('token', token);
+    LocalStore.set(AUTH_TOKEN, token);
     return true;
   } catch (error) {
+    LocalStore.remove(AUTH_TOKEN);
     throw new Error('Authenication Failed!');
   }
 };
 
-export const refreshToken = () => {
-  const success = (response: AxiosResponse<TokenResponse>) => {
-    const { token } = response.data;
+export const refreshToken = async () => {
+  try {
+    const {
+      data: { token },
+    } = await secureClient.post<TokenResponse>('/refresh');
     if (!token) {
-      failure(response);
-    } else {
-      LocalStore.set('token', token);
+      throw new Error('Authenication Failed!');
     }
-  };
-  const failure = (error: any) => {
-    console.log('ERR', error);
-    LocalStore.remove('token');
-  };
-
-  secureClient
-    .post<TokenResponse>('/refresh')
-    .then((response) => success(response))
-    .catch((error) => failure(error));
+    LocalStore.set(AUTH_TOKEN, token);
+    return token;
+  } catch (error) {
+    LocalStore.remove(AUTH_TOKEN);
+    throw new Error('Authenication Failed!');
+  }
 };

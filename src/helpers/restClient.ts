@@ -1,5 +1,6 @@
 import axios from 'axios';
 import LocalStore from 'store';
+import { AUTH_TOKEN } from 'constant';
 
 const connection = (withCredentials = false) => {
   const baseConnection = axios.create({
@@ -10,7 +11,7 @@ const connection = (withCredentials = false) => {
     },
   });
   baseConnection.interceptors.request.use((config) => {
-    const token = LocalStore.get('token') || process.env.REACT_APP_API_GENERIC_TOKEN;
+    const token = LocalStore.get(AUTH_TOKEN) || process.env.REACT_APP_API_GENERIC_TOKEN;
     if (token) {
       return {
         ...config,
@@ -20,7 +21,6 @@ const connection = (withCredentials = false) => {
         },
       };
     }
-    console.log(config, 'configconfigconfigconfig');
     return config;
   });
   return baseConnection;
