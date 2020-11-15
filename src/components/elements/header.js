@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
 import { Container, Button, Modal, FormItem } from 'components/elements';
 import { Input, Form, Drawer, Select, Row, Col } from 'antd';
-import { NavLink as Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import { getMyAccount } from 'graphql/queries/users';
 import { useLazyQuery } from '@apollo/client';
@@ -52,7 +52,9 @@ export const Header = ({ light = true }) => {
             <ThreeBarsIcon size="medium" />
           </Button>
           <div className="logo-cont">
-            <img src={Logo} alt="polgozar" />
+            <Link to="/">
+              <img src={Logo} alt="polgozar" />
+            </Link>
           </div>
           <nav className="menu-container">
             <Menu light={light} />
@@ -92,7 +94,7 @@ const Menu = (light) => {
     </ul>
   );
 };
-const MenuLink = styled(({ light, ...props }) => <Link {...props} />)`
+const MenuLink = styled(({ light, ...props }) => <NavLink {...props} />)`
   color: ${({ light }) => (light ? colors.white : colors.primary)};
   font-weight: ${fontWeight.bold};
   padding: ${spacer.sm};

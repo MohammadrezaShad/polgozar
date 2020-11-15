@@ -5,8 +5,12 @@ import Home from 'containers/home';
 import AdminApp from 'containers/admin';
 import page404 from 'containers/Page/404';
 import UseGlobalSync from 'hooks/useStoreSync';
+import { useGlobalStore } from 'stores/globalStore';
 
-const PrivateRoute = ({ component: WrapperComponent, isUser, isAdmin, location, ...rest }) => {
+const PrivateRoute = ({ component: WrapperComponent, location, ...rest }) => {
+  const { state } = useGlobalStore();
+  const isUser = state.isLoggedIn;
+  const isAdmin = state.userRole === 'admin';
   let comp = () => (
     <Redirect
       to={{
@@ -34,6 +38,7 @@ export default function RouterWrapper() {
           <Home />
         </Route>
         <PrivateRoute path="/admin" component={AdminApp} />
+        <PrivateRoute path="/account" component={AdminApp} />
         <Route component={page404} />
       </Switch>
     </Router>

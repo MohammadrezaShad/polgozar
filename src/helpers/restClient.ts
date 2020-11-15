@@ -1,5 +1,5 @@
 import axios from 'axios';
-import LocalStore from 'store';
+import LocalStore from 'helpers/localStore';
 import { AUTH_TOKEN } from 'constant';
 
 const connection = (withCredentials = false) => {
