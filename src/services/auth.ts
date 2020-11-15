@@ -1,6 +1,6 @@
 import { secureClient, plainClient } from 'helpers/restClient';
-import LocalStore from 'store';
 import { AUTH_TOKEN } from 'constant';
+import LocalStore from 'helpers/localStore';
 
 export interface LoginReq {
   email: string;
@@ -9,26 +9,6 @@ export interface LoginReq {
 interface TokenResponse {
   token: string;
 }
-// export const authSignup = data => {
-//   const success = response => {
-//     if (!response.data.csrf) {
-//       failure(response);
-//     } else {
-//       localStorage.csrf = response.data.csrf;
-//       localStorage.setItem('signedIn', 'true');
-//     }
-//   };
-
-//   const failure = error => {
-//     delete localStorage.csrf;
-//     delete localStorage.signedIn;
-//     console.log('ERR', error);
-//   };
-
-//   signup(data)
-//     .then(response => success(response))
-//     .catch(error => failure(error));
-// };
 
 export const authLogin = async (data: LoginReq) => {
   try {
@@ -61,3 +41,7 @@ export const refreshToken = async () => {
     throw new Error('Authenication Failed!');
   }
 };
+
+export function logout() {
+  LocalStore.remove(AUTH_TOKEN);
+}

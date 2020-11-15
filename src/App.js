@@ -12,14 +12,16 @@ import GlobalStyle from './global.style';
 
 import RouterWrapper from './RouterWrapper';
 
-const App = () => (
-  <>
-    <ApolloProvider client={client}>
-      <GlobalStore>
-        <RouterWrapper />
-      </GlobalStore>
-    </ApolloProvider>
-    <GlobalStyle />
-  </>
-);
+const App = () => {
+  return (
+    <>
+      <ApolloProvider client={client}>
+        <GlobalStore>
+          <RouterWrapper />
+        </GlobalStore>
+      </ApolloProvider>
+      <GlobalStyle />
+    </>
+  );
+};
 export default App;

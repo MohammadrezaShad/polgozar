@@ -11,6 +11,7 @@ import { useLazyQuery } from '@apollo/client';
 import LoginModal from 'components/login';
 import SginupModal from 'components/signup';
 import { useGlobalStore, ActionConstantType } from 'stores/globalStore';
+import { logout } from 'services/auth';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -20,12 +21,14 @@ const headerRoutes = [
 export const Header = ({ light = true }) => {
   const [drawer, setDrawer] = useState(false);
   const [getMyProfile, { loading, error, data }] = useLazyQuery(getMyAccount);
-  const { dispatch } = useGlobalStore();
+  const { state, dispatch } = useGlobalStore();
 
   useEffect(() => {
-    // get profile data
-    getMyProfile();
-  }, [getMyProfile]);
+    if (state.isLoggedIn) {
+      getMyProfile();
+    }
+  }, [getMyProfile, state]);
+
   console.log('MY PROFILE DATA: ', data);
 
   const onSignup = () => {
@@ -54,9 +57,15 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              <Button shape="link" color={light ? 'white' : 'primary'} onClick={onLogin}>
-                Login
-              </Button>
+              {state.isLoggedIn ? (
+                <Button shape="link" color={light ? 'white' : 'primary'} onClick={() => logout()}>
+                  Logout
+                </Button>
+              ) : (
+                <Button shape="link" color={light ? 'white' : 'primary'} onClick={onLogin}>
+                  Login
+                </Button>
+              )}
               <Button color="accent" shape="dark" onClick={onSignup}>
                 Sing up
               </Button>

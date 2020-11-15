@@ -1,8 +1,8 @@
 import { ApolloLink, Observable } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { AUTH_TOKEN } from 'constant';
-import LocalStore from 'store';
 import { refreshToken } from 'services/auth';
+import LocalStore from 'helpers/localStore';
 
 export const authLink = new ApolloLink((operation, forward) => {
   const token = LocalStore.get(AUTH_TOKEN) || process.env.REACT_APP_API_GENERIC_TOKEN;

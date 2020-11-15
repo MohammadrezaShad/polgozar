@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import Home from 'containers/home';
 import AdminApp from 'containers/admin';
 import page404 from 'containers/Page/404';
+import UseGlobalSync from 'hooks/useStoreSync';
 
 const PrivateRoute = ({ component: WrapperComponent, isUser, isAdmin, location, ...rest }) => {
   let comp = () => (
@@ -22,6 +23,7 @@ const PrivateRoute = ({ component: WrapperComponent, isUser, isAdmin, location, 
 };
 
 export default function RouterWrapper() {
+  UseGlobalSync();
   return (
     <Router>
       <Switch>
