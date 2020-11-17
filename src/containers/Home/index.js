@@ -13,7 +13,7 @@ class Home extends Component {
             <div className="logoCont">
               <img src={Logo} alt="" className="logo" />
             </div>
-            <h3 className="commingSoon">COMING SOON .</h3>
+            <h3 className="commingSoon">COMING SOON </h3>
             <ZCalendar />
             <div className="subscribtionForm">
               <form
