@@ -37,8 +37,8 @@ deploy_dev:
   dependencies:
     - yarn_dev
   before_script:
-    - echo XXX${S3_BUCKET_STAGING}XXX
-    - export S3_BUCKET=${S3_BUCKET_STAGING}
+    - echo XXX $S3_BUCKET_STAGING XXX
+    - export S3_BUCKET=$S3_BUCKET_STAGING
   only:
     refs:
       - staging
@@ -49,7 +49,7 @@ deploy_prod:
   dependencies:
     - yarn_prod
   before_script:
-    - export S3_BUCKET=${S3_BUCKET_PROD}
+    - export S3_BUCKET=$S3_BUCKET_PROD
   only:
     refs:
       - master
