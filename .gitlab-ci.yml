@@ -14,6 +14,8 @@ stages:
 yarn_dev:
   extends: .yarn_build
   stage: build
+  before_script:
+    - export REACT_APP_API_BASE_URL=$STAGING_API_BASE_URL
   only:
     refs:
       - staging
@@ -38,7 +40,6 @@ deploy_dev:
     - yarn_dev
   before_script:
     - export S3_BUCKET=$S3_BUCKET_STAGING
-    - export REACT_APP_API_BASE_URL=$STAGING_API_BASE_URL
   only:
     refs:
       - staging
