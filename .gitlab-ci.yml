@@ -37,7 +37,7 @@ deploy_dev:
   dependencies:
     - yarn_dev
   before_script:
-    - export S3_BUCKET=${S3_BUCKET_STAGING}
+    - export S3_BUCKET=${S3_BUCKET_STAGING}  REACT_APP_API_BASE_URL=${STAGING_API_BASE_URL}
   only:
     refs:
       - staging
