@@ -2,10 +2,6 @@ stages:
   - build
   - run
 
-variables:
-  S3_BUCKET_DEV: ${BUCKET_STAGING}
-  S3_BUCKET_PROD: ${BUCKET_PROD}
-
 .yarn_build:
   image: node:10
   script: |
@@ -41,7 +37,7 @@ deploy_dev:
   dependencies:
     - yarn_dev
   before_script:
-    - export S3_BUCKET=${S3_BUCKET_DEV}
+    - export S3_BUCKET=${S3_BUCKET_STAGING}
   only:
     refs:
       - staging
