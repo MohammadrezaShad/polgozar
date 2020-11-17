@@ -1,23 +1,27 @@
 import React from 'react';
-import AppStyle from './App.style';
-import { ThemeProvider } from 'styled-components';
-import './App.css';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import theme from './settings/theme';
+import { ApolloProvider } from '@apollo/client';
+import client from 'helpers/client';
+import { GlobalStore } from 'stores/globalStore';
 
-const App = () => (
-  <div>
-    <ThemeProvider theme={theme}>
-      <AppStyle id="appRoot">
-        <Router>
-          <Switch>
-            <Route exact path="/">
-              <div>fsad</div>
-            </Route>
-          </Switch>
-        </Router>
-      </AppStyle>
-    </ThemeProvider>
-  </div>
-);
+// library CSS
+import 'antd/dist/antd.less';
+import './assets/fonts/style.css';
+import 'swiper/swiper.scss';
+
+import GlobalStyle from './global.style';
+
+import RouterWrapper from './RouterWrapper';
+
+const App = () => {
+  return (
+    <>
+      <ApolloProvider client={client}>
+        <GlobalStore>
+          <RouterWrapper />
+        </GlobalStore>
+      </ApolloProvider>
+      <GlobalStyle />
+    </>
+  );
+};
 export default App;
