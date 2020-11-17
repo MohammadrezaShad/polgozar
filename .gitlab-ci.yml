@@ -3,7 +3,7 @@ stages:
   - run
 
 variables:
-  S3_BUCKET_DEV: ${BUCKET_DEV}
+  S3_BUCKET_DEV: ${BUCKET_STAGING}
   S3_BUCKET_PROD: ${BUCKET_PROD}
 
 .yarn_build:
@@ -20,7 +20,7 @@ yarn_dev:
   stage: build
   only:
     refs:
-      - develop
+      - staging
 
 yarn_prod:
   extends: .yarn_build
@@ -31,7 +31,6 @@ yarn_prod:
 
 .deploy_aws:
   image: python:latest
-  when: manual
   script: |
     pip install awscli #Install awscli tools
     aws s3 sync ./build/ s3://${S3_BUCKET}
@@ -45,7 +44,7 @@ deploy_dev:
     - export S3_BUCKET=${S3_BUCKET_DEV}
   only:
     refs:
-      - develop
+      - staging
 
 deploy_prod:
   extends: .deploy_aws
