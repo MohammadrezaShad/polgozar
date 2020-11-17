@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import styled, { css } from "styled-components";
-import Bg from "assets/images/bg.jpg";
-import Logo from "assets/images/logo-light.svg";
-import ZCalendar from "./zCalendar";
+import React, { Component } from 'react';
+import styled, { css } from 'styled-components';
+import Bg from 'assets/images/bg.jpg';
+import Logo from 'assets/images/logo-light.svg';
+import ZCalendar from './zCalendar';
 
 class Home extends Component {
   render() {
@@ -13,7 +13,7 @@ class Home extends Component {
             <div className="logoCont">
               <img src={Logo} alt="" className="logo" />
             </div>
-            <h3 className="commingSoon">COMING SOON</h3>
+            <h3 className="commingSoon">COMING SOON .</h3>
             <ZCalendar />
             <div className="subscribtionForm">
               <form
@@ -39,7 +39,7 @@ class Home extends Component {
                   className="submitBtn"
                 />
                 <input
-                  style={{ display: "none" }}
+                  style={{ display'none'e" }}
                   type="text"
                   name="b_fc29e5a1d31ba746a460139cc_2bb6ad23d9"
                   tabIndex="-1"
