@@ -39,7 +39,7 @@ class Home extends Component {
                   className="submitBtn"
                 />
                 <input
-                  style={{ display'none'e" }}
+                  style={{ display: 'none' }}
                   type="text"
                   name="b_fc29e5a1d31ba746a460139cc_2bb6ad23d9"
                   tabIndex="-1"
@@ -57,7 +57,7 @@ export default Home;
 const WrapperStyle = styled.div`
   ${({ theme }) => css`
     height: 100vh;
-    background-image: url("${Bg}");
+    background-image: url('${Bg}');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -81,21 +81,9 @@ const WrapperStyle = styled.div`
       width: 80%;
       margin: auto;
       border-radius: 10px;
-      background: linear-gradient(
-        94deg,
-        rgba(255, 227, 162, 0.5) 0%,
-        rgba(24, 86, 111, 0.5) 100%
-      );
-      background: -moz-linear-gradient(
-        94deg,
-        rgba(255, 227, 162, 0.5) 0%,
-        rgba(24, 86, 111, 0.5) 100%
-      );
-      background: -o-linear-gradient(
-        94deg,
-        rgba(255, 227, 162, 0.5) 0%,
-        rgba(24, 86, 111, 0.5) 100%
-      );
+      background: linear-gradient(94deg, rgba(255, 227, 162, 0.5) 0%, rgba(24, 86, 111, 0.5) 100%);
+      background: -moz-linear-gradient(94deg, rgba(255, 227, 162, 0.5) 0%, rgba(24, 86, 111, 0.5) 100%);
+      background: -o-linear-gradient(94deg, rgba(255, 227, 162, 0.5) 0%, rgba(24, 86, 111, 0.5) 100%);
       position: absolute;
       top: 50%;
       left: 50%;
