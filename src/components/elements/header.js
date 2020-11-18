@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Logo from 'assets/images/logo-light.svg';
 import styled, { css } from 'styled-components';
 import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
-import { Container, Button, Modal, FormItem } from 'components/elements';
-import { Input, Form, Drawer, Select, Row, Col } from 'antd';
+import { Container, Button } from 'components/elements';
+import { Drawer } from 'antd';
 import { NavLink, Link } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import { getMyAccount } from 'graphql/queries/users';
@@ -20,7 +20,7 @@ const headerRoutes = [
 ];
 export const Header = ({ light = true }) => {
   const [drawer, setDrawer] = useState(false);
-  const [getMyProfile, { loading, error, data }] = useLazyQuery(getMyAccount);
+  const [getMyProfile, { data }] = useLazyQuery(getMyAccount);
   const { state, dispatch } = useGlobalStore();
 
   useEffect(() => {

@@ -37,6 +37,7 @@
     "react/prop-types": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
     "semi": ["error", "always"],
+    "no-unused-vars": ["error"],
     "prettier/prettier": [
       "error",
       {

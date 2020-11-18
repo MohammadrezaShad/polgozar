@@ -1,5 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
-import { fonts, colors, spacer, fontSize, rgba, radius } from 'settings/style';
+import { fonts, colors, spacer, fontSize, rgba } from 'settings/style';
 
 const GlobalStyle = createGlobalStyle`
   html {
