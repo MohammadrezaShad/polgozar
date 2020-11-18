@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const CracoLessPlugin = require('craco-less');
-const { colors, fonts, fontSize } = require('./src/settings/style');
+const { colors, fonts, fontSize } = require('./src/settings/styleConfig');
 
 module.exports = {
   plugins: [
