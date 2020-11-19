@@ -26,7 +26,7 @@ const routes = [
 const AdminRouter = ({ url }) => {
   return (
     <Switch>
-      <Redirect exact from="admin/" to="admin/users" />
+      <Redirect exact from="/admin" to="admin/users" />
       {routes.map((singleRoute) => {
         const { path, exact, ...otherProps } = singleRoute;
         return <Route exact={!!exact} key={path} path={`${url}/${path}`} {...otherProps} />;
