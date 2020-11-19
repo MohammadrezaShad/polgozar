@@ -1,16 +1,24 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import page404 from 'containers/Page/404';
+import Groups from './manageGroups';
+import Events from './manageEvents';
+import Users from './manageUsers';
 
 const routes = [
   {
-    path: '',
-    component: () => <div>ooooo</div>,
+    path: 'users',
+    component: Users,
     exact: true,
   },
   {
-    path: 'manage-users',
-    component: () => <div>fasfaf</div>,
+    path: 'groups',
+    component: Groups,
+    exact: true,
+  },
+  {
+    path: 'events',
+    component: Events,
     exact: true,
   },
 ];
@@ -18,6 +26,7 @@ const routes = [
 const AdminRouter = ({ url }) => {
   return (
     <Switch>
+      <Redirect exact from="admin/" to="admin/users" />
       {routes.map((singleRoute) => {
         const { path, exact, ...otherProps } = singleRoute;
         return <Route exact={!!exact} key={path} path={`${url}/${path}`} {...otherProps} />;
