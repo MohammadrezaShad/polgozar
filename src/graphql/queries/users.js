@@ -9,6 +9,7 @@ export const getALlUsers = gql`
       email
       role
       avatarUrl
+      status
     }
   }
 `;
