@@ -56,8 +56,8 @@ export const getUserById = gql`
 `;
 
 export const updateUserStatus = gql`
-  mutation UpdateUserStatus($userId: String!, $status: String!) {
-    updateUserStatus(input: { userId: $userId, status: $status }) {
+  mutation UpdateUserStatus($input: UpdateUserStatusInput!) {
+    updateUserStatus(input: $input) {
       errors
       user {
         id

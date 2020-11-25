@@ -21,7 +21,7 @@ const ManageUsers = () => {
 
   const changeUserStatus = useCallback(
     (status: string, userId: string) => {
-      updateStatus({ variables: { userId, status } });
+      updateStatus({ variables: { input: { userId, status } } });
     },
     [updateStatus],
   );
