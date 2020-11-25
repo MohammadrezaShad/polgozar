@@ -43,8 +43,8 @@ export const getGroupById = gql`
 `;
 
 export const updateGroupStatus = gql`
-  mutation UpdateGroupStatus($groupId: String!, $status: String!) {
-    updateGroupStatus(input: { groupId: $groupId, status: $status }) {
+  mutation UpdateGroupStatus($input: UpdateGroupStatusInput!) {
+    updateGroupStatus(input: $input) {
       errors
       group {
         id
