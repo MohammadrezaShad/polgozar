@@ -22,11 +22,11 @@ export default function AdminApp({ match, location }) {
             <Menu.Item key={`${match.url}/users`} icon={<UserOutlined />}>
               <Link to={`${match.url}/users`}>Users</Link>
             </Menu.Item>
-            <Menu.Item key={`${match.url}/events`} icon={<ScheduleOutlined />}>
-              <Link to={`${match.url}/events`}>Events</Link>
-            </Menu.Item>
             <Menu.Item key={`${match.url}/groups`} icon={<TeamOutlined />}>
               <Link to={`${match.url}/groups`}>Groups</Link>
+            </Menu.Item>
+            <Menu.Item key={`${match.url}/events`} icon={<ScheduleOutlined />}>
+              <Link to={`${match.url}/events`}>Events</Link>
             </Menu.Item>
           </Menu>
         </Sider>

@@ -8,6 +8,7 @@ export const getALlGroups = gql`
       slug
       description
       coverPhotoUrl
+      status
       organizers {
         id
         name
@@ -37,6 +38,18 @@ export const getGroupById = gql`
     group(slug: $slug, id: $id) {
       id
       name
+    }
+  }
+`;
+
+export const updateGroupStatus = gql`
+  mutation UpdateGroupStatus($groupId: String!, $status: String!) {
+    updateGroupStatus(input: { groupId: $groupId, status: $status }) {
+      errors
+      group {
+        id
+        status
+      }
     }
   }
 `;
