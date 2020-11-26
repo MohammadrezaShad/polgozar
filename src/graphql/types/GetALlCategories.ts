@@ -4,25 +4,25 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetALlCategories
+// GraphQL query operation: GetAllCategories
 // ====================================================
 
-export interface GetALlCategories_categories_groups {
+export interface GetAllCategories_categories_groups {
   __typename: "Group";
   id: string;
   name: string;
 }
 
-export interface GetALlCategories_categories {
+export interface GetAllCategories_categories {
   __typename: "Category";
   id: string;
   title: string;
   slug: string;
   description: string;
   coverPhotoUrl: string | null;
-  groups: GetALlCategories_categories_groups[];
+  groups: GetAllCategories_categories_groups[];
 }
 
-export interface GetALlCategories {
-  categories: GetALlCategories_categories[];
+export interface GetAllCategories {
+  categories: GetAllCategories_categories[];
 }

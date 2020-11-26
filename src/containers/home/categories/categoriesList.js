@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { radius, colors, maxWinSize, spacer, shadow, fontSize, rgba } from 'settings/style';
 import { Container } from 'components/elements';
-import { getALlCategories } from 'graphql/queries/categories';
+import { getAllCategories } from 'graphql/queries/categories';
 import { useQuery } from '@apollo/client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -16,7 +16,7 @@ if (maxWinSize('sm')) {
 }
 
 const CategoriesList = () => {
-  const { loading, error, data } = useQuery(getALlCategories);
+  const { loading, error, data } = useQuery(getAllCategories);
   console.log('xxxx', slidesPerView, loading, error, data);
   return (
     <CategoriesWrapper>

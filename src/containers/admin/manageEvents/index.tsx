@@ -2,12 +2,12 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Table } from 'antd';
 import { useQuery } from '@apollo/client';
-import { getALlEvents } from 'graphql/queries/events';
+import { getAllEvents } from 'graphql/queries/events';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
 const ManageUsers = () => {
-  const { loading, data } = useQuery(getALlEvents);
+  const { loading, data } = useQuery(getAllEvents);
   const tableData = data && data.events ? data.events : [];
   const columns = useRef([
     {

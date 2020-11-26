@@ -4,14 +4,14 @@ import { Header, HeroImage, Container, Button } from 'components/elements';
 import BgImage from 'assets/images/intro_bg.jpg';
 import { Row, Col } from 'antd';
 import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style';
-import { getALlGroups } from 'graphql/queries/groups';
+import { getAllGroups } from 'graphql/queries/groups';
 import { useQuery } from '@apollo/client';
 import GroupCard from 'components/groupCard';
 import Footer from 'components/footer';
 import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
-  const { loading, error, data } = useQuery(getALlGroups);
+  const { loading, error, data } = useQuery(getAllGroups);
   console.log('xxxx', loading, error, data);
   return (
     <HomeWrapper>

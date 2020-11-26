@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
-export const getALlGroups = gql`
-  query GetALlGroups {
+export const getAllGroups = gql`
+  query GetAllGroups {
     groups {
       id
       name

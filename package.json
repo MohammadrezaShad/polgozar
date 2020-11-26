@@ -49,7 +49,7 @@
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "prettier:write": "yarn prettier --write **/*.{js,jsx,ts,tsx,json} && yarn prettier --write *.{js,jsx,ts,tsx,json}",
     "graphql:schema_download": "yarn run apollo schema:download -c=apollo.config.js graphql-schema.json",
-    "graphql:generate_types": "yarn run apollo codegen:generate src/graphql/types --localSchemaFile=graphql-schema.json --target=typescript -c=apollo.config.js --outputFlat"
+    "graphql:generate_types": "rm -rf ./src/graphql/types && yarn run apollo codegen:generate src/graphql/types --localSchemaFile=graphql-schema.json --target=typescript -c=apollo.config.js --outputFlat"
   },
   "eslintConfig": {
     "extends": "react-app"

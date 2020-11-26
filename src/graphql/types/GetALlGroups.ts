@@ -4,40 +4,40 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetALlGroups
+// GraphQL query operation: GetAllGroups
 // ====================================================
 
-export interface GetALlGroups_groups_organizers {
+export interface GetAllGroups_groups_organizers {
   __typename: "User";
   id: string;
   name: string;
   email: string | null;
 }
 
-export interface GetALlGroups_groups_members {
+export interface GetAllGroups_groups_members {
   __typename: "User";
   name: string;
 }
 
-export interface GetALlGroups_groups_events {
+export interface GetAllGroups_groups_events {
   __typename: "Event";
   id: string;
   title: string;
 }
 
-export interface GetALlGroups_groups_address {
+export interface GetAllGroups_groups_address {
   __typename: "Address";
   address: string;
   lat: number;
   lng: number;
 }
 
-export interface GetALlGroups_groups_categories {
+export interface GetAllGroups_groups_categories {
   __typename: "Category";
   title: string;
 }
 
-export interface GetALlGroups_groups {
+export interface GetAllGroups_groups {
   __typename: "Group";
   id: string;
   name: string;
@@ -45,13 +45,13 @@ export interface GetALlGroups_groups {
   description: string;
   coverPhotoUrl: string | null;
   status: string;
-  organizers: GetALlGroups_groups_organizers[] | null;
-  members: GetALlGroups_groups_members[];
-  events: GetALlGroups_groups_events[];
-  address: GetALlGroups_groups_address | null;
-  categories: GetALlGroups_groups_categories[];
+  organizers: GetAllGroups_groups_organizers[] | null;
+  members: GetAllGroups_groups_members[];
+  events: GetAllGroups_groups_events[];
+  address: GetAllGroups_groups_address | null;
+  categories: GetAllGroups_groups_categories[];
 }
 
-export interface GetALlGroups {
-  groups: GetALlGroups_groups[];
+export interface GetAllGroups {
+  groups: GetAllGroups_groups[];
 }

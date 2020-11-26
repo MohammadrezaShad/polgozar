@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetALlUsers
+// GraphQL query operation: GetAllUsers
 // ====================================================
 
-export interface GetALlUsers_users {
+export interface GetAllUsers_users {
   __typename: "User";
   id: string;
   lastname: string;
@@ -18,6 +18,6 @@ export interface GetALlUsers_users {
   status: string;
 }
 
-export interface GetALlUsers {
-  users: GetALlUsers_users[];
+export interface GetAllUsers {
+  users: GetAllUsers_users[];
 }
