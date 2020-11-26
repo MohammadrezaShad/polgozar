@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Table, Select } from 'antd';
 import { useQuery, useMutation } from '@apollo/client';
 import { getALlUsers, updateUserStatus } from 'graphql/queries/users';
+import { UpdateUserStatusVariables, UpdateUserStatus } from 'graphql/types/UpdateUserStatus';
 import { Link } from 'react-router-dom';
 
 const { Option } = Select;
@@ -15,7 +16,7 @@ enum StatusColors {
 
 const ManageUsers = () => {
   const { loading, data } = useQuery(getALlUsers);
-  const [updateStatus] = useMutation(updateUserStatus);
+  const [updateStatus] = useMutation<UpdateUserStatus, UpdateUserStatusVariables>(updateUserStatus);
 
   const tableData = data && data.users ? data.users : [];
 

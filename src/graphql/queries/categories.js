@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const getALlCategories = gql`
-  query {
+  query GetALlCategories {
     categories {
       id
       title
@@ -17,7 +17,7 @@ export const getALlCategories = gql`
 `;
 
 export const getCategoryById = gql`
-  query {
+  query GetCategoryById {
     category(slug: "non-odit-ut") {
       id
       title

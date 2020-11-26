@@ -47,7 +47,9 @@
     "eject": "react-scripts eject",
     "format": "prettier --write src/**/*.ts{,x}",
     "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
-    "prettier:write": "yarn prettier --write **/*.{js,jsx,ts,tsx,json} && yarn prettier --write *.{js,jsx,ts,tsx,json}"
+    "prettier:write": "yarn prettier --write **/*.{js,jsx,ts,tsx,json} && yarn prettier --write *.{js,jsx,ts,tsx,json}",
+    "graphql:schema_download": "yarn run apollo schema:download -c=apollo.config.js graphql-schema.json",
+    "graphql:generate_types": "yarn run apollo codegen:generate src/graphql/types --localSchemaFile=graphql-schema.json --target=typescript -c=apollo.config.js --outputFlat"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -65,8 +67,10 @@
     ]
   },
   "devDependencies": {
+    "@types/graphql": "^14.5.0",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
+    "apollo": "^2.31.1",
     "babel-plugin-import": "^1.12.2",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^12.0.0",

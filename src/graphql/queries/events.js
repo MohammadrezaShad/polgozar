@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const getALlEvents = gql`
-  query {
+  query GetALlEvents {
     events {
       id
       title
@@ -28,7 +28,7 @@ export const getALlEvents = gql`
 `;
 
 export const getEventById = gql`
-  query {
+  query GetEventById {
     event(id: "1") {
       id
       title

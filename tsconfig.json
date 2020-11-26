@@ -20,5 +20,6 @@
     "baseUrl": "./src",
     "strict": true
   },
-  "include": ["src", "craco.config.js"]
+  "include": ["src", "craco.config.js", "apollo.config.js"],
+  "exclude": ["src/types/graphqlGlobalTypes.ts", "node_modules"]
 }

@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const getALlGroups = gql`
-  query {
+  query GetALlGroups {
     groups {
       id
       name
@@ -34,7 +34,7 @@ export const getALlGroups = gql`
 `;
 
 export const getGroupById = gql`
-  query groupByIdSlug($id: String, $slug: String) {
+  query GroupByIdSlug($id: String, $slug: String) {
     group(slug: $slug, id: $id) {
       id
       name
