@@ -1,9 +1,28 @@
 import React from 'react';
 import { Modal } from 'antd';
+import { ModalProps } from 'antd/lib/modal';
 import { Button } from 'components/elements';
+import { ButtonComponentProps } from 'components/elements/button';
 import styled from 'styled-components';
 
-const ModalWrapper = ({ onLeft, onLeftText, onRight, onRightText, onRightProps, children, ...props }) => {
+interface ModalWrapperProps extends ModalProps {
+  onLeft?: () => void;
+  onRight?: () => void;
+  onLeftText?: React.ReactNode;
+  onRightText?: React.ReactNode;
+  children?: React.ReactNode;
+  onRightProps?: Omit<ButtonComponentProps, 'onClick'>;
+}
+
+const ModalWrapper = ({
+  onLeft,
+  onLeftText,
+  onRight,
+  onRightText,
+  onRightProps,
+  children,
+  ...props
+}: ModalWrapperProps) => {
   return (
     <Modal getContainer={() => window.document.getElementById('root') || window.document.body} {...props} footer={null}>
       {children}
