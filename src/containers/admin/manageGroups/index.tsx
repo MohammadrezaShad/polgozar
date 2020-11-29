@@ -6,14 +6,15 @@ import { getAllGroups, updateGroupStatus } from 'graphql/queries/groups';
 import { Link } from 'react-router-dom';
 import { UpdateGroupStatusVariables, UpdateGroupStatus } from 'graphql/types/UpdateGroupStatus';
 import { GetAllGroups } from 'graphql/types/GetAllGroups';
+import { colors } from 'settings/style';
 
 const { Option } = Select;
 
-enum StatusColors {
-  approved = '#06C049',
-  pending = 'gray',
-  rejected = 'red',
-}
+const StatusColors = {
+  approved: colors.success,
+  pending: colors.gray500,
+  rejected: colors.danger,
+};
 
 const ManageGroups = () => {
   const { loading, data } = useQuery<GetAllGroups>(getAllGroups);

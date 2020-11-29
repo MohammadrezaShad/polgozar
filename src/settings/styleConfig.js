@@ -46,6 +46,8 @@ const colors = {
   red300: '#fc4a73',
   red400: '#ff0031',
   transparent: 'transparent',
+
+  success: '#06C049',
 };
 
 const fonts = {

@@ -6,14 +6,15 @@ import { getAllUsers, updateUserStatus } from 'graphql/queries/users';
 import { UpdateUserStatusVariables, UpdateUserStatus } from 'graphql/types/UpdateUserStatus';
 import { GetAllUsers } from 'graphql/types/GetAllUsers';
 import { Link } from 'react-router-dom';
+import { colors } from 'settings/style';
 
 const { Option } = Select;
 
-enum StatusColors {
-  approved = '#06C049',
-  pending = 'gray',
-  rejected = 'red',
-}
+const StatusColors = {
+  approved: colors.success,
+  pending: colors.gray500,
+  rejected: colors.danger,
+};
 
 const ManageUsers = () => {
   const { loading, data } = useQuery<GetAllUsers>(getAllUsers);
