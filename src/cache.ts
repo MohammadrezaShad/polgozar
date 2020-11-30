@@ -1,4 +1,4 @@
-import { InMemoryCache, makeVar, gql } from '@apollo/client';
+import { InMemoryCache, makeVar } from '@apollo/client';
 import { AUTH_TOKEN } from 'constant';
 import jwt from 'jwt-decode';
 import LocalStore from 'helpers/localStore';
@@ -47,12 +47,3 @@ export const cache: InMemoryCache = new InMemoryCache({
     },
   },
 });
-
-export const typeDefs = gql`
-  extend type Query {
-    loggedInState: Boolean!
-    loginModalVisible: Boolean!
-    signupModalVisible: Boolean!
-    userRole: String!
-  }
-`;

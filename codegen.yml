@@ -1,7 +1,6 @@
 schema:
   - ./src/client-schema.ts
   - ${REACT_APP_API_BASE_URL}/graphql
-  # - ./graphql-schema.json
 documents: './src/**/*.{tsx,ts}'
 overwrite: true
 generates:
@@ -9,12 +8,11 @@ generates:
     plugins:
       - add:
           content: '/* eslint-disable */'
+      - add:
+          content: '/* DO NOT CHANGE THIS FILE MANUALLY, This file is generated automaticly from yarn codegen */'
       - typescript
       - typescript-operations
       - typescript-react-apollo
-    # The combined options of all provided plug-ins
-    # More information about the options below:
-    # graphql-code-generator.com/docs/plugins/typescript-react-apollo#configuration
     config:
       withHOC: false
       withHooks: true
