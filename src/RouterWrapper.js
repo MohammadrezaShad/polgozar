@@ -5,12 +5,14 @@ import Home from 'containers/home';
 import AdminApp from 'containers/admin';
 import page404 from 'containers/Page/404';
 import UseGlobalSync from 'hooks/useStoreSync';
-import { useGlobalStore } from 'stores/globalStore';
+import { useLoginModalVisibilityQuery, useUserRoleQuery } from 'graphql/types';
 
 const PrivateRoute = ({ component: WrapperComponent, location, ...rest }) => {
-  const { state } = useGlobalStore();
-  const isUser = state.isLoggedIn;
-  const isAdmin = state.userRole === 'admin';
+  const useLoginModalVisibilityResult = useLoginModalVisibilityQuery();
+  const useUserRoleResult = useUserRoleQuery();
+
+  const isUser = useLoginModalVisibilityResult.data.loginModalVisible;
+  const isAdmin = useUserRoleResult.data.userRole === 'admin';
   let comp = () => (
     <Redirect
       to={{

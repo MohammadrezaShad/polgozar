@@ -1,12 +1,9 @@
 import React, { useRef, useCallback } from 'react';
 import styled from 'styled-components';
 import { Table, Select } from 'antd';
-import { useQuery, useMutation } from '@apollo/client';
-import { getAllUsers, updateUserStatus } from 'graphql/queries/users';
-import { UpdateUserStatusVariables, UpdateUserStatus } from 'graphql/types/UpdateUserStatus';
-import { GetAllUsers } from 'graphql/types/GetAllUsers';
 import { Link } from 'react-router-dom';
 import { colors } from 'settings/style';
+import { useGetAllUsersQuery, useUpdateUserStatusMutation } from 'graphql/types';
 
 const { Option } = Select;
 
@@ -17,8 +14,8 @@ const StatusColors = {
 };
 
 const ManageUsers = () => {
-  const { loading, data } = useQuery<GetAllUsers>(getAllUsers);
-  const [updateStatus] = useMutation<UpdateUserStatus, UpdateUserStatusVariables>(updateUserStatus);
+  const { loading, data } = useGetAllUsersQuery();
+  const [updateStatus] = useUpdateUserStatusMutation();
 
   const tableData = data && data.users ? data.users : [];
 

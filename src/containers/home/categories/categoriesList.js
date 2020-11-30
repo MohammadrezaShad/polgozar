@@ -7,7 +7,7 @@ import { useQuery } from '@apollo/client';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 let slidesPerView = 5;
-if (maxWinSize('sm')) {
+if (maxWinSize('xs')) {
   slidesPerView = 1;
 } else if (maxWinSize('md')) {
   slidesPerView = 3;

@@ -10,8 +10,9 @@ import { getMyAccount } from 'graphql/queries/users';
 import { useLazyQuery } from '@apollo/client';
 import LoginModal from 'components/login';
 import SginupModal from 'components/signup';
-import { useGlobalStore, ActionConstantType } from 'stores/globalStore';
+import { loginModalVisible, signupModalVisible } from 'cache';
 import { logout } from 'services/auth';
+import { useLoggedInStateQuery } from 'graphql/types';
 
 const headerRoutes = [
   { name: 'Home', path: '/' },
@@ -19,24 +20,26 @@ const headerRoutes = [
   { name: 'Start new Group / Event', path: '/fsa' },
 ];
 export const Header = ({ light = true }) => {
+  const useLoggedInStateResult = useLoggedInStateQuery();
+  const isLoggedIn = useLoggedInStateResult.data.loggedInState;
+
   const [drawer, setDrawer] = useState(false);
   const [getMyProfile, { data }] = useLazyQuery(getMyAccount);
-  const { state, dispatch } = useGlobalStore();
 
   useEffect(() => {
-    if (state.isLoggedIn) {
+    if (isLoggedIn) {
       getMyProfile();
     }
-  }, [getMyProfile, state]);
+  }, [getMyProfile, isLoggedIn]);
 
   console.log('MY PROFILE DATA: ', data);
 
   const onSignup = () => {
-    dispatch({ type: ActionConstantType.SET_SIGNUP_VISIBLE, payload: true });
+    loginModalVisible(true);
   };
 
   const onLogin = () => {
-    dispatch({ type: ActionConstantType.SET_LOGIN_VISIBLE, payload: true });
+    signupModalVisible(true);
   };
 
   return (
@@ -59,7 +62,7 @@ export const Header = ({ light = true }) => {
           <nav className="menu-container">
             <Menu light={light} />
             <div className="login-signup">
-              {state.isLoggedIn ? (
+              {isLoggedIn ? (
                 <Button shape="link" color={light ? 'white' : 'primary'} onClick={() => logout()}>
                   Logout
                 </Button>

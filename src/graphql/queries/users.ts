@@ -45,7 +45,7 @@ export const getMyAccount = gql`
 `;
 
 export const getUserById = gql`
-  query GetUserById($id: String) {
+  query GetUserById($id: ID!) {
     user(id: $id) {
       id
       name

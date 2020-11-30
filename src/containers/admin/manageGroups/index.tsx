@@ -1,12 +1,9 @@
 import React, { useCallback, useRef } from 'react';
 import styled from 'styled-components';
 import { Table, Select } from 'antd';
-import { useQuery, useMutation } from '@apollo/client';
-import { getAllGroups, updateGroupStatus } from 'graphql/queries/groups';
 import { Link } from 'react-router-dom';
-import { UpdateGroupStatusVariables, UpdateGroupStatus } from 'graphql/types/UpdateGroupStatus';
-import { GetAllGroups } from 'graphql/types/GetAllGroups';
 import { colors } from 'settings/style';
+import { useGetAllGroupsQuery, useUpdateGroupStatusMutation } from 'graphql/types';
 
 const { Option } = Select;
 
@@ -17,8 +14,8 @@ const StatusColors = {
 };
 
 const ManageGroups = () => {
-  const { loading, data } = useQuery<GetAllGroups>(getAllGroups);
-  const [updateStatus] = useMutation<UpdateGroupStatus, UpdateGroupStatusVariables>(updateGroupStatus);
+  const { loading, data } = useGetAllGroupsQuery();
+  const [updateStatus] = useUpdateGroupStatusMutation();
 
   const chageGroupStatus = useCallback(
     (status: string, groupId: string) => {

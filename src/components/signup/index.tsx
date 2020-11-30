@@ -1,8 +1,9 @@
 import React from 'react';
 import { Modal, FormItem } from 'components/elements';
 import { Row, Col, Input, Form, Select } from 'antd';
-import { useGlobalStore, ActionConstantType } from 'stores/globalStore';
+import { loginModalVisible, signupModalVisible } from 'cache';
 import { LoginReq } from 'services/auth';
+import { useSignupModalVisibilityQuery } from 'graphql/types';
 
 const { Option } = Select;
 
@@ -16,14 +17,11 @@ const prefixSelector = (
 );
 
 function Signup() {
-  const {
-    state: { signupModalVisible },
-    dispatch,
-  } = useGlobalStore();
-  const [signupForm] = Form.useForm();
+  const useSignupModalVisibilityResult = useSignupModalVisibilityQuery();
 
+  const [signupForm] = Form.useForm();
   const setSignupVisibility = (visible: boolean) => {
-    dispatch({ type: ActionConstantType.SET_SIGNUP_VISIBLE, payload: visible });
+    signupModalVisible(visible);
   };
 
   const onFinish = (values: LoginReq) => {
@@ -32,13 +30,13 @@ function Signup() {
 
   const toLogin = () => {
     setSignupVisibility(false);
-    dispatch({ type: ActionConstantType.SET_LOGIN_VISIBLE, payload: true });
+    loginModalVisible(true);
   };
 
   return (
     <Modal
       title="Sign up"
-      visible={signupModalVisible}
+      visible={useSignupModalVisibilityResult.data?.signupModalVisible}
       onRight={() => {}}
       onRightProps={{ isLoading: false }}
       onRightText="Continue"

@@ -34,7 +34,7 @@ export const getAllGroups = gql`
 `;
 
 export const getGroupById = gql`
-  query GroupByIdSlug($id: String, $slug: String) {
+  query GroupByIdSlug($id: ID, $slug: String) {
     group(slug: $slug, id: $id) {
       id
       name

@@ -1,0 +1,21 @@
+schema:
+  - ./src/client-schema.ts
+  - ${REACT_APP_API_BASE_URL}/graphql
+  # - ./graphql-schema.json
+documents: './src/**/*.{tsx,ts}'
+overwrite: true
+generates:
+  ./src/graphql/types.tsx:
+    plugins:
+      - add:
+          content: '/* eslint-disable */'
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    # The combined options of all provided plug-ins
+    # More information about the options below:
+    # graphql-code-generator.com/docs/plugins/typescript-react-apollo#configuration
+    config:
+      withHOC: false
+      withHooks: true
+      withComponent: false

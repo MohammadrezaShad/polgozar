@@ -1,7 +1,6 @@
 import React from 'react';
 import { ApolloProvider } from '@apollo/client';
 import client from 'helpers/client';
-import { GlobalStore } from 'stores/globalStore';
 
 // library CSS
 import 'antd/dist/antd.less';
@@ -16,9 +15,7 @@ const App = () => {
   return (
     <>
       <ApolloProvider client={client}>
-        <GlobalStore>
-          <RouterWrapper />
-        </GlobalStore>
+        <RouterWrapper />
       </ApolloProvider>
       <GlobalStyle />
     </>
