@@ -2,10 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect, RouteProps } from 'react-router-dom';
 
 import Home from 'containers/home';
-import AdminApp from 'containers/admin';
+import AdminPanel from 'containers/admin';
+import AccountPanel from 'containers/account';
 import page404 from 'containers/Page/404';
 import UseGlobalSync from 'hooks/useStoreSync';
-import { useLoginModalVisibilityQuery, useUserRoleQuery } from 'graphql/types';
+import { useLoggedInStateQuery, useUserRoleQuery } from 'graphql/types';
+import MainLayout from 'components/mainLayout';
+import SingleGroup from 'containers/singleGroup';
+import SingleEvent from 'containers/singleEvent';
 
 interface PrivateRouteProps extends RouteProps {
   component: React.FC<any>;
@@ -13,10 +17,10 @@ interface PrivateRouteProps extends RouteProps {
 
 type RenderComponent = (props?: any) => React.ReactNode;
 const PrivateRoute = ({ component: WrapperComponent, location, ...rest }: PrivateRouteProps) => {
-  const useLoginModalVisibilityResult = useLoginModalVisibilityQuery();
+  const useLoggedInStateQueryResult = useLoggedInStateQuery();
   const useUserRoleResult = useUserRoleQuery();
 
-  const isUser = useLoginModalVisibilityResult.data?.loginModalVisible;
+  const isUser = useLoggedInStateQueryResult.data?.loggedInState;
   const isAdmin = useUserRoleResult.data?.userRole === 'admin';
   let comp: RenderComponent = () => (
     <Redirect
@@ -38,14 +42,13 @@ export default function RouterWrapper() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/">
-          <Home />
-        </Route>
-        <Route path="/login">
-          <Home />
-        </Route>
-        <PrivateRoute path="/admin" component={AdminApp} />
-        <PrivateRoute path="/account" component={AdminApp} />
+        <MainLayout>
+          <Route exact path="/" component={Home} />
+          <Route exact path="/groups/:slug" component={SingleGroup} />
+          <Route exact path="/events/:id" component={SingleEvent} />
+          <PrivateRoute path="/account" component={AccountPanel} />
+        </MainLayout>
+        <PrivateRoute path="/admin" component={AdminPanel} />
         <Route component={page404} />
       </Switch>
     </Router>

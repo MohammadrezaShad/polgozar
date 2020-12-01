@@ -1,22 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header, HeroImage, Container, Button } from 'components/elements';
+import { HeroImage, Container, Button } from 'components/elements';
 import BgImage from 'assets/images/intro_bg.jpg';
 import { Row, Col } from 'antd';
 import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style';
-import { getAllGroups } from 'graphql/queries/groups';
-import { useQuery } from '@apollo/client';
 import GroupCard from 'components/groupCard';
-import Footer from 'components/footer';
-import { Group } from 'graphql/types';
+import { useGetAllGroupsQuery } from 'graphql/types';
+
 import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
-  const { loading, error, data } = useQuery(getAllGroups);
-  console.log('xxxx', loading, error, data);
+  const { loading, data } = useGetAllGroupsQuery();
   return (
     <HomeWrapper>
-      <Header light />
       <div style={{ display: 'relative' }}>
         <HeroImage img={BgImage} overlay>
           <div className="hero-content">
@@ -36,10 +32,11 @@ const Home = () => {
         <Container>
           <div className="row-cont">
             <h3>Popular Groups</h3>
+            {loading && 'loading ....'}
             <Row gutter={[24, 24]}>
               {data &&
-                data.groups.slice(0, 3).map((item: Group) => (
-                  <Col xs={24} md={8}>
+                data.groups.slice(0, 3).map((item) => (
+                  <Col xs={24} md={8} key={item.slug}>
                     <GroupCard key={item.slug} group={item} />
                   </Col>
                 ))}
@@ -49,8 +46,8 @@ const Home = () => {
             <h3>Popular Events</h3>
             <Row gutter={[24, 24]}>
               {data &&
-                data.groups.slice(0, 3).map((item: Group) => (
-                  <Col xs={24} md={8}>
+                data.groups.slice(0, 3).map((item) => (
+                  <Col xs={24} md={8} key={item.slug}>
                     <GroupCard key={item.slug} group={item} />
                   </Col>
                 ))}
@@ -58,7 +55,6 @@ const Home = () => {
           </div>
         </Container>
       </ContentContainer>
-      <Footer />
     </HomeWrapper>
   );
 };
@@ -105,6 +101,7 @@ const HomeWrapper = styled.div`
     .join-us-btn {
       width: 54%;
       padding: 1em 0em;
+      margin-top: 1.5em;
       color: ${colors.white};
       backdrop-filter: blur(10px);
       background-color: ${rgba(colors.accent, 0.3)};

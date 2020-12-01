@@ -2,10 +2,6 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 import { colors, fontWeight, spacer, radius, rgba } from 'settings/style';
 import { Spinner } from 'components/elements';
-// interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-
-//   children?: React.ReactNode;
-// }
 
 export type ButtonComponentProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children?: React.ReactNode;
@@ -28,7 +24,7 @@ const ButtonComponent = ({ onClick, children, disabled, isLoading, ...otherProps
 };
 
 const Button = styled.button<ButtonComponentProps>`
-  ${({ rounded = true, color = 'accent', shape = 'dark', disabled = false }: ButtonComponentProps) => css`
+  ${({ rounded = true, color = 'accent', shape = 'dark' }: ButtonComponentProps) => css`
     display: inline-block;
     border: none;
     outline: none;

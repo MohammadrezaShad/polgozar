@@ -556,7 +556,9 @@ export type GetAllEventsQuery = (
   )> }
 );
 
-export type GetEventByIdQueryVariables = Exact<{ [key: string]: never; }>;
+export type GetEventByIdQueryVariables = Exact<{
+  id?: Maybe<Scalars['ID']>;
+}>;
 
 
 export type GetEventByIdQuery = (
@@ -859,8 +861,8 @@ export type GetAllEventsQueryHookResult = ReturnType<typeof useGetAllEventsQuery
 export type GetAllEventsLazyQueryHookResult = ReturnType<typeof useGetAllEventsLazyQuery>;
 export type GetAllEventsQueryResult = Apollo.QueryResult<GetAllEventsQuery, GetAllEventsQueryVariables>;
 export const GetEventByIdDocument = gql`
-    query GetEventById {
-  event(id: "1") {
+    query GetEventById($id: ID) {
+  event(id: $id) {
     id
     title
     description
@@ -897,6 +899,7 @@ export const GetEventByIdDocument = gql`
  * @example
  * const { data, loading, error } = useGetEventByIdQuery({
  *   variables: {
+ *      id: // value for 'id'
  *   },
  * });
  */

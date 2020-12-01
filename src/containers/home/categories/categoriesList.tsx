@@ -15,18 +15,12 @@ if (maxWinSize('xs')) {
 }
 
 const CategoriesList = () => {
-  const { loading, error, data } = useGetAllCategoriesQuery();
-  console.log('xxxx', slidesPerView, loading, error, data);
+  const { data } = useGetAllCategoriesQuery();
   return (
     <CategoriesWrapper>
       <Container>
         <div className="item-containers">
-          <Swiper
-            spaceBetween={40}
-            slidesPerView={slidesPerView}
-            onSlideChange={() => console.log('slide change')}
-            onSwiper={(swiper) => console.log(swiper)}
-          >
+          <Swiper spaceBetween={40} slidesPerView={slidesPerView}>
             {data &&
               data.categories.map((category) => (
                 <SwiperSlide key={category.slug}>

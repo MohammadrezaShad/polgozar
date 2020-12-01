@@ -19,7 +19,6 @@ const ManageGroups = () => {
 
   const chageGroupStatus = useCallback(
     (status: string, groupId: string) => {
-      console.log({ groupId, status }, 'XXXXXXX');
       updateStatus({ variables: { input: { groupId, status } } });
     },
     [updateStatus],

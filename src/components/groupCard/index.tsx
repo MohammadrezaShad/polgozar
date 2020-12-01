@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import { radius, colors, spacer, shadow, fontSize, fontType } from 'settings/style';
 import { Button } from 'components/elements';
 import { Link } from 'react-router-dom';
-import { Group } from 'graphql/types';
+import { GetAllGroupsQuery } from 'graphql/types';
 
 interface GroupCardProps {
-  group: Group;
+  group: GetAllGroupsQuery['groups'][0];
 }
+
 const GroupCard = ({ group }: GroupCardProps) => {
   return (
-    <GroupCardWrapper img={group.coverPhotoUrl || ''} to="/dsfa">
+    <GroupCardWrapper img={group.coverPhotoUrl || ''} to={`/groups/${group.slug}`}>
       <div className="img-cont" />
       <div className="content-cont">
         <h4 className="group-name">{group.name}</h4>

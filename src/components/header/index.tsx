@@ -19,20 +19,19 @@ const headerRoutes = [
   { name: 'Group and Event search', path: '/fsa' },
   { name: 'Start new Group / Event', path: '/fsa' },
 ];
-export const Header = ({ light = true }) => {
+export default function Header({ light = true }) {
   const useLoggedInStateResult = useLoggedInStateQuery();
   const isLoggedIn = useLoggedInStateResult.data?.loggedInState;
 
   const [drawer, setDrawer] = useState(false);
-  const [getMyProfile, { data }] = useLazyQuery(getMyAccount);
+  const [getMyProfile, { data: myProfile }] = useLazyQuery(getMyAccount);
 
+  console.log('myProfile', myProfile);
   useEffect(() => {
     if (isLoggedIn) {
       getMyProfile();
     }
   }, [getMyProfile, isLoggedIn]);
-
-  console.log('MY PROFILE DATA: ', data);
 
   const onSignup = () => {
     loginModalVisible(true);
@@ -80,9 +79,7 @@ export const Header = ({ light = true }) => {
       </Container>
     </HeaderWrapper>
   );
-};
-
-export default Header;
+}
 
 interface MenuProps {
   light: boolean;
@@ -121,7 +118,7 @@ interface HeaderWrapperProps {
 
 const HeaderWrapper = styled.header<HeaderWrapperProps>`
   ${({ light }) => css`
-    position: absolute;
+    position: ${light ? 'absolute' : 'relative'};
     top: 0;
     left: 0;
     width: 100%;
@@ -161,10 +158,19 @@ const HeaderWrapper = styled.header<HeaderWrapperProps>`
 
         ${light &&
         css`
-          border-bottom: 1px solid ${rgba(colors.accent, 0.4)};
-          ${media.lg`
-            border-bottom: none;
-          `}
+          position: relative;
+          &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 1px;
+            background-color: ${rgba(colors.accent, 0.4)};
+            position: absolute;
+            bottom: -${spacer.md};
+            ${media.lg`
+              height: 0;
+            `}
+          }
         `}
 
         display: flex;
