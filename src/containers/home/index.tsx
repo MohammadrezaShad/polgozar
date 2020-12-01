@@ -5,12 +5,14 @@ import BgImage from 'assets/images/intro_bg.jpg';
 import { Row, Col } from 'antd';
 import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style';
 import GroupCard from 'components/groupCard';
-import { useGetAllGroupsQuery } from 'graphql/types';
+import EventCard from 'components/eventCard';
+import { useGetAllGroupsQuery, useGetAllEventsQuery } from 'graphql/types';
 
 import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
-  const { loading, data } = useGetAllGroupsQuery();
+  const { loading: groupsLoading, data: groupsResult } = useGetAllGroupsQuery();
+  const { loading: eventsLoading, data: eventsResult } = useGetAllEventsQuery();
   return (
     <HomeWrapper>
       <div style={{ display: 'relative' }}>
@@ -32,23 +34,24 @@ const Home = () => {
         <Container>
           <div className="row-cont">
             <h3>Popular Groups</h3>
-            {loading && 'loading ....'}
+            {groupsLoading && 'loading ....'}
             <Row gutter={[24, 24]}>
-              {data &&
-                data.groups.slice(0, 3).map((item) => (
+              {groupsResult &&
+                groupsResult.groups.map((item) => (
                   <Col xs={24} md={8} key={item.slug}>
-                    <GroupCard key={item.slug} group={item} />
+                    <GroupCard group={item} />
                   </Col>
                 ))}
             </Row>
           </div>
           <div className="row-cont">
             <h3>Popular Events</h3>
+            {eventsLoading && 'loading ....'}
             <Row gutter={[24, 24]}>
-              {data &&
-                data.groups.slice(0, 3).map((item) => (
-                  <Col xs={24} md={8} key={item.slug}>
-                    <GroupCard key={item.slug} group={item} />
+              {eventsResult &&
+                eventsResult.events.map((item) => (
+                  <Col xs={24} md={8} key={item.id}>
+                    <EventCard event={item} />
                   </Col>
                 ))}
             </Row>
