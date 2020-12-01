@@ -2,17 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 import { HeroImage, Container, Button } from 'components/elements';
 import BgImage from 'assets/images/intro_bg.jpg';
-import { Row, Col } from 'antd';
+import { Row, Col, Skeleton } from 'antd';
 import { colors, fontType, snippet, spacer, rgba, media } from 'settings/style';
 import GroupCard from 'components/groupCard';
 import EventCard from 'components/eventCard';
 import { useGetAllGroupsQuery, useGetAllEventsQuery } from 'graphql/types';
+import { v4 } from 'uuid';
 
 import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
-  const { loading: groupsLoading, data: groupsResult } = useGetAllGroupsQuery();
-  const { loading: eventsLoading, data: eventsResult } = useGetAllEventsQuery();
+  const { data: groupsResult } = useGetAllGroupsQuery();
+  const { data: eventsResult } = useGetAllEventsQuery();
   return (
     <HomeWrapper>
       <div style={{ display: 'relative' }}>
@@ -34,26 +35,28 @@ const Home = () => {
         <Container>
           <div className="row-cont">
             <h3>Popular Groups</h3>
-            {groupsLoading && 'loading ....'}
             <Row gutter={[24, 24]}>
-              {groupsResult &&
-                groupsResult.groups.map((item) => (
-                  <Col xs={24} md={8} key={item.slug}>
-                    <GroupCard group={item} />
+              {[...Array(3)].map((_, index) => {
+                const item = groupsResult?.groups[index];
+                return (
+                  <Col xs={24} md={8} key={v4()}>
+                    {item ? <GroupCard group={item} /> : <LoadingCards />}
                   </Col>
-                ))}
+                );
+              })}
             </Row>
           </div>
           <div className="row-cont">
             <h3>Popular Events</h3>
-            {eventsLoading && 'loading ....'}
             <Row gutter={[24, 24]}>
-              {eventsResult &&
-                eventsResult.events.map((item) => (
-                  <Col xs={24} md={8} key={item.id}>
-                    <EventCard event={item} />
+              {[...Array(3)].map((_, index) => {
+                const item = eventsResult?.events[index];
+                return (
+                  <Col xs={24} md={8} key={v4()}>
+                    {item ? <EventCard event={item} /> : <LoadingCards />}
                   </Col>
-                ))}
+                );
+              })}
             </Row>
           </div>
         </Container>
@@ -62,6 +65,10 @@ const Home = () => {
   );
 };
 export default Home;
+
+function LoadingCards() {
+  return <Skeleton active title={false} avatar={{ shape: 'square' }} paragraph={{ rows: 4 }} />;
+}
 
 const ContentContainer = styled.div`
   background-color: ${colors.gray200};

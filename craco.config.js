@@ -32,6 +32,8 @@ module.exports = {
               '@heading-4-size': fontSize.md,
               '@heading-5-size': fontSize.base,
               '@divider-text-padding': '0',
+              '@skeleton-color': 'rgba(200, 200, 200, 0.1)',
+
               // vertical paddings
               //   "@padding-lg": spacer.xl,
               //   "@padding-md": spacer.lg,
