@@ -32,7 +32,7 @@ const Footer = () => {
               give.”
             </p>
             <div className="donate-btn-cont">
-              <Button shape="opacity" color="primary">
+              <Button shape="opacity" color="primary" onClick={() => {}}>
                 Donate here
               </Button>
             </div>

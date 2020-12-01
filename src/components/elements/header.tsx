@@ -21,7 +21,7 @@ const headerRoutes = [
 ];
 export const Header = ({ light = true }) => {
   const useLoggedInStateResult = useLoggedInStateQuery();
-  const isLoggedIn = useLoggedInStateResult.data.loggedInState;
+  const isLoggedIn = useLoggedInStateResult.data?.loggedInState;
 
   const [drawer, setDrawer] = useState(false);
   const [getMyProfile, { data }] = useLazyQuery(getMyAccount);
@@ -84,7 +84,11 @@ export const Header = ({ light = true }) => {
 
 export default Header;
 
-const Menu = (light) => {
+interface MenuProps {
+  light: boolean;
+}
+
+const Menu = ({ light }: MenuProps) => {
   return (
     <ul className="menu-links">
       {headerRoutes.map((item) => (
@@ -97,6 +101,7 @@ const Menu = (light) => {
     </ul>
   );
 };
+
 const MenuLink = styled(({ light, ...props }) => <NavLink {...props} />)`
   color: ${({ light }) => (light ? colors.white : colors.primary)};
   font-weight: ${fontWeight.bold};
@@ -109,7 +114,12 @@ const MenuLink = styled(({ light, ...props }) => <NavLink {...props} />)`
     color: ${colors.accent};
   }
 `;
-const HeaderWrapper = styled.header`
+
+interface HeaderWrapperProps {
+  light: boolean;
+}
+
+const HeaderWrapper = styled.header<HeaderWrapperProps>`
   ${({ light }) => css`
     position: absolute;
     top: 0;

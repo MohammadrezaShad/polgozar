@@ -8,6 +8,7 @@ import { getAllGroups } from 'graphql/queries/groups';
 import { useQuery } from '@apollo/client';
 import GroupCard from 'components/groupCard';
 import Footer from 'components/footer';
+import { Group } from 'graphql/types';
 import CategoriesList from './categories/categoriesList';
 
 const Home = () => {
@@ -23,7 +24,9 @@ const Home = () => {
             <h1 className="head-second">
               and that way is <span>TRUTH</span>.
             </h1>
-            <Button className="join-us-btn">JOIN US</Button>
+            <Button className="join-us-btn" onClick={() => {}}>
+              JOIN US
+            </Button>
           </div>
         </HeroImage>
         <CategoriesList />
@@ -35,7 +38,7 @@ const Home = () => {
             <h3>Popular Groups</h3>
             <Row gutter={[24, 24]}>
               {data &&
-                data.groups.slice(0, 3).map((item) => (
+                data.groups.slice(0, 3).map((item: Group) => (
                   <Col xs={24} md={8}>
                     <GroupCard key={item.slug} group={item} />
                   </Col>
@@ -46,7 +49,7 @@ const Home = () => {
             <h3>Popular Events</h3>
             <Row gutter={[24, 24]}>
               {data &&
-                data.groups.slice(0, 3).map((item) => (
+                data.groups.slice(0, 3).map((item: Group) => (
                   <Col xs={24} md={8}>
                     <GroupCard key={item.slug} group={item} />
                   </Col>

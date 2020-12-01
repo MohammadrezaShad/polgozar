@@ -33,7 +33,7 @@ const FourZeroFourStyleWrapper = styled.div`
 
     h1 {
       font-size: 84px;
-      color: ${colors.dark};
+      color: ${colors.gray900};
       font-weight: 700;
       line-height: 1;
       margin: 0 0 25px;
@@ -41,7 +41,7 @@ const FourZeroFourStyleWrapper = styled.div`
 
     h3 {
       font-size: 24px;
-      color: ${colors.dark};
+      color: ${colors.gray900};
       font-weight: 400;
       margin: 0 0 10px;
       line-height: 1.2;
@@ -49,7 +49,7 @@ const FourZeroFourStyleWrapper = styled.div`
 
     p {
       font-size: 14px;
-      color: ${colors.gray};
+      color: ${colors.gray500};
       font-weight: 400;
       margin: 0 0 10px;
     }
@@ -88,21 +88,19 @@ const FourZeroFourStyleWrapper = styled.div`
       }
 
       &:hover {
-
         a {
-        background-color: ${colors.primary};
+          background-color: ${colors.primary};
         }
-          text-decoration: none;
-        }
+        text-decoration: none;
       }
+    }
 
-      &:focus {
-        outline: 0;
-        box-shadow: none;
+    &:focus {
+      outline: 0;
+      box-shadow: none;
 
-        a {
-          text-decoration: none;
-        }
+      a {
+        text-decoration: none;
       }
     }
   }
@@ -111,7 +109,7 @@ const FourZeroFourStyleWrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left:  100px;
+    margin-left: 100px;
     margin-right: inherit;
     height: 500px;
 
@@ -123,6 +121,7 @@ const FourZeroFourStyleWrapper = styled.div`
     img {
       max-height: 100%;
     }
+  }
 `;
 
 export default FourZeroFourStyleWrapper;

@@ -1,8 +1,16 @@
 import styled, { css } from 'styled-components';
 import { media } from 'settings/style';
 
+interface HeroImgProps {
+  overlay?: boolean;
+  filter?: string;
+  img: string;
+  parallex?: boolean;
+  height?: string;
+}
+
 // prettier-ignore
-const HeroImg = styled.div`
+const HeroImg = styled.div<HeroImgProps>`
   ${({ overlay, filter, img, parallex, height = "100vh" }) => css`
     background-image: ${overlay
         ? `linear-gradient( ${

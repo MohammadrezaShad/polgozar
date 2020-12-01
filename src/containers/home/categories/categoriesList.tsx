@@ -2,9 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { radius, colors, maxWinSize, spacer, shadow, fontSize, rgba } from 'settings/style';
 import { Container } from 'components/elements';
-import { getAllCategories } from 'graphql/queries/categories';
-import { useQuery } from '@apollo/client';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useGetAllCategoriesQuery } from 'graphql/types';
 
 let slidesPerView = 5;
 if (maxWinSize('xs')) {
@@ -16,7 +15,7 @@ if (maxWinSize('xs')) {
 }
 
 const CategoriesList = () => {
-  const { loading, error, data } = useQuery(getAllCategories);
+  const { loading, error, data } = useGetAllCategoriesQuery();
   console.log('xxxx', slidesPerView, loading, error, data);
   return (
     <CategoriesWrapper>
@@ -31,7 +30,7 @@ const CategoriesList = () => {
             {data &&
               data.categories.map((category) => (
                 <SwiperSlide key={category.slug}>
-                  <CategoriesItem key={category.slug} img={category.coverPhotoUrl}>
+                  <CategoriesItem key={category.slug} img={category.coverPhotoUrl || ''}>
                     <div className="img-container">
                       <div className="title">{category.title} </div>
                     </div>
@@ -63,7 +62,11 @@ const CategoriesWrapper = styled.div`
   }
 `;
 
-const CategoriesItem = styled.div`
+interface CategoriesItemProps {
+  img: string;
+}
+
+const CategoriesItem = styled.div<CategoriesItemProps>`
   background: ${colors.gray600};
   position: relative;
   min-height: 150px;
