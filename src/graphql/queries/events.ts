@@ -1,55 +1,26 @@
 import { gql } from '@apollo/client';
+import { basicEventDetails } from './commonFragments';
 
+// Queries
 export const getAllEvents = gql`
   query GetAllEvents {
     events {
-      id
-      title
-      description
-      coverPhotoUrl
-      startTime
-      endTime
-      photos {
-        id
-        url
-      }
-      address {
-        address
-        lat
-        lng
-      }
-      group {
-        id
-        name
-        description
-      }
+      ...basicEventDetails
     }
   }
+  ${basicEventDetails}
 `;
 
 export const getEventById = gql`
   query GetEventById($id: ID) {
     event(id: $id) {
-      id
-      title
+      ...basicEventDetails
       description
-      coverPhotoUrl
-      startTime
-      endTime
       photos {
         id
         url
       }
-      address {
-        address
-        lat
-        lng
-      }
-      group {
-        id
-        name
-        description
-      }
     }
   }
+  ${basicEventDetails}
 `;

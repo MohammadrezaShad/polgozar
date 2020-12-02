@@ -509,6 +509,11 @@ export type User = {
   status: Scalars['String'];
 };
 
+export type BasicCategoryInfoFragment = (
+  { __typename?: 'Category' }
+  & Pick<Category, 'title' | 'description'>
+);
+
 export type GetAllCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -516,23 +521,37 @@ export type GetAllCategoriesQuery = (
   { __typename?: 'Query' }
   & { categories: Array<(
     { __typename?: 'Category' }
-    & Pick<Category, 'id' | 'title' | 'slug' | 'description' | 'coverPhotoUrl'>
-    & { groups: Array<(
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name'>
-    )> }
+    & Pick<Category, 'id' | 'slug' | 'coverPhotoUrl'>
+    & BasicCategoryInfoFragment
   )> }
 );
 
-export type GetCategoryByIdQueryVariables = Exact<{ [key: string]: never; }>;
+export type BasicAddressFragment = (
+  { __typename?: 'Address' }
+  & Pick<Address, 'lat' | 'lng' | 'city' | 'address'>
+);
 
+export type FullAddressFragment = (
+  { __typename?: 'Address' }
+  & Pick<Address, 'country' | 'state' | 'zip'>
+  & BasicAddressFragment
+);
 
-export type GetCategoryByIdQuery = (
-  { __typename?: 'Query' }
-  & { category?: Maybe<(
-    { __typename?: 'Category' }
-    & Pick<Category, 'id' | 'title' | 'slug'>
-  )> }
+export type BasicGroupDetailsFragment = (
+  { __typename?: 'Group' }
+  & Pick<Group, 'id' | 'name' | 'slug'>
+);
+
+export type BasicEventDetailsFragment = (
+  { __typename?: 'Event' }
+  & Pick<Event, 'id' | 'title' | 'coverPhotoUrl' | 'startTime' | 'endTime'>
+  & { address?: Maybe<(
+    { __typename?: 'Address' }
+    & BasicAddressFragment
+  )>, group: (
+    { __typename?: 'Group' }
+    & BasicGroupDetailsFragment
+  ) }
 );
 
 export type GetAllEventsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -542,17 +561,7 @@ export type GetAllEventsQuery = (
   { __typename?: 'Query' }
   & { events: Array<(
     { __typename?: 'Event' }
-    & Pick<Event, 'id' | 'title' | 'description' | 'coverPhotoUrl' | 'startTime' | 'endTime'>
-    & { photos?: Maybe<Array<(
-      { __typename?: 'Photo' }
-      & Pick<Photo, 'id' | 'url'>
-    )>>, address?: Maybe<(
-      { __typename?: 'Address' }
-      & Pick<Address, 'address' | 'lat' | 'lng'>
-    )>, group: (
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name' | 'description'>
-    ) }
+    & BasicEventDetailsFragment
   )> }
 );
 
@@ -565,18 +574,29 @@ export type GetEventByIdQuery = (
   { __typename?: 'Query' }
   & { event?: Maybe<(
     { __typename?: 'Event' }
-    & Pick<Event, 'id' | 'title' | 'description' | 'coverPhotoUrl' | 'startTime' | 'endTime'>
+    & Pick<Event, 'description'>
     & { photos?: Maybe<Array<(
       { __typename?: 'Photo' }
       & Pick<Photo, 'id' | 'url'>
-    )>>, address?: Maybe<(
-      { __typename?: 'Address' }
-      & Pick<Address, 'address' | 'lat' | 'lng'>
-    )>, group: (
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name' | 'description'>
-    ) }
+    )>> }
+    & BasicEventDetailsFragment
   )> }
+);
+
+export type GroupCardInfoFragment = (
+  { __typename?: 'Group' }
+  & Pick<Group, 'coverPhotoUrl' | 'status'>
+  & { members: Array<(
+    { __typename?: 'User' }
+    & BasicProfileFragment
+  )>, address?: Maybe<(
+    { __typename?: 'Address' }
+    & BasicAddressFragment
+  )>, categories: Array<(
+    { __typename?: 'Category' }
+    & BasicCategoryInfoFragment
+  )> }
+  & BasicGroupDetailsFragment
 );
 
 export type GetAllGroupsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -586,23 +606,7 @@ export type GetAllGroupsQuery = (
   { __typename?: 'Query' }
   & { groups: Array<(
     { __typename?: 'Group' }
-    & Pick<Group, 'id' | 'name' | 'slug' | 'description' | 'coverPhotoUrl' | 'status'>
-    & { organizers?: Maybe<Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'id' | 'name' | 'email'>
-    )>>, members: Array<(
-      { __typename?: 'User' }
-      & Pick<User, 'name'>
-    )>, events: Array<(
-      { __typename?: 'Event' }
-      & Pick<Event, 'id' | 'title'>
-    )>, address?: Maybe<(
-      { __typename?: 'Address' }
-      & Pick<Address, 'address' | 'lat' | 'lng'>
-    )>, categories: Array<(
-      { __typename?: 'Category' }
-      & Pick<Category, 'title'>
-    )> }
+    & GroupCardInfoFragment
   )> }
 );
 
@@ -616,7 +620,18 @@ export type GroupByIdSlugQuery = (
   { __typename?: 'Query' }
   & { group?: Maybe<(
     { __typename?: 'Group' }
-    & Pick<Group, 'id' | 'name'>
+    & Pick<Group, 'description'>
+    & { organizers?: Maybe<Array<(
+      { __typename?: 'User' }
+      & BasicProfileFragment
+    )>>, events: Array<(
+      { __typename?: 'Event' }
+      & BasicEventDetailsFragment
+    )>, categories: Array<(
+      { __typename?: 'Category' }
+      & BasicCategoryInfoFragment
+    )> }
+    & GroupCardInfoFragment
   )> }
 );
 
@@ -669,6 +684,17 @@ export type UserRoleQuery = (
   & Pick<Query, 'userRole'>
 );
 
+export type BasicProfileFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'id' | 'firstname' | 'lastname' | 'avatarUrl'>
+);
+
+export type FullProfileFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'email' | 'role' | 'status'>
+  & BasicProfileFragment
+);
+
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -676,7 +702,7 @@ export type GetAllUsersQuery = (
   { __typename?: 'Query' }
   & { users: Array<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'lastname' | 'firstname' | 'email' | 'role' | 'avatarUrl' | 'status'>
+    & FullProfileFragment
   )> }
 );
 
@@ -687,10 +713,9 @@ export type GetMyAccountQuery = (
   { __typename?: 'Query' }
   & { myAccount?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'lastname' | 'firstname' | 'email' | 'role' | 'avatarUrl'>
     & { address?: Maybe<(
       { __typename?: 'Address' }
-      & Pick<Address, 'address' | 'lat' | 'lng'>
+      & FullAddressFragment
     )>, groups?: Maybe<Array<(
       { __typename?: 'Group' }
       & Pick<Group, 'id' | 'name'>
@@ -701,6 +726,7 @@ export type GetMyAccountQuery = (
       { __typename?: 'Category' }
       & Pick<Category, 'id' | 'title'>
     )>> }
+    & FullProfileFragment
   )> }
 );
 
@@ -713,7 +739,7 @@ export type GetUserByIdQuery = (
   { __typename?: 'Query' }
   & { user?: Maybe<(
     { __typename?: 'User' }
-    & Pick<User, 'id' | 'name' | 'firstname' | 'email'>
+    & BasicProfileFragment
   )> }
 );
 
@@ -734,22 +760,96 @@ export type UpdateUserStatusMutation = (
   )> }
 );
 
-
+export const BasicAddressFragmentDoc = gql`
+    fragment basicAddress on Address {
+  lat
+  lng
+  city
+  address
+}
+    `;
+export const FullAddressFragmentDoc = gql`
+    fragment fullAddress on Address {
+  country
+  state
+  zip
+  ...basicAddress
+}
+    ${BasicAddressFragmentDoc}`;
+export const BasicGroupDetailsFragmentDoc = gql`
+    fragment basicGroupDetails on Group {
+  id
+  name
+  slug
+}
+    `;
+export const BasicEventDetailsFragmentDoc = gql`
+    fragment basicEventDetails on Event {
+  id
+  title
+  coverPhotoUrl
+  startTime
+  endTime
+  address {
+    ...basicAddress
+  }
+  group {
+    ...basicGroupDetails
+  }
+}
+    ${BasicAddressFragmentDoc}
+${BasicGroupDetailsFragmentDoc}`;
+export const BasicProfileFragmentDoc = gql`
+    fragment basicProfile on User {
+  id
+  firstname
+  lastname
+  avatarUrl
+}
+    `;
+export const BasicCategoryInfoFragmentDoc = gql`
+    fragment basicCategoryInfo on Category {
+  title
+  description
+}
+    `;
+export const GroupCardInfoFragmentDoc = gql`
+    fragment groupCardInfo on Group {
+  ...basicGroupDetails
+  coverPhotoUrl
+  status
+  members {
+    ...basicProfile
+  }
+  address {
+    ...basicAddress
+  }
+  categories {
+    ...basicCategoryInfo
+  }
+}
+    ${BasicGroupDetailsFragmentDoc}
+${BasicProfileFragmentDoc}
+${BasicAddressFragmentDoc}
+${BasicCategoryInfoFragmentDoc}`;
+export const FullProfileFragmentDoc = gql`
+    fragment fullProfile on User {
+  ...basicProfile
+  email
+  role
+  status
+}
+    ${BasicProfileFragmentDoc}`;
 export const GetAllCategoriesDocument = gql`
     query GetAllCategories {
   categories {
     id
-    title
     slug
-    description
     coverPhotoUrl
-    groups {
-      id
-      name
-    }
+    ...basicCategoryInfo
   }
 }
-    `;
+    ${BasicCategoryInfoFragmentDoc}`;
 
 /**
  * __useGetAllCategoriesQuery__
@@ -775,66 +875,13 @@ export function useGetAllCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type GetAllCategoriesQueryHookResult = ReturnType<typeof useGetAllCategoriesQuery>;
 export type GetAllCategoriesLazyQueryHookResult = ReturnType<typeof useGetAllCategoriesLazyQuery>;
 export type GetAllCategoriesQueryResult = Apollo.QueryResult<GetAllCategoriesQuery, GetAllCategoriesQueryVariables>;
-export const GetCategoryByIdDocument = gql`
-    query GetCategoryById {
-  category(slug: "non-odit-ut") {
-    id
-    title
-    slug
-  }
-}
-    `;
-
-/**
- * __useGetCategoryByIdQuery__
- *
- * To run a query within a React component, call `useGetCategoryByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetCategoryByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useGetCategoryByIdQuery({
- *   variables: {
- *   },
- * });
- */
-export function useGetCategoryByIdQuery(baseOptions?: Apollo.QueryHookOptions<GetCategoryByIdQuery, GetCategoryByIdQueryVariables>) {
-        return Apollo.useQuery<GetCategoryByIdQuery, GetCategoryByIdQueryVariables>(GetCategoryByIdDocument, baseOptions);
-      }
-export function useGetCategoryByIdLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetCategoryByIdQuery, GetCategoryByIdQueryVariables>) {
-          return Apollo.useLazyQuery<GetCategoryByIdQuery, GetCategoryByIdQueryVariables>(GetCategoryByIdDocument, baseOptions);
-        }
-export type GetCategoryByIdQueryHookResult = ReturnType<typeof useGetCategoryByIdQuery>;
-export type GetCategoryByIdLazyQueryHookResult = ReturnType<typeof useGetCategoryByIdLazyQuery>;
-export type GetCategoryByIdQueryResult = Apollo.QueryResult<GetCategoryByIdQuery, GetCategoryByIdQueryVariables>;
 export const GetAllEventsDocument = gql`
     query GetAllEvents {
   events {
-    id
-    title
-    description
-    coverPhotoUrl
-    startTime
-    endTime
-    photos {
-      id
-      url
-    }
-    address {
-      address
-      lat
-      lng
-    }
-    group {
-      id
-      name
-      description
-    }
+    ...basicEventDetails
   }
 }
-    `;
+    ${BasicEventDetailsFragmentDoc}`;
 
 /**
  * __useGetAllEventsQuery__
@@ -863,29 +910,15 @@ export type GetAllEventsQueryResult = Apollo.QueryResult<GetAllEventsQuery, GetA
 export const GetEventByIdDocument = gql`
     query GetEventById($id: ID) {
   event(id: $id) {
-    id
-    title
+    ...basicEventDetails
     description
-    coverPhotoUrl
-    startTime
-    endTime
     photos {
       id
       url
     }
-    address {
-      address
-      lat
-      lng
-    }
-    group {
-      id
-      name
-      description
-    }
   }
 }
-    `;
+    ${BasicEventDetailsFragmentDoc}`;
 
 /**
  * __useGetEventByIdQuery__
@@ -915,35 +948,10 @@ export type GetEventByIdQueryResult = Apollo.QueryResult<GetEventByIdQuery, GetE
 export const GetAllGroupsDocument = gql`
     query GetAllGroups {
   groups {
-    id
-    name
-    slug
-    description
-    coverPhotoUrl
-    status
-    organizers {
-      id
-      name
-      email
-    }
-    members {
-      name
-    }
-    events {
-      id
-      title
-    }
-    address {
-      address
-      lat
-      lng
-    }
-    categories {
-      title
-    }
+    ...groupCardInfo
   }
 }
-    `;
+    ${GroupCardInfoFragmentDoc}`;
 
 /**
  * __useGetAllGroupsQuery__
@@ -972,11 +980,23 @@ export type GetAllGroupsQueryResult = Apollo.QueryResult<GetAllGroupsQuery, GetA
 export const GroupByIdSlugDocument = gql`
     query GroupByIdSlug($id: ID, $slug: String) {
   group(slug: $slug, id: $id) {
-    id
-    name
+    ...groupCardInfo
+    description
+    organizers {
+      ...basicProfile
+    }
+    events {
+      ...basicEventDetails
+    }
+    categories {
+      ...basicCategoryInfo
+    }
   }
 }
-    `;
+    ${GroupCardInfoFragmentDoc}
+${BasicProfileFragmentDoc}
+${BasicEventDetailsFragmentDoc}
+${BasicCategoryInfoFragmentDoc}`;
 
 /**
  * __useGroupByIdSlugQuery__
@@ -1163,16 +1183,10 @@ export type UserRoleQueryResult = Apollo.QueryResult<UserRoleQuery, UserRoleQuer
 export const GetAllUsersDocument = gql`
     query GetAllUsers {
   users {
-    id
-    lastname
-    firstname
-    email
-    role
-    avatarUrl
-    status
+    ...fullProfile
   }
 }
-    `;
+    ${FullProfileFragmentDoc}`;
 
 /**
  * __useGetAllUsersQuery__
@@ -1201,16 +1215,9 @@ export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAll
 export const GetMyAccountDocument = gql`
     query GetMyAccount {
   myAccount {
-    id
-    lastname
-    firstname
-    email
-    role
-    avatarUrl
+    ...fullProfile
     address {
-      address
-      lat
-      lng
+      ...fullAddress
     }
     groups {
       id
@@ -1226,7 +1233,8 @@ export const GetMyAccountDocument = gql`
     }
   }
 }
-    `;
+    ${FullProfileFragmentDoc}
+${FullAddressFragmentDoc}`;
 
 /**
  * __useGetMyAccountQuery__
@@ -1255,13 +1263,10 @@ export type GetMyAccountQueryResult = Apollo.QueryResult<GetMyAccountQuery, GetM
 export const GetUserByIdDocument = gql`
     query GetUserById($id: ID!) {
   user(id: $id) {
-    id
-    name
-    firstname
-    email
+    ...basicProfile
   }
 }
-    `;
+    ${BasicProfileFragmentDoc}`;
 
 /**
  * __useGetUserByIdQuery__

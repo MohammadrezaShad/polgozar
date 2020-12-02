@@ -1,27 +1,22 @@
 import { gql } from '@apollo/client';
 
+// Fragments
+export const basicCategoryInfo = gql`
+  fragment basicCategoryInfo on Category {
+    title
+    description
+  }
+`;
+
+// Queries
 export const getAllCategories = gql`
   query GetAllCategories {
     categories {
       id
-      title
       slug
-      description
       coverPhotoUrl
-      groups {
-        id
-        name
-      }
+      ...basicCategoryInfo
     }
   }
-`;
-
-export const getCategoryById = gql`
-  query GetCategoryById {
-    category(slug: "non-odit-ut") {
-      id
-      title
-      slug
-    }
-  }
+  ${basicCategoryInfo}
 `;

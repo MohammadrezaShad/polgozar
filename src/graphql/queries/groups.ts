@@ -1,45 +1,60 @@
 import { gql } from '@apollo/client';
+import { basicAddress, basicEventDetails, basicGroupDetails } from './commonFragments';
+import { basicProfile } from './users';
+import { basicCategoryInfo } from './categories';
 
+// Fragments
+export const groupCardInfo = gql`
+  fragment groupCardInfo on Group {
+    ...basicGroupDetails
+    coverPhotoUrl
+    status
+    members {
+      ...basicProfile
+    }
+    address {
+      ...basicAddress
+    }
+    categories {
+      ...basicCategoryInfo
+    }
+  }
+  ${basicAddress}
+  ${basicProfile}
+  ${basicCategoryInfo}
+  ${basicGroupDetails}
+`;
+
+// Queries
 export const getAllGroups = gql`
   query GetAllGroups {
     groups {
-      id
-      name
-      slug
-      description
-      coverPhotoUrl
-      status
-      organizers {
-        id
-        name
-        email
-      }
-      members {
-        name
-      }
-      events {
-        id
-        title
-      }
-      address {
-        address
-        lat
-        lng
-      }
-      categories {
-        title
-      }
+      ...groupCardInfo
     }
   }
+  ${groupCardInfo}
 `;
 
 export const getGroupById = gql`
   query GroupByIdSlug($id: ID, $slug: String) {
     group(slug: $slug, id: $id) {
-      id
-      name
+      ...groupCardInfo
+      description
+      organizers {
+        ...basicProfile
+      }
+      events {
+        ...basicEventDetails
+      }
+      categories {
+        ...basicCategoryInfo
+      }
     }
   }
+  ${basicEventDetails}
+  ${basicProfile}
+  ${basicCategoryInfo}
+  ${groupCardInfo}
 `;
 
 export const updateGroupStatus = gql`

@@ -1,32 +1,42 @@
 import { gql } from '@apollo/client';
+import { fullAddress } from './commonFragments';
 
+// Fragments
+export const basicProfile = gql`
+  fragment basicProfile on User {
+    id
+    firstname
+    lastname
+    avatarUrl
+  }
+`;
+
+export const fullProfile = gql`
+  fragment fullProfile on User {
+    ...basicProfile
+    email
+    role
+    status
+  }
+  ${basicProfile}
+`;
+
+// Queries
 export const getAllUsers = gql`
   query GetAllUsers {
     users {
-      id
-      lastname
-      firstname
-      email
-      role
-      avatarUrl
-      status
+      ...fullProfile
     }
   }
+  ${fullProfile}
 `;
 
 export const getMyAccount = gql`
   query GetMyAccount {
     myAccount {
-      id
-      lastname
-      firstname
-      email
-      role
-      avatarUrl
+      ...fullProfile
       address {
-        address
-        lat
-        lng
+        ...fullAddress
       }
       groups {
         id
@@ -42,17 +52,17 @@ export const getMyAccount = gql`
       }
     }
   }
+  ${fullProfile}
+  ${fullAddress}
 `;
 
 export const getUserById = gql`
   query GetUserById($id: ID!) {
     user(id: $id) {
-      id
-      name
-      firstname
-      email
+      ...basicProfile
     }
   }
+  ${basicProfile}
 `;
 
 export const updateUserStatus = gql`
