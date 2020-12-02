@@ -4,7 +4,7 @@ import styled, { css } from 'styled-components';
 import { rgba, colors, spacer, fontWeight, media } from 'settings/style';
 import { Container, Button } from 'components/elements';
 import { Drawer } from 'antd';
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useHistory } from 'react-router-dom';
 import { ThreeBarsIcon } from '@primer/octicons-react';
 import { getMyAccount } from 'graphql/queries/users';
 import { useLazyQuery } from '@apollo/client';
@@ -22,6 +22,7 @@ const headerRoutes = [
 export default function Header({ light = true }) {
   const useLoggedInStateResult = useLoggedInStateQuery();
   const isLoggedIn = useLoggedInStateResult.data?.loggedInState;
+  const history = useHistory();
 
   const [drawer, setDrawer] = useState(false);
   const [getMyProfile, { data: myProfile }] = useLazyQuery(getMyAccount);
@@ -34,11 +35,11 @@ export default function Header({ light = true }) {
   }, [getMyProfile, isLoggedIn]);
 
   const onSignup = () => {
-    loginModalVisible(true);
+    signupModalVisible(true);
   };
 
   const onLogin = () => {
-    signupModalVisible(true);
+    loginModalVisible(true);
   };
 
   return (
@@ -70,9 +71,15 @@ export default function Header({ light = true }) {
                   Login
                 </Button>
               )}
-              <Button color="accent" shape="dark" onClick={onSignup}>
-                Sing up
-              </Button>
+              {isLoggedIn ? (
+                <Button color="accent" shape="dark" onClick={() => history.push('/account')}>
+                  My Profile
+                </Button>
+              ) : (
+                <Button color="accent" shape="dark" onClick={onSignup}>
+                  Sing up
+                </Button>
+              )}
             </div>
           </nav>
         </div>
