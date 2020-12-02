@@ -151,6 +151,10 @@ const HeaderWrapper = styled.header<HeaderWrapperProps>`
         `}
       }
       .menu-container {
+        .login-signup {
+          align-items: center;
+          display: flex;
+        }
         ${media.lg`
           flex: 1;
           justify-content: flex-end;
