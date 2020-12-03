@@ -41,8 +41,8 @@ function Signup() {
   };
 
   const onSigupSuccess = () => {
-    history.push('/account');
     setSignupVisibility(false);
+    history.push('/account');
   };
 
   const onFinish = (values: SignupProps) => {
@@ -74,14 +74,14 @@ function Signup() {
       visible={useSignupModalVisibilityResult.data?.signupModalVisible}
       onRight={() => signupForm.submit()}
       onRightProps={{ isLoading: loginLoading || updateProfileLoading }}
-      onRightText="Continue"
+      onRightText="Confirm"
       onLeft={toLogin}
       onLeftText="I have account"
       onCancel={() => setSignupVisibility(false)}
       destroyOnClose
     >
       <ProfileAvatar loading={false} onImportAvatar={onImportAvatar} />
-      <Form layout="vertical" form={signupForm} onFinish={onFinish}>
+      <Form layout="vertical" form={signupForm} onFinish={onFinish} preserve={false}>
         <Row gutter={[24, 0]}>
           <Col xs={24} md={12}>
             <FormItem

@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { resizeImg, ResizeImageResult } from 'helpers';
 import { useDropzone } from 'react-dropzone';
 import { message } from 'antd';
+import { colors } from 'settings/style';
 
 interface ProfileAvatarProps {
   loading: boolean;
@@ -29,9 +30,23 @@ export default function ProfileAvatar({ loading = false, onImportAvatar }: Profi
   const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' });
 
   return (
-    <div {...getRootProps()}>
+    <div
+      {...getRootProps()}
+      style={{
+        borderRadius: '100%',
+        width: '90px',
+        height: '90px',
+        display: 'flex',
+        margin: 'auto',
+        justifyContent: 'center',
+        marginBottom: '1rem',
+        overflow: 'hidden',
+        alignItems: 'center',
+        backgroundColor: '#726f6f',
+      }}
+    >
       <input {...getInputProps()} />
-      {!selectedAvatar && 'Upload Image'}
+      {!selectedAvatar && <i className="icon-user" style={{ color: colors.accent, fontSize: '30px' }} />}
       <img src={selectedAvatar} alt="" />
     </div>
   );
