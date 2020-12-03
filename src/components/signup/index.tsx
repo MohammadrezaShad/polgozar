@@ -54,7 +54,7 @@ function Signup() {
     });
     onRegisters({ firstname, lastname, password, email }, () => {
       onSigupSuccess();
-      updateUserProfile({ variables: { input: { lastname: '7777' } } });
+      updateUserProfile({ variables: { input: { phoneNumber: prefix + phone } } });
     });
   };
 

@@ -14,14 +14,36 @@ export const basicProfile = gql`
 export const fullProfile = gql`
   fragment fullProfile on User {
     ...basicProfile
-    email
     role
     status
     description
     birthdate
-    phoneNumber
   }
   ${basicProfile}
+`;
+
+export const myProfileDetails = gql`
+  fragment myProfileDetails on User {
+    phoneNumber
+    email
+    address {
+      ...fullAddress
+    }
+    groups {
+      id
+      name
+    }
+    ledGroups {
+      id
+      name
+    }
+    categories {
+      id
+      title
+    }
+  }
+  ${fullProfile}
+  ${fullAddress}
 `;
 
 // Queries
@@ -37,26 +59,10 @@ export const getAllUsers = gql`
 export const getMyAccount = gql`
   query GetMyAccount {
     myAccount {
-      ...fullProfile
-      address {
-        ...fullAddress
-      }
-      groups {
-        id
-        name
-      }
-      ledGroups {
-        id
-        name
-      }
-      categories {
-        id
-        title
-      }
+      ...myProfileDetails
     }
   }
-  ${fullProfile}
-  ${fullAddress}
+  ${myProfileDetails}
 `;
 
 export const getUserById = gql`
@@ -85,9 +91,9 @@ export const updateProfile = gql`
     updateProfile(input: $input) {
       errors
       user {
-        ...fullProfile
+        ...myProfileDetails
       }
     }
   }
-  ${fullProfile}
+  ${myProfileDetails}
 `;

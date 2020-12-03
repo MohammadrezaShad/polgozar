@@ -697,8 +697,26 @@ export type BasicProfileFragment = (
 
 export type FullProfileFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'email' | 'role' | 'status' | 'description' | 'birthdate' | 'phoneNumber'>
+  & Pick<User, 'role' | 'status' | 'description' | 'birthdate'>
   & BasicProfileFragment
+);
+
+export type MyProfileDetailsFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'phoneNumber' | 'email'>
+  & { address?: Maybe<(
+    { __typename?: 'Address' }
+    & FullAddressFragment
+  )>, groups?: Maybe<Array<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id' | 'name'>
+  )>>, ledGroups?: Maybe<Array<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id' | 'name'>
+  )>>, categories?: Maybe<Array<(
+    { __typename?: 'Category' }
+    & Pick<Category, 'id' | 'title'>
+  )>> }
 );
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -719,20 +737,7 @@ export type GetMyAccountQuery = (
   { __typename?: 'Query' }
   & { myAccount?: Maybe<(
     { __typename?: 'User' }
-    & { address?: Maybe<(
-      { __typename?: 'Address' }
-      & FullAddressFragment
-    )>, groups?: Maybe<Array<(
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name'>
-    )>>, ledGroups?: Maybe<Array<(
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name'>
-    )>>, categories?: Maybe<Array<(
-      { __typename?: 'Category' }
-      & Pick<Category, 'id' | 'title'>
-    )>> }
-    & FullProfileFragment
+    & MyProfileDetailsFragment
   )> }
 );
 
@@ -778,7 +783,7 @@ export type UpdateProfileMutation = (
     & Pick<UpdateProfilePayload, 'errors'>
     & { user?: Maybe<(
       { __typename?: 'User' }
-      & FullProfileFragment
+      & MyProfileDetailsFragment
     )> }
   )> }
 );
@@ -791,14 +796,6 @@ export const BasicAddressFragmentDoc = gql`
   address
 }
     `;
-export const FullAddressFragmentDoc = gql`
-    fragment fullAddress on Address {
-  country
-  state
-  zip
-  ...basicAddress
-}
-    ${BasicAddressFragmentDoc}`;
 export const BasicGroupDetailsFragmentDoc = gql`
     fragment basicGroupDetails on Group {
   id
@@ -858,14 +855,41 @@ ${BasicCategoryInfoFragmentDoc}`;
 export const FullProfileFragmentDoc = gql`
     fragment fullProfile on User {
   ...basicProfile
-  email
   role
   status
   description
   birthdate
-  phoneNumber
 }
     ${BasicProfileFragmentDoc}`;
+export const FullAddressFragmentDoc = gql`
+    fragment fullAddress on Address {
+  country
+  state
+  zip
+  ...basicAddress
+}
+    ${BasicAddressFragmentDoc}`;
+export const MyProfileDetailsFragmentDoc = gql`
+    fragment myProfileDetails on User {
+  phoneNumber
+  email
+  address {
+    ...fullAddress
+  }
+  groups {
+    id
+    name
+  }
+  ledGroups {
+    id
+    name
+  }
+  categories {
+    id
+    title
+  }
+}
+    ${FullAddressFragmentDoc}`;
 export const GetAllCategoriesDocument = gql`
     query GetAllCategories {
   categories {
@@ -1241,26 +1265,10 @@ export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAll
 export const GetMyAccountDocument = gql`
     query GetMyAccount {
   myAccount {
-    ...fullProfile
-    address {
-      ...fullAddress
-    }
-    groups {
-      id
-      name
-    }
-    ledGroups {
-      id
-      name
-    }
-    categories {
-      id
-      title
-    }
+    ...myProfileDetails
   }
 }
-    ${FullProfileFragmentDoc}
-${FullAddressFragmentDoc}`;
+    ${MyProfileDetailsFragmentDoc}`;
 
 /**
  * __useGetMyAccountQuery__
@@ -1360,11 +1368,11 @@ export const UpdateProfileDocument = gql`
   updateProfile(input: $input) {
     errors
     user {
-      ...fullProfile
+      ...myProfileDetails
     }
   }
 }
-    ${FullProfileFragmentDoc}`;
+    ${MyProfileDetailsFragmentDoc}`;
 export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
 
 /**
