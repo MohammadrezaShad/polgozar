@@ -24,6 +24,7 @@ export const fullProfile = gql`
 
 export const myProfileDetails = gql`
   fragment myProfileDetails on User {
+    ...fullProfile
     phoneNumber
     email
     address {

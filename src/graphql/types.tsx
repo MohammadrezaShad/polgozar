@@ -717,6 +717,7 @@ export type MyProfileDetailsFragment = (
     { __typename?: 'Category' }
     & Pick<Category, 'id' | 'title'>
   )>> }
+  & FullProfileFragment
 );
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -871,6 +872,7 @@ export const FullAddressFragmentDoc = gql`
     ${BasicAddressFragmentDoc}`;
 export const MyProfileDetailsFragmentDoc = gql`
     fragment myProfileDetails on User {
+  ...fullProfile
   phoneNumber
   email
   address {
@@ -889,7 +891,8 @@ export const MyProfileDetailsFragmentDoc = gql`
     title
   }
 }
-    ${FullAddressFragmentDoc}`;
+    ${FullProfileFragmentDoc}
+${FullAddressFragmentDoc}`;
 export const GetAllCategoriesDocument = gql`
     query GetAllCategories {
   categories {

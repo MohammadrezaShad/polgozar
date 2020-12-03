@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, FormItem } from 'components/elements';
-import { Row, Col, Input, Form, Select } from 'antd';
+import { Row, Col, Input, Form, Select, message } from 'antd';
 import { loginModalVisible, signupModalVisible } from 'cache';
 import { useSignupModalVisibilityQuery, useUpdateProfileMutation } from 'graphql/types';
 import useRegister from 'hooks/useRegister';
 import { useHistory } from 'react-router-dom';
+import ProfileAvatar from 'components/profileAvatar';
+import { ResizeImageResult } from 'helpers';
 
 const { Option } = Select;
 
@@ -27,10 +29,11 @@ const prefixSelector = (
 );
 
 function Signup() {
+  const [avatar, setAvatar] = useState<Blob | null>();
   const useSignupModalVisibilityResult = useSignupModalVisibilityQuery();
   const [loginLoading, onRegisters] = useRegister();
   const history = useHistory();
-  const [updateUserProfile] = useUpdateProfileMutation();
+  const [updateUserProfile, { loading: updateProfileLoading }] = useUpdateProfileMutation();
 
   const [signupForm] = Form.useForm();
   const setSignupVisibility = (visible: boolean) => {
@@ -38,24 +41,22 @@ function Signup() {
   };
 
   const onSigupSuccess = () => {
-    console.log('doneee');
     history.push('/account');
     setSignupVisibility(false);
   };
 
   const onFinish = (values: SignupProps) => {
     const { firstname, lastname, email, prefix, phone, password } = values;
-    console.log({
-      firstname,
-      lastname,
-      email,
-      phone: prefix + phone,
-      password,
-    });
-    onRegisters({ firstname, lastname, password, email }, () => {
-      onSigupSuccess();
-      updateUserProfile({ variables: { input: { phoneNumber: prefix + phone } } });
-    });
+    if (avatar) {
+      onRegisters({ firstname, lastname, password, email }, async () => {
+        await updateUserProfile({
+          variables: { input: { phoneNumber: prefix + phone, avatar } },
+        });
+        onSigupSuccess();
+      });
+    } else {
+      message.error('Avatar cannot be empty!');
+    }
   };
 
   const toLogin = () => {
@@ -63,18 +64,23 @@ function Signup() {
     loginModalVisible(true);
   };
 
+  const onImportAvatar = (data: ResizeImageResult) => {
+    setAvatar(data.blob);
+  };
+
   return (
     <Modal
       title="Sign up"
       visible={useSignupModalVisibilityResult.data?.signupModalVisible}
       onRight={() => signupForm.submit()}
-      onRightProps={{ isLoading: loginLoading }}
+      onRightProps={{ isLoading: loginLoading || updateProfileLoading }}
       onRightText="Continue"
       onLeft={toLogin}
       onLeftText="I have account"
       onCancel={() => setSignupVisibility(false)}
       destroyOnClose
     >
+      <ProfileAvatar loading={false} onImportAvatar={onImportAvatar} />
       <Form layout="vertical" form={signupForm} onFinish={onFinish}>
         <Row gutter={[24, 0]}>
           <Col xs={24} md={12}>
