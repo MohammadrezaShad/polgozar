@@ -6,6 +6,14 @@ export interface LoginReq {
   email: string;
   password: string;
 }
+
+export interface RegisterReq {
+  firstname: string;
+  lastname: string;
+  password: string;
+  email: string;
+}
+
 interface TokenResponse {
   token: string;
 }
@@ -20,6 +28,22 @@ export const authLogin = async (data: LoginReq) => {
     }
     LocalStore.set(AUTH_TOKEN, token);
     return true;
+  } catch (error) {
+    LocalStore.remove(AUTH_TOKEN);
+    throw new Error('Authenication Failed!');
+  }
+};
+
+export const authRegister = async (data: RegisterReq) => {
+  try {
+    const {
+      data: { token },
+    } = await plainClient.post<TokenResponse>('/signup', data);
+    if (!token) {
+      throw new Error('Authenication Failed!');
+    }
+    LocalStore.set(AUTH_TOKEN, token);
+    return token;
   } catch (error) {
     LocalStore.remove(AUTH_TOKEN);
     throw new Error('Authenication Failed!');

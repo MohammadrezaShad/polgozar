@@ -76,3 +76,15 @@ export const updateUserStatus = gql`
     }
   }
 `;
+
+export const updateProfile = gql`
+  mutation UpdateProfile($input: UpdateProfileInput!) {
+    updateProfile(input: $input) {
+      errors
+      user {
+        ...fullProfile
+      }
+    }
+  }
+  ${fullProfile}
+`;

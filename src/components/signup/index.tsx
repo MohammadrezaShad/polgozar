@@ -2,7 +2,9 @@ import React from 'react';
 import { Modal, FormItem } from 'components/elements';
 import { Row, Col, Input, Form, Select } from 'antd';
 import { loginModalVisible, signupModalVisible } from 'cache';
-import { useSignupModalVisibilityQuery } from 'graphql/types';
+import { useSignupModalVisibilityQuery, useUpdateProfileMutation } from 'graphql/types';
+import useRegister from 'hooks/useRegister';
+import { useHistory } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -26,10 +28,19 @@ const prefixSelector = (
 
 function Signup() {
   const useSignupModalVisibilityResult = useSignupModalVisibilityQuery();
+  const [loginLoading, onRegisters] = useRegister();
+  const history = useHistory();
+  const [updateUserProfile] = useUpdateProfileMutation();
 
   const [signupForm] = Form.useForm();
   const setSignupVisibility = (visible: boolean) => {
     signupModalVisible(visible);
+  };
+
+  const onSigupSuccess = () => {
+    console.log('doneee');
+    history.push('/account');
+    setSignupVisibility(false);
   };
 
   const onFinish = (values: SignupProps) => {
@@ -40,6 +51,10 @@ function Signup() {
       email,
       phone: prefix + phone,
       password,
+    });
+    onRegisters({ firstname, lastname, password, email }, () => {
+      onSigupSuccess();
+      updateUserProfile({ variables: { input: { lastname: '7777' } } });
     });
   };
 
@@ -53,11 +68,12 @@ function Signup() {
       title="Sign up"
       visible={useSignupModalVisibilityResult.data?.signupModalVisible}
       onRight={() => signupForm.submit()}
-      onRightProps={{ isLoading: false }}
+      onRightProps={{ isLoading: loginLoading }}
       onRightText="Continue"
       onLeft={toLogin}
       onLeftText="I have account"
       onCancel={() => setSignupVisibility(false)}
+      destroyOnClose
     >
       <Form layout="vertical" form={signupForm} onFinish={onFinish}>
         <Row gutter={[24, 0]}>

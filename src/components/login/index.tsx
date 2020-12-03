@@ -30,6 +30,7 @@ function Login() {
       onLeft={toSignup}
       onLeftText="I don’t have account"
       onCancel={() => loginModalVisible(false)}
+      destroyOnClose
     >
       <Form layout="vertical" form={loginForm} onFinish={onFinish}>
         <FormItem
