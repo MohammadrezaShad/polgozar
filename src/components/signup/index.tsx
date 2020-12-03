@@ -2,16 +2,24 @@ import React from 'react';
 import { Modal, FormItem } from 'components/elements';
 import { Row, Col, Input, Form, Select } from 'antd';
 import { loginModalVisible, signupModalVisible } from 'cache';
-import { LoginReq } from 'services/auth';
 import { useSignupModalVisibilityQuery } from 'graphql/types';
 
 const { Option } = Select;
 
+interface SignupProps {
+  firstname: string;
+  lastname: string;
+  email: string;
+  prefix: string;
+  phone: string;
+  password: string;
+}
+
 const prefixSelector = (
-  <Form.Item name="prefix" noStyle>
+  <Form.Item name="prefix" noStyle initialValue="+1">
     <Select style={{ width: 80 }}>
-      <Option value="86">+1</Option>
-      <Option value="87">+98</Option>
+      <Option value="+1">+1</Option>
+      <Option value="+98">+98</Option>
     </Select>
   </Form.Item>
 );
@@ -24,8 +32,15 @@ function Signup() {
     signupModalVisible(visible);
   };
 
-  const onFinish = (values: LoginReq) => {
-    console.log(values, 'signup');
+  const onFinish = (values: SignupProps) => {
+    const { firstname, lastname, email, prefix, phone, password } = values;
+    console.log({
+      firstname,
+      lastname,
+      email,
+      phone: prefix + phone,
+      password,
+    });
   };
 
   const toLogin = () => {
@@ -37,7 +52,7 @@ function Signup() {
     <Modal
       title="Sign up"
       visible={useSignupModalVisibilityResult.data?.signupModalVisible}
-      onRight={() => {}}
+      onRight={() => signupForm.submit()}
       onRightProps={{ isLoading: false }}
       onRightText="Continue"
       onLeft={toLogin}
@@ -71,7 +86,10 @@ function Signup() {
           theme="dark"
           name="phone"
           label="Phone Number"
-          rules={[{ required: true, message: 'Please input your phone number!' }]}
+          rules={[
+            { required: true, message: 'Please input your phone number!' },
+            { len: 10, message: 'Phone Number should be 10 digit' },
+          ]}
         >
           <Input addonBefore={prefixSelector} />
         </FormItem>
