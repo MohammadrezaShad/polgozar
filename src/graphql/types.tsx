@@ -461,6 +461,9 @@ export type UpdateProfileInput = {
   groupIds?: Maybe<Array<Scalars['String']>>;
   categoryIds?: Maybe<Array<Scalars['String']>>;
   address?: Maybe<AddressAttributes>;
+  birthdate?: Maybe<Scalars['ISO8601DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['Upload']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
@@ -497,7 +500,9 @@ export type User = {
   __typename?: 'User';
   address?: Maybe<Address>;
   avatarUrl?: Maybe<Scalars['String']>;
+  birthdate?: Maybe<Scalars['ISO8601DateTime']>;
   categories?: Maybe<Array<Category>>;
+  description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstname: Scalars['String'];
   groups?: Maybe<Array<Group>>;
@@ -505,6 +510,7 @@ export type User = {
   lastname: Scalars['String'];
   ledGroups?: Maybe<Array<Group>>;
   name: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['String']>;
   status: Scalars['String'];
 };
@@ -691,7 +697,7 @@ export type BasicProfileFragment = (
 
 export type FullProfileFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'email' | 'role' | 'status'>
+  & Pick<User, 'email' | 'role' | 'status' | 'description' | 'birthdate' | 'phoneNumber'>
   & BasicProfileFragment
 );
 
@@ -855,6 +861,9 @@ export const FullProfileFragmentDoc = gql`
   email
   role
   status
+  description
+  birthdate
+  phoneNumber
 }
     ${BasicProfileFragmentDoc}`;
 export const GetAllCategoriesDocument = gql`

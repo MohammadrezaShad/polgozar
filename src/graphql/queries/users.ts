@@ -17,6 +17,9 @@ export const fullProfile = gql`
     email
     role
     status
+    description
+    birthdate
+    phoneNumber
   }
   ${basicProfile}
 `;
