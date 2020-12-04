@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import page404 from 'containers/Page/404';
 import Profile from './profile';
+import CreateGroup from './createGroup';
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     component: () => {
       return <div />;
     },
+    exact: true,
+  },
+  {
+    path: 'groups/create',
+    component: CreateGroup,
     exact: true,
   },
 ];

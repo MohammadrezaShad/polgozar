@@ -1,18 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
-import { radius, colors, maxWinSize, spacer, shadow, fontSize, rgba } from 'settings/style';
+import { radius, colors, breakpoints, spacer, shadow, fontSize, rgba } from 'settings/style';
 import { Container } from 'components/elements';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useGetAllCategoriesQuery } from 'graphql/types';
 
-let slidesPerView = 5;
-if (maxWinSize('xs')) {
-  slidesPerView = 1;
-} else if (maxWinSize('md')) {
-  slidesPerView = 3;
-} else if (maxWinSize('lg')) {
-  slidesPerView = 4;
-}
+const sliderBreakpoints = {
+  [breakpoints.xs]: {
+    slidesPerView: 2,
+    spaceBetween: 20,
+  },
+  [breakpoints.lg]: {
+    slidesPerView: 3,
+    spaceBetween: 30,
+  },
+  [breakpoints.lg]: {
+    slidesPerView: 4,
+    spaceBetween: 40,
+  },
+  [breakpoints.xl]: {
+    slidesPerView: 5,
+    spaceBetween: 40,
+  },
+};
 
 const CategoriesList = () => {
   const { data } = useGetAllCategoriesQuery();
@@ -20,7 +30,7 @@ const CategoriesList = () => {
     <CategoriesWrapper>
       <Container>
         <div className="item-containers">
-          <Swiper spaceBetween={40} slidesPerView={slidesPerView}>
+          <Swiper spaceBetween={10} slidesPerView={1} breakpoints={sliderBreakpoints}>
             {data &&
               data.categories.map((category) => (
                 <SwiperSlide key={category.slug}>

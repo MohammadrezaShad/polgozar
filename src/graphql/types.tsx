@@ -461,6 +461,9 @@ export type UpdateProfileInput = {
   groupIds?: Maybe<Array<Scalars['String']>>;
   categoryIds?: Maybe<Array<Scalars['String']>>;
   address?: Maybe<AddressAttributes>;
+  birthdate?: Maybe<Scalars['ISO8601DateTime']>;
+  description?: Maybe<Scalars['String']>;
+  phoneNumber?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['Upload']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
@@ -497,7 +500,9 @@ export type User = {
   __typename?: 'User';
   address?: Maybe<Address>;
   avatarUrl?: Maybe<Scalars['String']>;
+  birthdate?: Maybe<Scalars['ISO8601DateTime']>;
   categories?: Maybe<Array<Category>>;
+  description?: Maybe<Scalars['String']>;
   email?: Maybe<Scalars['String']>;
   firstname: Scalars['String'];
   groups?: Maybe<Array<Group>>;
@@ -505,6 +510,7 @@ export type User = {
   lastname: Scalars['String'];
   ledGroups?: Maybe<Array<Group>>;
   name: Scalars['String'];
+  phoneNumber?: Maybe<Scalars['String']>;
   role?: Maybe<Scalars['String']>;
   status: Scalars['String'];
 };
@@ -691,8 +697,27 @@ export type BasicProfileFragment = (
 
 export type FullProfileFragment = (
   { __typename?: 'User' }
-  & Pick<User, 'email' | 'role' | 'status'>
+  & Pick<User, 'role' | 'status' | 'description' | 'birthdate'>
   & BasicProfileFragment
+);
+
+export type MyProfileDetailsFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'phoneNumber' | 'email'>
+  & { address?: Maybe<(
+    { __typename?: 'Address' }
+    & FullAddressFragment
+  )>, groups?: Maybe<Array<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id' | 'name'>
+  )>>, ledGroups?: Maybe<Array<(
+    { __typename?: 'Group' }
+    & Pick<Group, 'id' | 'name'>
+  )>>, categories?: Maybe<Array<(
+    { __typename?: 'Category' }
+    & Pick<Category, 'id' | 'title'>
+  )>> }
+  & FullProfileFragment
 );
 
 export type GetAllUsersQueryVariables = Exact<{ [key: string]: never; }>;
@@ -713,20 +738,7 @@ export type GetMyAccountQuery = (
   { __typename?: 'Query' }
   & { myAccount?: Maybe<(
     { __typename?: 'User' }
-    & { address?: Maybe<(
-      { __typename?: 'Address' }
-      & FullAddressFragment
-    )>, groups?: Maybe<Array<(
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name'>
-    )>>, ledGroups?: Maybe<Array<(
-      { __typename?: 'Group' }
-      & Pick<Group, 'id' | 'name'>
-    )>>, categories?: Maybe<Array<(
-      { __typename?: 'Category' }
-      & Pick<Category, 'id' | 'title'>
-    )>> }
-    & FullProfileFragment
+    & MyProfileDetailsFragment
   )> }
 );
 
@@ -760,6 +772,23 @@ export type UpdateUserStatusMutation = (
   )> }
 );
 
+export type UpdateProfileMutationVariables = Exact<{
+  input: UpdateProfileInput;
+}>;
+
+
+export type UpdateProfileMutation = (
+  { __typename?: 'Mutation' }
+  & { updateProfile?: Maybe<(
+    { __typename?: 'UpdateProfilePayload' }
+    & Pick<UpdateProfilePayload, 'errors'>
+    & { user?: Maybe<(
+      { __typename?: 'User' }
+      & MyProfileDetailsFragment
+    )> }
+  )> }
+);
+
 export const BasicAddressFragmentDoc = gql`
     fragment basicAddress on Address {
   lat
@@ -768,14 +797,6 @@ export const BasicAddressFragmentDoc = gql`
   address
 }
     `;
-export const FullAddressFragmentDoc = gql`
-    fragment fullAddress on Address {
-  country
-  state
-  zip
-  ...basicAddress
-}
-    ${BasicAddressFragmentDoc}`;
 export const BasicGroupDetailsFragmentDoc = gql`
     fragment basicGroupDetails on Group {
   id
@@ -835,11 +856,43 @@ ${BasicCategoryInfoFragmentDoc}`;
 export const FullProfileFragmentDoc = gql`
     fragment fullProfile on User {
   ...basicProfile
-  email
   role
   status
+  description
+  birthdate
 }
     ${BasicProfileFragmentDoc}`;
+export const FullAddressFragmentDoc = gql`
+    fragment fullAddress on Address {
+  country
+  state
+  zip
+  ...basicAddress
+}
+    ${BasicAddressFragmentDoc}`;
+export const MyProfileDetailsFragmentDoc = gql`
+    fragment myProfileDetails on User {
+  ...fullProfile
+  phoneNumber
+  email
+  address {
+    ...fullAddress
+  }
+  groups {
+    id
+    name
+  }
+  ledGroups {
+    id
+    name
+  }
+  categories {
+    id
+    title
+  }
+}
+    ${FullProfileFragmentDoc}
+${FullAddressFragmentDoc}`;
 export const GetAllCategoriesDocument = gql`
     query GetAllCategories {
   categories {
@@ -1215,26 +1268,10 @@ export type GetAllUsersQueryResult = Apollo.QueryResult<GetAllUsersQuery, GetAll
 export const GetMyAccountDocument = gql`
     query GetMyAccount {
   myAccount {
-    ...fullProfile
-    address {
-      ...fullAddress
-    }
-    groups {
-      id
-      name
-    }
-    ledGroups {
-      id
-      name
-    }
-    categories {
-      id
-      title
-    }
+    ...myProfileDetails
   }
 }
-    ${FullProfileFragmentDoc}
-${FullAddressFragmentDoc}`;
+    ${MyProfileDetailsFragmentDoc}`;
 
 /**
  * __useGetMyAccountQuery__
@@ -1329,3 +1366,38 @@ export function useUpdateUserStatusMutation(baseOptions?: Apollo.MutationHookOpt
 export type UpdateUserStatusMutationHookResult = ReturnType<typeof useUpdateUserStatusMutation>;
 export type UpdateUserStatusMutationResult = Apollo.MutationResult<UpdateUserStatusMutation>;
 export type UpdateUserStatusMutationOptions = Apollo.BaseMutationOptions<UpdateUserStatusMutation, UpdateUserStatusMutationVariables>;
+export const UpdateProfileDocument = gql`
+    mutation UpdateProfile($input: UpdateProfileInput!) {
+  updateProfile(input: $input) {
+    errors
+    user {
+      ...myProfileDetails
+    }
+  }
+}
+    ${MyProfileDetailsFragmentDoc}`;
+export type UpdateProfileMutationFn = Apollo.MutationFunction<UpdateProfileMutation, UpdateProfileMutationVariables>;
+
+/**
+ * __useUpdateProfileMutation__
+ *
+ * To run a mutation, you first call `useUpdateProfileMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateProfileMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateProfileMutation, { data, loading, error }] = useUpdateProfileMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateProfileMutation(baseOptions?: Apollo.MutationHookOptions<UpdateProfileMutation, UpdateProfileMutationVariables>) {
+        return Apollo.useMutation<UpdateProfileMutation, UpdateProfileMutationVariables>(UpdateProfileDocument, baseOptions);
+      }
+export type UpdateProfileMutationHookResult = ReturnType<typeof useUpdateProfileMutation>;
+export type UpdateProfileMutationResult = Apollo.MutationResult<UpdateProfileMutation>;
+export type UpdateProfileMutationOptions = Apollo.BaseMutationOptions<UpdateProfileMutation, UpdateProfileMutationVariables>;
