@@ -1,8 +1,8 @@
 import React from 'react';
 import { Input, Form } from 'antd';
 
-import { FormItem } from 'components/elements';
-import ButtonComponent from 'components/elements/button';
+import { FormItem, Button } from 'components/elements';
+
 import {
   StyledContent,
   StyledFormWrap,
@@ -74,9 +74,9 @@ const ProfileContent = ({ editIntroduction, introduction, introductionChange }: 
             <Input />
           </FormItem>
           <StyledButton>
-            <ButtonComponent color="accent" onClick={() => {}}>
+            <Button color="accent" size="lg" onClick={() => {}}>
               <StyledButtonText>Send Invitation </StyledButtonText>
-            </ButtonComponent>
+            </Button>
           </StyledButton>
         </Form>
       </StyledFormWrap>
