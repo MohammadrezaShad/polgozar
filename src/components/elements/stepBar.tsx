@@ -1,16 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { colors, fontWeight, spacer, radius, rgba } from 'settings/style';
+import { colors, fontWeight, spacer } from 'settings/style';
 
-const bars = [{ title: 'fsa' }, { title: 'fsa' }, { title: 'fsa' }];
+interface Steps {
+  title: string;
+}
+interface StepBarProps {
+  step: number;
+  steps: Steps[];
+}
 
-function StepBar() {
+function StepBar({ step = 0, steps }: StepBarProps) {
   return (
     <StepWrapper>
-      {bars.map((step, index) => (
-        <StepItem>
+      {steps.map((currentStep, index) => (
+        <StepItem active={index + 1 <= step}>
           <div className="step">{index + 1}</div>
-          <div className="title">{step.title}</div>
+          <div className="title">{currentStep.title}</div>
         </StepItem>
       ))}
     </StepWrapper>
@@ -21,13 +27,14 @@ function StepBar() {
 
 export default StepBar;
 
+const dotSize = 2.5;
 const StepWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 `;
 
-const StepItem = styled.div`
+const StepItem = styled.div<{ active: boolean }>`
   position: relative;
   flex: 1;
   display: flex;
@@ -36,33 +43,34 @@ const StepItem = styled.div`
 
   &:not(:last-of-type):after {
     content: '';
-    height: 2px;
-    width: 100%;
-    background-color: brown;
+    width: calc(100% - ${dotSize * 2}rem);
     position: absolute;
-    top: 1.25rem;
+    top: ${(dotSize + 0.5) / 2}rem;
     z-index: -2;
-    left: 50%;
+    left: calc(50% + ${dotSize}rem);
+    border-top: 2px dashed ${colors.primary300};
   }
   .step {
-    width: 2.5rem;
-    height: 2.5rem;
+    font-weight: ${fontWeight.bold};
+    width: ${dotSize + 0.5}rem;
+    height: ${dotSize + 0.5}rem;
     border-radius: 100%;
-    border: 2px solid red;
+    border: 2px solid ${colors.primary300};
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     background-color: white;
     z-index: 2;
+    transition: all 0.2s;
     &:after {
       content: '';
       position: absolute;
       display: block;
-      width: 2rem;
-      height: 2rem;
+      width: ${dotSize}rem;
+      height: ${dotSize}rem;
       margin: auto;
-      background-color: red;
+      background-color: ${({ active }) => (active ? colors.primary300 : 'transparent')};
       border-radius: 100%;
       z-index: -1;
       top: 0;
@@ -73,5 +81,8 @@ const StepItem = styled.div`
   }
   .title {
     text-align: center;
+    padding-top: ${spacer.sm};
+    color: ${colors.gray600};
+    font-weight: ${fontWeight.light};
   }
 `;
