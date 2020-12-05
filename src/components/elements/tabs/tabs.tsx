@@ -5,7 +5,6 @@ import { StyledTab } from './tabs.styled';
 interface TabsItem {
   path: string;
   text: string;
-  id: number;
 }
 
 interface TabsProps {
@@ -20,10 +19,10 @@ interface TabsProps {
 const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent }: TabsProps) => {
   return (
     <>
-      {items.map(({ text, path, id }) => {
+      {items.map(({ text, path }) => {
         return (
           <StyledTab
-            key={id}
+            key={path}
             path={path}
             height={height}
             matchParent={matchParent}
