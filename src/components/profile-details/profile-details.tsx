@@ -1,11 +1,9 @@
 import React from 'react';
-
-import { Stars } from 'components/elements';
+import { Avatar, Stars } from 'components/elements';
+import { Input } from 'antd';
 import {
   StyledWrapper,
   StyledImgWrap,
-  StyledImgContainer,
-  StyledImg,
   StyledStar,
   StyledBlock,
   StyledName,
@@ -17,41 +15,62 @@ import {
 } from './profile-details.styled';
 
 interface ProfileDetailsProp {
-  avatarUrl?: string | null;
-  firstName?: string | null;
-  lastName?: string | null;
-  loaction?: string | null;
+  avatarUrl?: string;
+  firstName?: string;
+  lastName?: string;
+  loaction?: string;
+  birthday?: string;
+  editIntroduction: boolean;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const ProfileDetails = ({ avatarUrl, firstName, lastName, loaction }: ProfileDetailsProp) => {
-  const imgRender = (): JSX.Element => {
-    if (avatarUrl) {
-      return <StyledImg alt="img" avatarUrl={avatarUrl} src={avatarUrl} />;
-    }
-    return <StyledImg alt="img" src="" />;
-  };
-
+const ProfileDetails = ({
+  avatarUrl,
+  firstName,
+  lastName,
+  loaction,
+  editIntroduction,
+  birthday,
+  handleChange,
+}: ProfileDetailsProp) => {
   return (
     <StyledWrapper>
       <StyledBlock>
         <StyledStar>
-          <Stars rate={3} items={[{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]} />
+          <Stars rate={3} />
         </StyledStar>
         <StyledTextWrap>
-          <StyledName>{firstName}</StyledName>
-          <StyledNameBold>{lastName}</StyledNameBold>
+          {editIntroduction ? (
+            <Input onChange={handleChange} name="firstName" value={firstName} />
+          ) : (
+            <StyledName>{firstName}</StyledName>
+          )}
+
+          {editIntroduction ? (
+            <Input onChange={handleChange} name="lastName" value={lastName} />
+          ) : (
+            <StyledNameBold>{lastName}</StyledNameBold>
+          )}
         </StyledTextWrap>
       </StyledBlock>
       <StyledBlock>
         <StyledInfo>
           <i className="icon-pin" />
           <StyledText>Location :</StyledText>
-          <StyledSubText>{loaction}</StyledSubText>
+          {editIntroduction ? (
+            <Input onChange={handleChange} name="location" value={loaction} />
+          ) : (
+            <StyledName>{loaction}</StyledName>
+          )}
         </StyledInfo>
         <StyledInfo>
           <i className="icon-birthday" />
           <StyledText>Birthday :</StyledText>
-          <StyledSubText>24. Mar. 1986</StyledSubText>
+          {editIntroduction ? (
+            <Input onChange={handleChange} name="birthday" value={birthday} />
+          ) : (
+            <StyledSubText>{birthday}</StyledSubText>
+          )}
         </StyledInfo>
         <StyledInfo>
           <i className="icon-calendar2" />
@@ -60,7 +79,7 @@ const ProfileDetails = ({ avatarUrl, firstName, lastName, loaction }: ProfileDet
         </StyledInfo>
       </StyledBlock>
       <StyledImgWrap>
-        <StyledImgContainer>{imgRender()}</StyledImgContainer>
+        <Avatar avatarUrl={avatarUrl} />
       </StyledImgWrap>
     </StyledWrapper>
   );
