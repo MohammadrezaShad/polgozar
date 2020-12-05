@@ -6,3 +6,4 @@ export { default as FormItem } from './formItem';
 export { default as Spinner } from './spinner';
 export { default as Tabs } from './tabs/tabs';
 export { default as Stars } from './star-rating/star-rating';
+export { default as Avatar } from './avatar/avatar';
