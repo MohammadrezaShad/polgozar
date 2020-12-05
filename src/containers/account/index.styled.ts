@@ -18,6 +18,6 @@ export const StyledLayout = styled.div`
   align-items: flex-start;
   flex: 1;
   max-width: ${sizes.xxl};
-  padding: 0 ${spacer.xl};
+  padding-right: ${spacer.xl};
   margin: 0 auto;
 `;
