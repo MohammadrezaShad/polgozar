@@ -7,6 +7,7 @@ interface StarProps {
 }
 
 export const StyledItem = styled.div<StarProps>`
+  display: flex;
   i {
     color: ${({ rate, starId }) => (rate >= starId ? colors.accent : colors.primary500)};
   }
