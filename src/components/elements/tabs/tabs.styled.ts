@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import { colors, fontWeight, fontSize, spacer } from 'settings/style';
 
 interface TabProp {
-  itemId: number;
-  selectedTab: number;
+  path: string;
+  selectedTab: string;
   height?: string;
   width?: string;
   matchParent?: boolean;
@@ -22,11 +22,11 @@ export const StyledTab = styled.div<TabProp>`
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.normal};
   padding: ${spacer.sm};
-  color: ${({ selectedTab, itemId }) => (selectedTab === itemId ? colors.white : colors.primary400)};
+  color: ${({ selectedTab, path }) => (selectedTab === path ? colors.white : colors.primary400)};
   cursor: pointer;
   text-align: center;
-  background-color: ${({ selectedTab, itemId }) => (selectedTab === itemId ? colors.primary300 : colors.primary200)};
+  background-color: ${({ selectedTab, path }) => (selectedTab === path ? colors.primary300 : colors.primary200)};
   &:not(:last-child) {
-    border-bottom: ${({ selectedTab, itemId }) => (selectedTab === itemId ? 'none' : `1px solid ${colors.primary400}`)};
+    border-bottom: ${({ selectedTab, path }) => (selectedTab === path ? 'none' : `1px solid ${colors.primary400}`)};
   }
 `;
