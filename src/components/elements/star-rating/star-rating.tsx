@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { v4 } from 'uuid';
 import { StyledItem } from './star-rating.styled';
 
 interface StarRatingProps {
@@ -9,21 +9,11 @@ interface StarRatingProps {
 const StarRating = ({ rate }: StarRatingProps) => {
   return (
     <>
-      <StyledItem rate={rate} starId={1}>
-        <i className="icon-rating-star" />
-      </StyledItem>
-      <StyledItem rate={rate} starId={2}>
-        <i className="icon-rating-star" />
-      </StyledItem>
-      <StyledItem rate={rate} starId={3}>
-        <i className="icon-rating-star" />
-      </StyledItem>
-      <StyledItem rate={rate} starId={4}>
-        <i className="icon-rating-star" />
-      </StyledItem>
-      <StyledItem rate={rate} starId={5}>
-        <i className="icon-rating-star" />
-      </StyledItem>
+      {[...Array(5)].map((_, idx) => (
+        <StyledItem rate={rate} starId={idx + 1} key={v4()}>
+          <i className="icon-rating-star" />
+        </StyledItem>
+      ))}
     </>
   );
 };
