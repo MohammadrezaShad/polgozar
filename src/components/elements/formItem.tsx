@@ -19,6 +19,7 @@ interface MappedColorType {
 
 interface FormItemPropTypes extends FormItemProps {
   theme: ThemeType;
+  noBackground?: boolean;
 }
 
 const mappedColors: MappedColorType = {
@@ -44,15 +45,15 @@ const mappedColors: MappedColorType = {
   },
 };
 
-const FormItemWrapper = styled.div<{ color: ThemeType }>`
-  ${({ color }) => css`
+const FormItemWrapper = styled.div<{ color: ThemeType; noBackground?: boolean }>`
+  ${({ color, noBackground }) => css`
     .ant-form-item-control-input {
-      background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
+      background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.3)};
       border-color: ${colors[mappedColors.border[color]]};
       border-radius: ${radius.xl};
       padding: ${spacer.sm} ${spacer.lg};
       .ant-input-group-addon {
-        background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
+        background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.3)};
         border-color: ${colors[mappedColors.border[color]]};
         border-radius: ${radius.xl};
         .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
@@ -65,7 +66,7 @@ const FormItemWrapper = styled.div<{ color: ThemeType }>`
         }
       }
       &:hover {
-        background-color: ${rgba(colors[mappedColors.bg[color]], 0.2)};
+        background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.2)};
       }
       input {
         box-shadow: none;
@@ -111,9 +112,9 @@ const FormItemWrapper = styled.div<{ color: ThemeType }>`
   `}
 `;
 
-const FormItem = ({ theme = 'primary', ...rest }: FormItemPropTypes) => {
+const FormItem = ({ theme = 'primary', noBackground, ...rest }: FormItemPropTypes) => {
   return (
-    <FormItemWrapper color={theme}>
+    <FormItemWrapper color={theme} noBackground={noBackground}>
       <Form.Item {...rest} />
     </FormItemWrapper>
   );

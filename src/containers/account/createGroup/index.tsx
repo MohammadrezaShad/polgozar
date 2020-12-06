@@ -1,24 +1,40 @@
 import React, { useState, useMemo } from 'react';
 import styled from 'styled-components';
-// import { useGetMyAccountQuery } from 'graphql/types';
-import { StepBar, Button } from 'components/elements';
+import { useGetAllCategoriesQuery } from 'graphql/types';
+import { StepBar, Button, FormItem } from 'components/elements';
 import { colors, spacer, fontType, radius, sizes } from 'settings/style';
+import DetailedCheckbox from 'components/detailedCheckbox';
+import CoverPhoto from 'components/coverPhoto';
+
+import { Input, Form } from 'antd';
 
 const steps = [{ title: 'Choose Categories' }, { title: 'Add Cover Photo' }, { title: 'Add Informations' }];
 
-const CreateGroup = () => {
+function CreateGroup() {
   const [step, setStep] = useState(1);
+  const { data } = useGetAllCategoriesQuery();
+  const [createGroupForm] = Form.useForm();
+
+  const categories = useMemo(
+    () =>
+      data?.categories
+        ? data?.categories.map(({ id, description, title }) => ({ value: id, label: title, description }))
+        : [],
+    [data],
+  );
 
   const renderedSubmitButton = useMemo(() => {
-    let buttonText = 'Next';
+    let buttonText = 'Continue';
     const buttonAction = () => setStep(step + 1);
-    if (step === 1) {
-      buttonText = 'Continue';
-    } else if (step === steps.length) {
+    if (step === steps.length) {
       buttonText = 'Confirm';
     }
     return <Button onClick={buttonAction}>{buttonText}</Button>;
   }, [step]);
+
+  const onFinish = (values: any) => {
+    console.log(values);
+  };
 
   return (
     <div>
@@ -28,16 +44,50 @@ const CreateGroup = () => {
       </ProgressBarHeader>
       <Wrapper>
         <FormWrapper>
-          <FormBoxWrapper>fsahdfkla</FormBoxWrapper>
-          <FormFooter>
-            {step > 1 ? <Button onClick={() => setStep(step - 1)}>Back</Button> : <span />}
-            {renderedSubmitButton}
-          </FormFooter>
+          <Form layout="vertical" form={createGroupForm} onFinish={onFinish} preserve={false}>
+            <FormBoxWrapper>
+              <FormItem
+                name="coverPhoto"
+                label=""
+                theme="dark"
+                noBackground
+                rules={[{ required: true, message: 'Cover Photo is required!' }]}
+              >
+                <CoverPhoto />
+              </FormItem>
+              <FormItem
+                name="title"
+                label="Title"
+                theme="primary"
+                rules={[
+                  {
+                    required: true,
+                    message: 'Please input your Email!',
+                  },
+                ]}
+              >
+                <Input placeholder="Enter Your Group Title" />
+              </FormItem>
+              <FormItem
+                name="categories"
+                label=""
+                theme="dark"
+                noBackground
+                rules={[{ required: true, message: 'Categories is required!' }]}
+              >
+                <DetailedCheckbox options={categories} />
+              </FormItem>
+            </FormBoxWrapper>
+            <FormFooter>
+              {step > 1 ? <Button onClick={() => setStep(step - 1)}>Back</Button> : <span />}
+              {renderedSubmitButton}
+            </FormFooter>
+          </Form>
         </FormWrapper>
       </Wrapper>
     </div>
   );
-};
+}
 
 export default CreateGroup;
 
