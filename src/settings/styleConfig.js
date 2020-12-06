@@ -35,7 +35,7 @@ const colors = {
   gray700: '#4a5568',
   gray800: '#2d3748',
   gray900: '#212529',
-
+  gray1000: ' #435760',
   // '#5c5c5c'
   // '#02192b'
   cream100: '#FFF2D4',
@@ -77,6 +77,7 @@ const fontType = {
   md: { 'font-size': fontSize.md, 'font-weight': fontWeight.bold },
   lg: { 'font-size': fontSize.lg, 'font-weight': fontWeight.bolder },
   xl: { 'font-size': fontSize.xl, 'font-weight': fontWeight.heavy },
+  boldTitle: { 'font-size': fontSize.xl, 'font-weight': fontWeight.normal },
 };
 
 const baseSpace = 1;
@@ -102,6 +103,7 @@ const radius = {
   md: '.25rem',
   lg: '1rem',
   xl: '2rem',
+  alt: '1.1875rem',
 };
 
 const heights = {
