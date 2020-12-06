@@ -4,4 +4,7 @@ export { default as HeroImage } from './heroImg';
 export { default as Modal } from './modal';
 export { default as FormItem } from './formItem';
 export { default as Spinner } from './spinner';
+export { default as Tabs } from './tabs/tabs';
+export { default as Stars } from './star-rating/star-rating';
+export { default as Avatar } from './avatar/avatar';
 export { default as StepBar } from './stepBar';
