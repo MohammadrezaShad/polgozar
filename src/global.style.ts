@@ -138,6 +138,19 @@ const GlobalStyle = createGlobalStyle`
     display: inline-block;
   }
 
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #fff !important;
+  }
+
   /* ant design overwrite styles */
   /* MODAL */
   .ant-modal-mask, .ant-drawer-mask{

@@ -1,8 +1,8 @@
 import { css, ThemedCssFunction, DefaultTheme } from 'styled-components';
-import { sizes, colors, spacer } from './styleConfig';
+import { breakpoints, colors, spacer } from './styleConfig';
 
 export {
-  sizes,
+  breakpoints,
   colors,
   radius,
   shadow,
@@ -15,12 +15,17 @@ export {
   fontType,
 } from './styleConfig';
 
-export type SizeType = keyof typeof sizes;
+export type SizeType = keyof typeof breakpoints;
 export type ColorTypes = keyof typeof colors;
+
+export const sizes = Object.keys(breakpoints).reduce(
+  (acc, key) => ({ ...acc, [key]: `${breakpoints[key as SizeType]}px` }),
+  {},
+) as { [size in SizeType]: string };
 
 export const maxWinSize = (size: SizeType) => {
   const windowSize = window.innerWidth;
-  return windowSize <= parseInt(sizes[size].replace('px', ''), 10);
+  return windowSize <= breakpoints[size];
 };
 
 export const media = Object.keys(sizes).reduce(

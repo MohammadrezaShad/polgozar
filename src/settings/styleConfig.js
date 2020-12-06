@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const { rgba } = require('polished');
 
-const sizes = {
-  xs: '480px',
-  md: '768px',
-  lg: '992px',
-  xl: '1200px',
-  xxl: '1500px',
+const breakpoints = {
+  xs: 480,
+  md: 768,
+  lg: 992,
+  xl: 1200,
+  xxl: 1500,
 };
 
 const colors = {
@@ -113,7 +113,7 @@ const heights = {
 };
 
 module.exports = {
-  sizes,
+  breakpoints,
   colors,
   radius,
   shadow,
