@@ -12,6 +12,7 @@ export type ButtonComponentProps = React.ButtonHTMLAttributes<HTMLButtonElement>
   shape?: 'outline' | 'opacity' | 'dark' | 'link';
   isLoading?: boolean;
   disabled?: boolean;
+  fontStyle?: 'sm' | 'md' | 'lg';
 };
 
 const ButtonComponent = ({ onClick, children, disabled, isLoading, ...otherProps }: ButtonComponentProps) => {
@@ -24,7 +25,7 @@ const ButtonComponent = ({ onClick, children, disabled, isLoading, ...otherProps
 };
 
 const Button = styled.button<ButtonComponentProps>`
-  ${({ rounded = true, color = 'accent', shape = 'dark' }: ButtonComponentProps) => css`
+  ${({ rounded = true, color = 'accent', shape = 'dark', size = 'md' }: ButtonComponentProps) => css`
     display: inline-block;
     border: none;
     outline: none;
@@ -44,7 +45,7 @@ const Button = styled.button<ButtonComponentProps>`
 
     font-weight: ${fontWeight.bold}
     border-radius: ${rounded ? radius.xl : 0};
-    padding: ${spacer.sm} ${spacer.lg};
+    padding:${size === 'lg' ? `${spacer.md} ${spacer.lg}` : `${spacer.sm} ${spacer.lg}`} ;
     &:disabled{
       cursor: not-allowed;
     }

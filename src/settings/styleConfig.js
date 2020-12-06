@@ -20,7 +20,7 @@ const colors = {
   primary300: '#A2BFCC',
   primary400: '#6b8490',
   primary500: '#0B3B50',
-
+  primary700: '#d5e4ea',
   font: '#546E7A',
 
   white: '#fff',
