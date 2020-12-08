@@ -1,4 +1,4 @@
-import { colors } from 'settings/style';
+import { colors, fontType, spacer } from 'settings/style';
 import styled from 'styled-components';
 
 interface AvatarProps {
@@ -32,4 +32,15 @@ export const StyledImg = styled.img<AvatarProps>`
   width: ${({ size }) => (size === 'md' ? '60px' : '172px')};
   background-color: ${colors.white};
   object-fit: cover;
+`;
+
+export const StyledWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
+
+export const StyledText = styled.span`
+  display: inline-flex;
+  ${fontType.boldTitle};
+  margin-left: ${spacer.xl};
 `;
