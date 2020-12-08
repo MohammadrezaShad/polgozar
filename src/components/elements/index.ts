@@ -18,3 +18,4 @@ export { default as DateTag } from './date-tag/date-tag';
 export { default as SocialMedia } from './social-media/social-media';
 export { default as Comments } from './comments/comments';
 export { default as SliderList } from './slider-list/slider-list';
+export { default as SearchBox } from './searchBox';
