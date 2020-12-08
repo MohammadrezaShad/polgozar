@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors, fontWeight, spacer } from 'settings/style';
+import { v4 } from 'uuid';
 
 interface Steps {
   title: string;
@@ -14,7 +15,7 @@ function StepBar({ step = 0, steps }: StepBarProps) {
   return (
     <StepWrapper>
       {steps.map((currentStep, index) => (
-        <StepItem active={index + 1 <= step}>
+        <StepItem active={index + 1 <= step} key={v4()}>
           <div className="step">{index + 1}</div>
           <div className="title">{currentStep.title}</div>
         </StepItem>

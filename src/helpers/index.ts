@@ -132,3 +132,60 @@ export function resizeImg(
 export function isObject(value: any) {
   return value && typeof value === 'object' && value.constructor === Object;
 }
+
+export const loadMapApi = () => {
+  const mapsURL = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&libraries=places&language=no&region=NO&v=quarterly`;
+  const scripts = document.getElementsByTagName('script');
+  // Go through existing script tags, and return google maps api tag when found.
+  for (let i = 0; i < scripts.length; i += 1) {
+    if (scripts[i].src.indexOf('https://maps.googleapis.com/maps/api') === 0) {
+      return scripts[i];
+    }
+  }
+
+  const googleMapScript = document.createElement('script');
+  googleMapScript.src = mapsURL;
+  googleMapScript.async = true;
+  googleMapScript.defer = true;
+  window.document.body.appendChild(googleMapScript);
+
+  return googleMapScript;
+};
+
+const addressAttr = {
+  administrative_area_level_1: ['short_name', 'state'] as const,
+  locality: ['long_name', 'city'] as const,
+  postal_code: ['long_name', 'zip'] as const,
+  country: ['long_name', 'country'] as const,
+};
+
+type AddressAttr = keyof typeof addressAttr;
+export interface ParseGoogleAddressResult {
+  state?: string;
+  city?: string;
+  zip?: string;
+  country?: string;
+  address?: string;
+  lat?: string;
+  lng?: string;
+}
+
+export function parseGoogleAddress(address: google.maps.places.PlaceResult) {
+  if (!address) {
+    return {};
+  }
+  const addressResult = {
+    lat: address?.geometry?.location.lat(),
+    lng: address?.geometry?.location.lng(),
+    address: address?.formatted_address,
+  } as ParseGoogleAddressResult;
+  const addressComponent = address?.address_components || [];
+  for (let i = 0; i < addressComponent.length; i += 1) {
+    const attr = addressComponent[i];
+    const attrKey = attr.types[0] as AddressAttr;
+    if (addressAttr[attrKey]) {
+      addressResult[addressAttr[attrKey][1]] = attr[addressAttr[attrKey][0]];
+    }
+  }
+  return addressResult;
+}

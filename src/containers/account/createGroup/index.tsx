@@ -9,18 +9,19 @@ import AddCategoriesStep from './addCategoriesStep';
 
 const steps = [
   {
-    title: 'Categories',
-    pageTitle: 'Select related categories',
-    validation: ['categoryIds'],
-    content: AddCategoriesStep,
-  },
-  { title: 'Cover Photo', pageTitle: 'Add Cover Photo', validation: ['coverPhoto'], content: CoverPhotoStep },
-  {
     title: 'Informations',
     pageTitle: 'Add Group Details',
     validation: ['name', 'description'],
     content: InformationStep,
   },
+  {
+    title: 'Categories',
+    pageTitle: 'Select related categories',
+    validation: ['categoryIds'],
+    content: AddCategoriesStep,
+  },
+
+  { title: 'Cover Photo', pageTitle: 'Add Cover Photo', validation: ['coverPhoto'], content: CoverPhotoStep },
 ];
 
 function CreateGroup() {

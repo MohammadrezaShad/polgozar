@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormItem } from 'components/elements';
+import { FormItem, SearchBox } from 'components/elements';
 import { Input } from 'antd';
 
 function InformationStep() {
@@ -18,6 +18,20 @@ function InformationStep() {
       >
         <Input placeholder="Enter Your Group Title" />
       </FormItem>
+      <FormItem
+        name="address"
+        label="Address"
+        theme="primary"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your Address!',
+          },
+        ]}
+      >
+        <SearchBox />
+      </FormItem>
+
       <FormItem
         name="description"
         label="Description"

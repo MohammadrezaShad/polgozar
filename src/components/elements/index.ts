@@ -8,3 +8,4 @@ export { default as Tabs } from './tabs/tabs';
 export { default as Stars } from './star-rating/star-rating';
 export { default as Avatar } from './avatar/avatar';
 export { default as StepBar } from './stepBar';
+export { default as SearchBox } from './searchBox';
