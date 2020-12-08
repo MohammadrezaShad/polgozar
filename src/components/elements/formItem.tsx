@@ -18,8 +18,9 @@ interface MappedColorType {
 }
 
 interface FormItemPropTypes extends FormItemProps {
-  theme: ThemeType;
-  noBackground?: boolean;
+  theme?: ThemeType;
+  noStyle?: boolean;
+  fullRounded?: boolean;
 }
 
 const mappedColors: MappedColorType = {
@@ -45,15 +46,19 @@ const mappedColors: MappedColorType = {
   },
 };
 
-const FormItemWrapper = styled.div<{ color: ThemeType; noBackground?: boolean }>`
-  ${({ color, noBackground }) => css`
+const FormItemWrapper = styled.div<{ color: ThemeType; noStyle?: boolean; fullRounded?: boolean }>`
+  ${({ color, noStyle, fullRounded = true }) => css`
     .ant-form-item-control-input {
-      background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.3)};
       border-color: ${colors[mappedColors.border[color]]};
-      border-radius: ${radius.xl};
-      padding: ${spacer.sm} ${spacer.lg};
+      border-radius: ${fullRounded ? radius.xl : radius.lg};
+      ${!noStyle &&
+      css`
+        padding: ${spacer.sm} ${spacer.lg};
+        background-color: ${rgba(colors[mappedColors.bg[color]], 0.3)};
+      `}
+
       .ant-input-group-addon {
-        background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.3)};
+        background-color: ${noStyle ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.3)};
         border-color: ${colors[mappedColors.border[color]]};
         border-radius: ${radius.xl};
         .ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input)
@@ -66,7 +71,7 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noBackground?: boolean }>
         }
       }
       &:hover {
-        background-color: ${noBackground ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.2)};
+        background-color: ${noStyle ? 'transparent' : rgba(colors[mappedColors.bg[color]], 0.2)};
       }
       input {
         box-shadow: none;
@@ -83,6 +88,13 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noBackground?: boolean }>
           border: none;
           box-shadow: none;
         }
+        ::placeholder {
+          color: ${colors[mappedColors.placeholder[color]]};
+          opacity: 1;
+        }
+      }
+      textarea {
+        padding: 0;
         ::placeholder {
           color: ${colors[mappedColors.placeholder[color]]};
           opacity: 1;
@@ -109,12 +121,23 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noBackground?: boolean }>
       padding-left: ${spacer.md};
       color: ${colors.danger};
     }
+
+    .ant-form-item-has-error .ant-input,
+    .ant-form-item-has-error .ant-input:focus,
+    .ant-form-item-has-error .ant-input-affix-wrapper:focus,
+    .ant-form-item-has-error .ant-input-focused,
+    .ant-form-item-has-error .ant-input-affix-wrapper-focused {
+      background-color: transparent;
+      border-color: transparent;
+      border: none;
+      box-shadow: none;
+    }
   `}
 `;
 
-const FormItem = ({ theme = 'primary', noBackground, ...rest }: FormItemPropTypes) => {
+const FormItem = ({ theme = 'primary', noStyle, fullRounded, ...rest }: FormItemPropTypes) => {
   return (
-    <FormItemWrapper color={theme} noBackground={noBackground}>
+    <FormItemWrapper color={theme} noStyle={noStyle} fullRounded={fullRounded}>
       <Form.Item {...rest} />
     </FormItemWrapper>
   );

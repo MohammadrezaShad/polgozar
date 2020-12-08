@@ -1,102 +1,83 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
-import { useGetAllCategoriesQuery } from 'graphql/types';
-import { StepBar, Button, FormItem } from 'components/elements';
+import { StepBar, Button } from 'components/elements';
 import { colors, spacer, fontType, radius, sizes } from 'settings/style';
-import DetailedCheckbox from 'components/detailedCheckbox';
-import CoverPhoto from 'components/coverPhoto';
+import { Form } from 'antd';
+import CoverPhotoStep from './coverPhotoStep';
+import InformationStep from './informationStep';
+import AddCategoriesStep from './addCategoriesStep';
 
-import { Input, Form } from 'antd';
-
-const steps = [{ title: 'Choose Categories' }, { title: 'Add Cover Photo' }, { title: 'Add Informations' }];
+const steps = [
+  {
+    title: 'Categories',
+    pageTitle: 'Select related categories',
+    validation: ['categoryIds'],
+    content: AddCategoriesStep,
+  },
+  { title: 'Cover Photo', pageTitle: 'Add Cover Photo', validation: ['coverPhoto'], content: CoverPhotoStep },
+  {
+    title: 'Informations',
+    pageTitle: 'Add Group Details',
+    validation: ['name', 'description'],
+    content: InformationStep,
+  },
+];
 
 function CreateGroup() {
   const [step, setStep] = useState(1);
-  const { data } = useGetAllCategoriesQuery();
   const [createGroupForm] = Form.useForm();
 
-  const categories = useMemo(
-    () =>
-      data?.categories
-        ? data?.categories.map(({ id, description, title }) => ({ value: id, label: title, description }))
-        : [],
-    [data],
-  );
-
-  const renderedSubmitButton = useMemo(() => {
-    let buttonText = 'Continue';
-    const buttonAction = () => setStep(step + 1);
-    if (step === steps.length) {
-      buttonText = 'Confirm';
-    }
-    return <Button onClick={buttonAction}>{buttonText}</Button>;
-  }, [step]);
+  const onNext = useCallback(() => {
+    const validation = steps[step - 1]?.validation;
+    const action = step === steps.length ? createGroupForm.submit : () => setStep(step + 1);
+    createGroupForm.validateFields(validation).then(action);
+  }, [createGroupForm, step]);
 
   const onFinish = (values: any) => {
-    console.log(values);
+    console.log({ ...values, coverPhoto: values.coverPhoto.blob }, 'iiiooooooo');
+    // createGroupForm.submit();
   };
 
   return (
-    <div>
+    <Wrapper>
       <ProgressBarHeader>
         <HeaderTitle>Make new Group</HeaderTitle>
         <StepBar step={step} steps={steps} />
       </ProgressBarHeader>
-      <Wrapper>
+      <ContentWrapper>
         <FormWrapper>
-          <Form layout="vertical" form={createGroupForm} onFinish={onFinish} preserve={false}>
+          <Form layout="vertical" form={createGroupForm} onFinish={onFinish}>
             <FormBoxWrapper>
-              <FormItem
-                name="coverPhoto"
-                label=""
-                theme="dark"
-                noBackground
-                rules={[{ required: true, message: 'Cover Photo is required!' }]}
-              >
-                <CoverPhoto />
-              </FormItem>
-              <FormItem
-                name="title"
-                label="Title"
-                theme="primary"
-                rules={[
-                  {
-                    required: true,
-                    message: 'Please input your Email!',
-                  },
-                ]}
-              >
-                <Input placeholder="Enter Your Group Title" />
-              </FormItem>
-              <FormItem
-                name="categories"
-                label=""
-                theme="dark"
-                noBackground
-                rules={[{ required: true, message: 'Categories is required!' }]}
-              >
-                <DetailedCheckbox options={categories} />
-              </FormItem>
+              {steps.map((item, index) => (
+                <div style={{ display: index + 1 === step ? 'block' : 'none' }} key={item.title}>
+                  <StepTitle>{item.pageTitle}</StepTitle>
+                  {item.content()}
+                </div>
+              ))}
             </FormBoxWrapper>
-            <FormFooter>
-              {step > 1 ? <Button onClick={() => setStep(step - 1)}>Back</Button> : <span />}
-              {renderedSubmitButton}
-            </FormFooter>
           </Form>
+          <FormFooter>
+            {step > 1 ? <Button onClick={() => setStep(step - 1)}>Back</Button> : <span />}
+            <Button onClick={onNext}>{step === steps.length ? 'Confirm' : 'Continue'}</Button>
+          </FormFooter>
         </FormWrapper>
-      </Wrapper>
-    </div>
+      </ContentWrapper>
+    </Wrapper>
   );
 }
 
 export default CreateGroup;
+
+const Wrapper = styled.div`
+  width: 100%;
+`;
 
 const HeaderTitle = styled.h2`
   ${fontType.lg}
   padding-bottom: ${spacer.lg};
 `;
 
-const Wrapper = styled.div`
+const ContentWrapper = styled.div`
   background-color: #eeeeee;
   padding: ${spacer.xl};
 `;
@@ -113,7 +94,7 @@ const FormWrapper = styled.div`
 const FormBoxWrapper = styled.div`
   background-color: ${colors.white};
   border-radius: ${radius.md};
-  padding: ${spacer.lg};
+  padding: ${spacer.xl};
   margin-bottom: ${spacer.lg};
 `;
 
@@ -121,4 +102,9 @@ const FormFooter = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+`;
+
+const StepTitle = styled.p`
+  ${fontType.md};
+  margin-bottom: ${spacer.xl};
 `;

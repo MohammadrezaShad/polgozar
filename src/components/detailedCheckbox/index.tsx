@@ -16,13 +16,7 @@ interface DetailedCheckboxProps {
   value?: string[];
 }
 
-function DetailedCheckbox({
-  onChange = () => {},
-  value = [],
-  // defaultValue = [],
-  options,
-}: // disabled,
-DetailedCheckboxProps) {
+function DetailedCheckbox({ onChange = () => {}, value = [], options }: DetailedCheckboxProps) {
   const onValueChange = useCallback(
     (id: string) => {
       if (value.includes(id)) {
@@ -37,7 +31,11 @@ DetailedCheckboxProps) {
   return (
     <>
       {options.map((option) => (
-        <OptionItem onClick={() => onValueChange(option.value)} checked={value.includes(option.value)}>
+        <OptionItem
+          onClick={() => onValueChange(option.value)}
+          checked={value.includes(option.value)}
+          key={option.value}
+        >
           <OptionLabel>{option.label}</OptionLabel>
           {!!option.description && <OptionDescription>{option.description}</OptionDescription>}
         </OptionItem>

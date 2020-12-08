@@ -8,6 +8,7 @@ const Container = styled.div`
   ${media.lg`
     padding: 0 ${spacer.lg};
   `}
+  overflow: hidden;
 `;
 
 export default Container;
