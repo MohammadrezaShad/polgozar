@@ -166,8 +166,8 @@ export interface ParseGoogleAddressResult {
   zip?: string;
   country?: string;
   address?: string;
-  lat?: string;
-  lng?: string;
+  lat?: number;
+  lng?: number;
 }
 
 export function parseGoogleAddress(address: google.maps.places.PlaceResult) {
