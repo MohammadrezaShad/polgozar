@@ -13,7 +13,10 @@ function SearchBox({ onChange = () => {}, placeholder = 'Please Enter your Addre
 
   const onPlacesChanged = useCallback(() => {
     const places = searchBox.current.getPlaces();
-    onChange(parseGoogleAddress(places[0]));
+    const result = parseGoogleAddress(places[0]);
+    if (result) {
+      onChange(result);
+    }
   }, [onChange]);
 
   useEffect(() => {
