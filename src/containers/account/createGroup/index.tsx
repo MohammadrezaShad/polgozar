@@ -5,9 +5,18 @@ import { colors, spacer, fontType, radius, sizes } from 'settings/style';
 import { Form, message } from 'antd';
 import { useCreateGroupMutation } from 'graphql/types';
 import { useHistory } from 'react-router-dom';
+import { ResizeImageResult, ParseGoogleAddressResult } from 'helpers';
 import CoverPhotoStep from './coverPhotoStep';
 import InformationStep from './informationStep';
 import AddCategoriesStep from './addCategoriesStep';
+
+interface FromFields {
+  name: string;
+  description: string;
+  categoryIds: string[];
+  coverPhoto: ResizeImageResult;
+  address: ParseGoogleAddressResult;
+}
 
 const steps = [
   {
@@ -46,7 +55,7 @@ function CreateGroup() {
     }
   }, [createGroupForm, step]);
 
-  const onFinish = async (values: any) => {
+  const onFinish = async (values: FromFields) => {
     try {
       const result = await createGroup({
         variables: { input: { attributes: { ...values, coverPhoto: values.coverPhoto.blob } } },

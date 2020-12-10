@@ -163,9 +163,9 @@ export interface ParseGoogleAddressResult {
   city?: string;
   zip?: string;
   country?: string;
-  address?: string;
-  lat?: number;
-  lng?: number;
+  address: string;
+  lat: number;
+  lng: number;
 }
 
 export function parseGoogleAddress(address: google.maps.places.PlaceResult) {
