@@ -12,7 +12,7 @@ const breakpoints = {
 const colors = {
   primary: '#91c8de',
   accent: '#FFB300',
-
+  accent100: rgba(248, 200, 88, 0.65),
   errorColor: '#FFB300',
 
   primary100: '#D9ECF4',
@@ -24,6 +24,11 @@ const colors = {
   font: '#546E7A',
 
   white: '#fff',
+  white100: '#f5f5f5',
+  white200: '#daeef5',
+  white300: '#ecf4f7',
+  white400: '#e1edf2',
+  white500: '#d3d3d3',
   black: '#000',
 
   gray100: '#f7fafc',
@@ -36,6 +41,13 @@ const colors = {
   gray800: '#2d3748',
   gray900: '#212529',
   gray1000: ' #435760',
+  gray1100: '#e6e6e6',
+  gray1200: '#dddddd',
+  gray1300: '#989898',
+  gray1400: '#7c7c7c',
+  gray1500: '#b7b7b7',
+  gray1600: '#bfbfbf',
+  gray1700: '#EEEEEE',
   // '#5c5c5c'
   // '#02192b'
   cream100: '#FFF2D4',
@@ -101,6 +113,7 @@ const shadow = {
 const radius = {
   sm: '.2rem',
   md: '.25rem',
+  mlg: '0.625rem',
   lg: '1rem',
   xl: '2rem',
   alt: '1.1875rem',

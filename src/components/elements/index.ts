@@ -8,4 +8,14 @@ export { default as Tabs } from './tabs/tabs';
 export { default as Stars } from './star-rating/star-rating';
 export { default as Avatar } from './avatar/avatar';
 export { default as StepBar } from './stepBar';
+export { default as Location } from './location/location';
+export { default as AlbumSlider } from './albumSlider/albumSlider';
+export { default as CommentItem } from './commentItem/commentItem';
+export { default as ListItem } from './listItem/listItem';
+export { default as Card } from './card/card';
+
+export { default as DateTag } from './dateTag/dateTag';
+export { default as SocialMedia } from './socialMedia/socialMedia';
+export { default as Comments } from './comments/comments';
+export { default as SliderList } from './sliderList/sliderList';
 export { default as SearchBox } from './searchBox';
