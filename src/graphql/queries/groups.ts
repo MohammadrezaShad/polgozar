@@ -57,6 +57,7 @@ export const getGroupById = gql`
   ${groupCardInfo}
 `;
 
+// mutations
 export const updateGroupStatus = gql`
   mutation UpdateGroupStatus($input: UpdateGroupStatusInput!) {
     updateGroupStatus(input: $input) {
@@ -67,4 +68,16 @@ export const updateGroupStatus = gql`
       }
     }
   }
+`;
+
+export const createGroup = gql`
+  mutation CreateGroup($input: CreateGroupInput!) {
+    createGroup(input: $input) {
+      errors
+      group {
+        ...groupCardInfo
+      }
+    }
+  }
+  ${groupCardInfo}
 `;
