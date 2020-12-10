@@ -170,12 +170,12 @@ export interface ParseGoogleAddressResult {
 
 export function parseGoogleAddress(address: google.maps.places.PlaceResult) {
   if (!address) {
-    return {};
+    return null;
   }
   const addressResult = {
-    lat: address?.geometry?.location.lat(),
-    lng: address?.geometry?.location.lng(),
-    address: address?.formatted_address,
+    lat: address.geometry?.location.lat(),
+    lng: address.geometry?.location.lng(),
+    address: address.formatted_address,
   } as ParseGoogleAddressResult;
   const addressComponent = address?.address_components || [];
   for (let i = 0; i < addressComponent.length; i += 1) {
