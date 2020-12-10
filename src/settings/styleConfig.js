@@ -47,6 +47,7 @@ const colors = {
   gray1400: '#7c7c7c',
   gray1500: '#b7b7b7',
   gray1600: '#bfbfbf',
+  gray1700: '#EEEEEE',
   // '#5c5c5c'
   // '#02192b'
   cream100: '#FFF2D4',

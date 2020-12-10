@@ -15,6 +15,7 @@ const Location = ({ zoom = 17, loactionDetail, mapSize = 'lg' }: LocationProps) 
   const handleApiLoaded = () => {
     setMapLoaded(true);
   };
+  console.log(process.env);
   return (
     <>
       <StyledContent mapSize={mapSize}>
@@ -26,7 +27,7 @@ const Location = ({ zoom = 17, loactionDetail, mapSize = 'lg' }: LocationProps) 
       </StyledContent>
       <StyledMap>
         <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyBXsNmtDJ1Iq870UOGv8rk-fmvXOfwvqSU' }}
+          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API }}
           center={{ lat: loactionDetail?.lat, lng: loactionDetail?.lng }}
           defaultZoom={zoom}
           yesIWantToUseGoogleMapApiInternals

@@ -1,23 +1,22 @@
 import { radius, spacer, colors, fontType, fontSize, fontWeight } from 'settings/style';
 import styled from 'styled-components';
-import BgImage from 'assets/images/intro_bg.jpg';
 
 export const StyledWrapper = styled.div`
   display: inline-flex;
   flex-flow: column;
   border-radius: ${radius.mlg};
   flex: 1;
+  background-color: ${colors.white};
   box-shadow: 0 7px 30px -10px rgba(150, 170, 180, 0.7);
 `;
 
 export const StyledImgWrap = styled.div<{ url?: string }>`
   display: flex;
   align-items: flex-end;
-  padding: ${spacer.lg} ${spacer.xl};
   background: ${({ url }) => `url(${url})`};
   background-repeat: no-repeat;
   background-size: cover;
-  height: 183px;
+  height: 270px;
   border-top-right-radius: ${radius.mlg};
   border-top-left-radius: ${radius.mlg};
 `;
@@ -77,7 +76,12 @@ export const StyledBottomCount = styled.span`
   margin-left: ${spacer.md};
 `;
 
-export const StyledImgContent = styled.div``;
+export const StyledImgContent = styled.div`
+  background: ${colors.black};
+  background: ${`linear-gradient(to bottom, transparent 0%, ${colors.black} 100%)`};
+  padding: 0 ${spacer.xl};
+  width: 100%;
+`;
 export const StyledImgDateWrap = styled.div`
   display: flex;
   align-items: center;

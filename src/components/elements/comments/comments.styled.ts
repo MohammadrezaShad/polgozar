@@ -1,4 +1,4 @@
-import { colors, fontType, spacer, radius } from 'settings/style';
+import { colors, spacer, radius, fontSize, fontWeight } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div``;
@@ -20,7 +20,8 @@ export const StyledButtonText = styled.span``;
 export const StyledTitle = styled.span`
   display: inline-flex;
   color: ${colors.font};
-  ${fontType.boldTitle};
+  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.normal};
 `;
 
 export const StyledWrap = styled.div`

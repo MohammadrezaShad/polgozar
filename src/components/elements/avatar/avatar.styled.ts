@@ -1,4 +1,4 @@
-import { colors, fontType, spacer } from 'settings/style';
+import { colors, fontType, spacer, fontSize } from 'settings/style';
 import styled from 'styled-components';
 
 interface AvatarProps {
@@ -41,6 +41,6 @@ export const StyledWrapper = styled.div`
 
 export const StyledText = styled.span`
   display: inline-flex;
-  ${fontType.boldTitle};
+  font-size: ${fontSize.md};
   margin-left: ${spacer.xl};
 `;
