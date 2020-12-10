@@ -153,7 +153,6 @@ export const loadMapApi = () => {
 };
 
 const addressAttr = {
-  administrative_area_level_1: ['short_name', 'state'] as const,
   locality: ['long_name', 'city'] as const,
   postal_code: ['long_name', 'zip'] as const,
   country: ['long_name', 'country'] as const,
@@ -161,13 +160,12 @@ const addressAttr = {
 
 type AddressAttr = keyof typeof addressAttr;
 export interface ParseGoogleAddressResult {
-  state?: string;
   city?: string;
   zip?: string;
   country?: string;
   address?: string;
-  lat?: string;
-  lng?: string;
+  lat?: number;
+  lng?: number;
 }
 
 export function parseGoogleAddress(address: google.maps.places.PlaceResult) {

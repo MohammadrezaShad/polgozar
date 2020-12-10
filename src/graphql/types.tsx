@@ -534,7 +534,7 @@ export type GetAllCategoriesQuery = (
 
 export type BasicAddressFragment = (
   { __typename?: 'Address' }
-  & Pick<Address, 'lat' | 'lng' | 'city' | 'address'>
+  & Pick<Address, 'lat' | 'lng' | 'city' | 'address' | 'country'>
 );
 
 export type FullAddressFragment = (
@@ -654,6 +654,23 @@ export type UpdateGroupStatusMutation = (
     & { group?: Maybe<(
       { __typename?: 'Group' }
       & Pick<Group, 'id' | 'status'>
+    )> }
+  )> }
+);
+
+export type CreateGroupMutationVariables = Exact<{
+  input: CreateGroupInput;
+}>;
+
+
+export type CreateGroupMutation = (
+  { __typename?: 'Mutation' }
+  & { createGroup?: Maybe<(
+    { __typename?: 'CreateGroupPayload' }
+    & Pick<CreateGroupPayload, 'errors'>
+    & { group?: Maybe<(
+      { __typename?: 'Group' }
+      & GroupCardInfoFragment
     )> }
   )> }
 );
@@ -795,6 +812,7 @@ export const BasicAddressFragmentDoc = gql`
   lng
   city
   address
+  country
 }
     `;
 export const BasicGroupDetailsFragmentDoc = gql`
@@ -1113,6 +1131,41 @@ export function useUpdateGroupStatusMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateGroupStatusMutationHookResult = ReturnType<typeof useUpdateGroupStatusMutation>;
 export type UpdateGroupStatusMutationResult = Apollo.MutationResult<UpdateGroupStatusMutation>;
 export type UpdateGroupStatusMutationOptions = Apollo.BaseMutationOptions<UpdateGroupStatusMutation, UpdateGroupStatusMutationVariables>;
+export const CreateGroupDocument = gql`
+    mutation CreateGroup($input: CreateGroupInput!) {
+  createGroup(input: $input) {
+    errors
+    group {
+      ...groupCardInfo
+    }
+  }
+}
+    ${GroupCardInfoFragmentDoc}`;
+export type CreateGroupMutationFn = Apollo.MutationFunction<CreateGroupMutation, CreateGroupMutationVariables>;
+
+/**
+ * __useCreateGroupMutation__
+ *
+ * To run a mutation, you first call `useCreateGroupMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateGroupMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createGroupMutation, { data, loading, error }] = useCreateGroupMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useCreateGroupMutation(baseOptions?: Apollo.MutationHookOptions<CreateGroupMutation, CreateGroupMutationVariables>) {
+        return Apollo.useMutation<CreateGroupMutation, CreateGroupMutationVariables>(CreateGroupDocument, baseOptions);
+      }
+export type CreateGroupMutationHookResult = ReturnType<typeof useCreateGroupMutation>;
+export type CreateGroupMutationResult = Apollo.MutationResult<CreateGroupMutation>;
+export type CreateGroupMutationOptions = Apollo.BaseMutationOptions<CreateGroupMutation, CreateGroupMutationVariables>;
 export const LoginModalVisibilityDocument = gql`
     query LoginModalVisibility {
   loginModalVisible @client

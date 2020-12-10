@@ -87,6 +87,7 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noStyle?: boolean; fullRo
         .ant-input-focused {
           border: none;
           box-shadow: none;
+          outline: none;
         }
         ::placeholder {
           color: ${colors[mappedColors.placeholder[color]]};

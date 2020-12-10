@@ -7,6 +7,7 @@ export const basicAddress = gql`
     lng
     city
     address
+    country
   }
 `;
 
