@@ -1,6 +1,6 @@
 import React from 'react';
 import { Form, message } from 'antd';
-import { useCreateGroupMutation } from 'graphql/types';
+import { useCreateEventMutation } from 'graphql/types';
 import { useHistory } from 'react-router-dom';
 import { ResizeImageResult, ParseGoogleAddressResult } from 'helpers';
 import StepBarForm from 'components/stepBarForm';
@@ -9,9 +9,11 @@ import InformationStep from './informationStep';
 import AddCategoriesStep from './addCategoriesStep';
 
 interface FromFields {
-  name: string;
+  title: string;
+  startTime: string;
+  endTime: string;
   description: string;
-  categoryIds: string[];
+  groupId: string;
   coverPhoto: ResizeImageResult;
   address: ParseGoogleAddressResult;
 }
@@ -35,25 +37,25 @@ const steps = [
 
 function CreateGroup() {
   const [form] = Form.useForm();
-  const [createGroup, { loading }] = useCreateGroupMutation();
+  const [createEvent, { loading }] = useCreateEventMutation();
   const history = useHistory();
 
   const onFinish = async (values: FromFields) => {
     const attributes = { ...values, coverPhoto: values.coverPhoto.blob };
     try {
-      const result = await createGroup({
+      const result = await createEvent({
         variables: { input: { attributes } },
       });
-      const groupSlug = result.data?.createGroup?.group?.slug;
-      if (groupSlug) {
-        history.push(`/groups/${groupSlug}`);
+      const eventId = result.data?.createEvent?.event?.id;
+      if (eventId) {
+        history.push(`/events/${eventId}`);
       }
     } catch (err) {
       message.error(err.message);
     }
   };
 
-  return <StepBarForm pageTitle="Make new Group" form={form} onFinish={onFinish} isLoading={loading} steps={steps} />;
+  return <StepBarForm pageTitle="Make new Event" form={form} onFinish={onFinish} isLoading={loading} steps={steps} />;
 }
 
 export default CreateGroup;

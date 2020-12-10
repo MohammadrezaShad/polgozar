@@ -24,3 +24,16 @@ export const getEventById = gql`
   }
   ${basicEventDetails}
 `;
+
+// mutations
+export const createEvent = gql`
+  mutation CreateEvent($input: CreateEventInput!) {
+    createEvent(input: $input) {
+      errors
+      event {
+        ...basicEventDetails
+      }
+    }
+  }
+  ${basicEventDetails}
+`;
