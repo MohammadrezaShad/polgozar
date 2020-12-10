@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
   flex: 1;
+  background-color: ${colors.gray1700};
 `;
 
 export const StyledHead = styled.div`
@@ -55,4 +56,6 @@ export const StyledEvents = styled.div`
   max-width: ${sizes.xxl};
   margin: ${spacer.xl} auto 0 auto;
   padding: 0 ${spacer.xl};
+  border-top: 1px solid ${colors.gray1500};
+  padding-top: ${spacer.xl};
 `;

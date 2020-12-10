@@ -3,9 +3,9 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useGetEventByIdQuery } from 'graphql/types';
 
 import { Comments, SliderList as EventList } from 'components/elements';
-import SingleEventList from 'components/single-event-list';
-import SingleEventHead from 'components/single-event-head';
-import SingleEventContent from 'components/single-event-content';
+import SingleEventList from 'components/singleEventList';
+import SingleEventHead from 'components/singleEventHead';
+import SingleEventContent from 'components/singleEventContent';
 import {
   StyledWrapper,
   StyledHead,
@@ -15,7 +15,7 @@ import {
   StyledAlbum,
   StyledEvents,
 } from './index.styled';
-import SingleEventAlbum from '../../components/single-event-album';
+import SingleEventAlbum from '../../components/singleEventAlbum';
 
 type MatchParams = { id: string };
 type SingleEventProps = RouteComponentProps<MatchParams>;
@@ -59,7 +59,7 @@ export default function SingleEvent(props: SingleEventProps) {
         <Comments />
       </StyledComments>
       <StyledAlbum>
-        <SingleEventAlbum />
+        <SingleEventAlbum photos={eventByIdResult?.event.photos} />
       </StyledAlbum>
       <StyledEvents>
         <EventList photos={eventByIdResult?.event.photos} />
