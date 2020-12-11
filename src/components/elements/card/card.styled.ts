@@ -36,6 +36,7 @@ export const StyledBottom = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   padding: ${spacer.lg};
   margin-top: 0;
   background-color: ${colors.white};
@@ -80,6 +81,7 @@ export const StyledImgContent = styled.div`
   background: ${colors.black};
   background: ${`linear-gradient(to bottom, transparent 0%, ${colors.black} 100%)`};
   padding: 0 ${spacer.xl};
+  padding-bottom: ${spacer.md};
   width: 100%;
 `;
 export const StyledImgDateWrap = styled.div`

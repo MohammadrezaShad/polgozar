@@ -10,7 +10,7 @@ import {
   StyledItem,
   StyledHeadWrap,
   StyledLinkText,
-} from './singleEventList.styled';
+} from './userList.styled';
 
 interface SingleEventListProp {
   size?: number;

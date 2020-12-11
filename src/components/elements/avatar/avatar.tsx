@@ -8,6 +8,7 @@ interface AvatarProps {
   avatarUrl?: string;
   size?: 'md' | 'lg';
   text?: string;
+  transparentWrap?: boolean;
 }
 
 const Avatar = ({ avatarUrl, size = 'lg', text }: AvatarProps) => {

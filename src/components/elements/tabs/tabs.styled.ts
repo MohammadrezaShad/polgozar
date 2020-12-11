@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors, fontWeight, fontSize, spacer } from 'settings/style';
 
 interface TabProp {
-  path: string;
+  href: string;
   selectedTab: string;
   height?: string;
   width?: string;
@@ -22,11 +22,11 @@ export const StyledTab = styled.div<TabProp>`
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.normal};
   padding: ${spacer.sm};
-  color: ${({ selectedTab, path }) => (selectedTab === path ? colors.white : colors.primary400)};
+  color: ${({ selectedTab, href }) => (selectedTab === href ? colors.white : colors.primary400)};
   cursor: pointer;
   text-align: center;
-  background-color: ${({ selectedTab, path }) => (selectedTab === path ? colors.primary300 : colors.primary200)};
+  background-color: ${({ selectedTab, href }) => (selectedTab === href ? colors.primary300 : colors.primary200)};
   &:not(:last-child) {
-    border-bottom: ${({ selectedTab, path }) => (selectedTab === path ? 'none' : `1px solid ${colors.primary400}`)};
+    border-bottom: ${({ selectedTab, href }) => (selectedTab === href ? 'none' : `1px solid ${colors.primary400}`)};
   }
 `;

@@ -14,16 +14,18 @@ interface TabsProps {
   width?: string;
   matchParent?: boolean;
   items?: TabsItem[];
+  refTag?: boolean;
 }
 
-const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent }: TabsProps) => {
+const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent, refTag }: TabsProps) => {
   return (
     <>
       {items.map(({ text, path }) => {
         return (
           <StyledTab
+            as={refTag ? 'a' : 'div'}
             key={path}
-            path={path}
+            href={path}
             height={height}
             matchParent={matchParent}
             width={width}

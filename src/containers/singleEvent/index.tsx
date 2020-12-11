@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import { useGetEventByIdQuery } from 'graphql/types';
 
 import { Comments, SliderList as EventList } from 'components/elements';
-import SingleEventList from 'components/singleEventList';
+import SingleEventList from 'components/userList';
 import SingleEventHead from 'components/singleEventHead';
 import SingleEventContent from 'components/singleEventContent';
 import {
@@ -62,7 +62,7 @@ export default function SingleEvent(props: SingleEventProps) {
         <SingleEventAlbum photos={eventByIdResult?.event.photos} />
       </StyledAlbum>
       <StyledEvents>
-        <EventList photos={eventByIdResult?.event.photos} />
+        <EventList photos={eventByIdResult?.event.photos} title="Relate Events" />
       </StyledEvents>
     </StyledWrapper>
   );

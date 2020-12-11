@@ -6,19 +6,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { StyledWrapper, StyledItem, StyledTitle } from './sliderList.styled';
 
 interface Photos {
-  id: string;
-  url: string;
+  id?: string;
+  url?: string;
+  coverPhotoUrl?: string;
 }
 interface EventListProp {
   photos: Photos[];
+  title?: string;
 }
 const sliderBreakpoints = {
   [breakpoints.xs]: {
-    slidesPerView: 2,
+    slidesPerView: 1,
     spaceBetween: 20,
   },
   [breakpoints.lg]: {
-    slidesPerView: 3,
+    slidesPerView: 1,
     spaceBetween: 30,
   },
   [breakpoints.lg]: {
@@ -31,16 +33,16 @@ const sliderBreakpoints = {
   },
 };
 
-const EventList = ({ photos = [] }: EventListProp) => {
+const EventList = ({ photos = [], title }: EventListProp) => {
   return (
     <StyledWrapper>
-      <StyledTitle>Relate Events</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
       <Swiper spaceBetween={20} breakpoints={sliderBreakpoints}>
-        {photos.map(({ id, url }) => {
+        {photos.map(({ id, url, coverPhotoUrl }) => {
           return (
             <SwiperSlide key={id}>
               <StyledItem>
-                <Card url={url} />
+                <Card url={url || coverPhotoUrl} />
               </StyledItem>
             </SwiperSlide>
           );
