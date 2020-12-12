@@ -1,11 +1,15 @@
 import { radius, colors, spacer, fontSize, fontType, fontWeight } from 'settings/style';
 import styled from 'styled-components';
+import { sizes } from '../../settings/style';
 
 export const StyledContent = styled.div`
   display: flex;
   flex-flow: column;
   flex: 0 0 54.7%;
   min-width: 0;
+  @media only screen and (max-width: ${sizes.xl}) {
+    flex: 0 0 100%;
+  }
 `;
 
 export const StyledFormHead = styled.div`
@@ -39,6 +43,9 @@ export const StyledFormWrap = styled.div`
   border-right: 11px solid ${colors.font};
   min-width: 0;
   margin-left: ${spacer.sm};
+  @media only screen and (max-width: ${sizes.xl}) {
+    flex: 0 0 90%;
+  }
 `;
 
 export const StyledText = styled.p`
@@ -48,6 +55,9 @@ export const StyledText = styled.p`
   font-weight: ${fontWeight.light};
   margin-bottom: ${spacer.sm};
   min-height: 440px !important;
+  @media only screen and (max-width: ${sizes.xl}) {
+    min-height: auto !important;
+  }
 `;
 
 export const StyledTitle = styled.span`
