@@ -4,14 +4,13 @@ import { useCreateEventMutation } from 'graphql/types';
 import { useHistory } from 'react-router-dom';
 import { ResizeImageResult, ParseGoogleAddressResult } from 'helpers';
 import StepBarForm from 'components/stepBarForm';
+import moment from 'moment';
 import CoverPhotoStep from './coverPhotoStep';
 import InformationStep from './informationStep';
-import AddCategoriesStep from './addCategoriesStep';
 
 interface FromFields {
   title: string;
-  startTime: string;
-  endTime: string;
+  dates: moment.Moment[];
   description: string;
   groupId: string;
   coverPhoto: ResizeImageResult;
@@ -21,15 +20,9 @@ interface FromFields {
 const steps = [
   {
     title: 'Informations',
-    pageTitle: 'Add Group Details',
-    validation: ['name', 'description', 'address'],
+    pageTitle: 'Add Event Details',
+    validation: ['title', 'description', 'address', 'groupId', 'dates'],
     content: InformationStep,
-  },
-  {
-    title: 'Categories',
-    pageTitle: 'Select related categories',
-    validation: ['categoryIds'],
-    content: AddCategoriesStep,
   },
 
   { title: 'Cover Photo', pageTitle: 'Add Cover Photo', validation: ['coverPhoto'], content: CoverPhotoStep },
@@ -41,7 +34,14 @@ function CreateGroup() {
   const history = useHistory();
 
   const onFinish = async (values: FromFields) => {
-    const attributes = { ...values, coverPhoto: values.coverPhoto.blob };
+    const { dates, ...restValues } = values;
+    const attributes = {
+      ...restValues,
+      coverPhoto: values.coverPhoto.blob,
+      startTime: dates[0].format(),
+      endTime: dates[1].format(),
+    };
+    console.log(attributes, 'attributes');
     try {
       const result = await createEvent({
         variables: { input: { attributes } },

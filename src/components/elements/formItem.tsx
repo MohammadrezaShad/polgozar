@@ -102,7 +102,11 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noStyle?: boolean; fullRo
         }
       }
       .ant-input-affix-wrapper,
-      .ant-input-affix-wrapper-focused {
+      .ant-input-affix-wrapper-focused,
+      .ant-select-selector,
+      .ant-select-focused:not(.ant-select-disabled).ant-select:not(.ant-select-customize-input) .ant-select-selector,
+      .ant-picker-range,
+      .ant-select:not(.ant-select-disabled):not(.ant-select-customize-input) .ant-select-selector {
         background-color: transparent;
         border: none;
         box-shadow: none;
@@ -111,6 +115,21 @@ const FormItemWrapper = styled.div<{ color: ThemeType; noStyle?: boolean; fullRo
           border: none;
           box-shadow: none;
         }
+      }
+      .ant-select-selector {
+        height: auto;
+      }
+      .ant-select-single:not(.ant-select-customize-input) .ant-select-selector::after,
+      .ant-select-single .ant-select-selector .ant-select-selection-item,
+      .ant-select-single .ant-select-selector .ant-select-selection-placeholder {
+        line-height: 1rem;
+      }
+      .ant-picker-range .ant-picker-active-bar {
+        margin-left: 0;
+      }
+      .ant-picker-suffix {
+        position: absolute;
+        right: 0;
       }
     }
     .ant-form-item-label > label {
