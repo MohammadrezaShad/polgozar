@@ -12,19 +12,20 @@ import {
 } from './singleGroupBottom.styled';
 
 interface SingleGroupBottomProp {
-  Bottom?: string;
+  slug?: string;
+  name?: string;
 }
-const SingleGroupBottom = ({ Bottom }: SingleGroupBottomProp) => {
+const SingleGroupBottom = ({ slug, name }: SingleGroupBottomProp) => {
   return (
     <StyledWrapper>
       <StyledContentTopWrap>
         <StyledContentTopContainer>
-          <StyledContentTopText>Bachehaye khoshhal Iran</StyledContentTopText>
+          <StyledContentTopText>{slug}</StyledContentTopText>
           <StyledStar>
             <StarRating rate={3} />
           </StyledStar>
         </StyledContentTopContainer>
-        <StyledContentTopSubText>Ravanshad</StyledContentTopSubText>
+        <StyledContentTopSubText>{name}</StyledContentTopSubText>
       </StyledContentTopWrap>
       <Button size="lg" onClick={() => {}} color="danger">
         Join to this group

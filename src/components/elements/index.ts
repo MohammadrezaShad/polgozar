@@ -19,3 +19,4 @@ export { default as SocialMedia } from './socialMedia/socialMedia';
 export { default as Comments } from './comments/comments';
 export { default as SliderList } from './sliderList/sliderList';
 export { default as SearchBox } from './searchBox';
+export { default as ReadMore } from './readMore/readMore';

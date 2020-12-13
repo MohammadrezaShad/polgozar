@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import StarRating from 'components/elements/star-rating/star-rating';
-import { Button } from 'components/elements';
+import { Button, ReadMore } from 'components/elements';
 import Avatar from 'antd/lib/avatar/avatar';
 import { UserOutlined } from '@ant-design/icons';
+
 import {
   StyledWrapper,
   StyledHead,
@@ -40,8 +41,28 @@ interface SingleGroupHeadProp {
   organizers?: any[];
   members?: any[];
   city?: string;
+  name?: string;
+  slug?: string;
 }
-const SingleGroupHead = ({ coverPhotoUrl, description, organizers = [], members = [], city }: SingleGroupHeadProp) => {
+const SingleGroupHead = ({
+  coverPhotoUrl,
+  description,
+  organizers = [],
+  members = [],
+  city,
+  slug,
+  name,
+}: SingleGroupHeadProp) => {
+  const [textExpand, setTextExpand] = useState(false);
+  const [elementMaxHeight] = useState(100);
+  const [elementHeight, setElementHeight] = useState(0);
+  const node = useRef(null);
+  const textToggle = () => {
+    setTextExpand(!textExpand);
+  };
+  useEffect(() => {
+    setElementHeight(node.current.scrollHeight);
+  }, [description]);
   return (
     <StyledWrapper>
       <StyledContainer>
@@ -50,12 +71,12 @@ const SingleGroupHead = ({ coverPhotoUrl, description, organizers = [], members 
           <StyledHeadTop>
             <StyledHeadTopWrap>
               <StyledHeadTopContainer>
-                <StyledHeadTopText>Bachehaye khoshhal Iran</StyledHeadTopText>
+                <StyledHeadTopText>{slug}</StyledHeadTopText>
                 <StyledStar>
                   <StarRating rate={3} />
                 </StyledStar>
               </StyledHeadTopContainer>
-              <StyledHeadTopSubText>Ravanshad</StyledHeadTopSubText>
+              <StyledHeadTopSubText>{name}</StyledHeadTopSubText>
             </StyledHeadTopWrap>
           </StyledHeadTop>
           <StyledHeadContent>
@@ -100,11 +121,21 @@ const SingleGroupHead = ({ coverPhotoUrl, description, organizers = [], members 
       <StyledDescription>
         <StyledDescriptionWrap>
           <StyledTitle>Description </StyledTitle>
-          <StyledDescriptionText>{description}</StyledDescriptionText>
+          <StyledDescriptionText
+            ref={node}
+            textExpand={textExpand}
+            elementHeight={elementHeight}
+            elementMaxHeight={elementMaxHeight}
+          >
+            {description}
+          </StyledDescriptionText>
           <StyledDescriptionButton>
-            <Button color="accent" shape="link" onClick={() => {}}>
-              Read More
-            </Button>
+            <ReadMore
+              textExpand={textExpand}
+              elementMaxHeight={elementMaxHeight}
+              elementHeight={elementHeight}
+              onClick={textToggle}
+            />
           </StyledDescriptionButton>
         </StyledDescriptionWrap>
         <StyledDescriptionButtonWrap>

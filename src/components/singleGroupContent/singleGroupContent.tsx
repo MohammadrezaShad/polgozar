@@ -1,5 +1,5 @@
 import { SliderList } from 'components/elements';
-import SingleEventList from 'components/userList';
+import UserList from 'components/userList';
 import React from 'react';
 
 import { StyledWrapper, StyledContent } from './singleGroupContent.styled';
@@ -22,7 +22,7 @@ const SingleGroupContent = ({ events = [] }: SingleGroupContentProp) => {
         <SliderList photos={events} title="Past events" />
       </StyledContent>
       <StyledContent id="members">
-        <SingleEventList size={3} bgColor="primary" title="Members" />
+        <UserList size={3} bgColor="primary" title="Members" />
       </StyledContent>
     </StyledWrapper>
   );

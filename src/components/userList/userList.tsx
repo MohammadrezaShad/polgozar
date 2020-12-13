@@ -12,12 +12,12 @@ import {
   StyledLinkText,
 } from './userList.styled';
 
-interface SingleEventListProp {
+interface UserListProp {
   size?: number;
   bgColor?: 'primary' | 'accent100';
   title: string;
 }
-const SingleEventList = ({ size = 2, bgColor, title }: SingleEventListProp) => {
+const UserList = ({ size = 2, bgColor, title }: UserListProp) => {
   return (
     <>
       <StyledHead>
@@ -68,4 +68,4 @@ const SingleEventList = ({ size = 2, bgColor, title }: SingleEventListProp) => {
   );
 };
 
-export default SingleEventList;
+export default UserList;

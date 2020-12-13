@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import page404 from 'containers/Page/404';
 import Profile from './profile';
 import CreateGroup from './createGroup';
+import CreateEvent from './createEvent';
 
 const routes = [
   {
@@ -27,6 +28,11 @@ const routes = [
   {
     path: 'groups/create',
     component: CreateGroup,
+    exact: true,
+  },
+  {
+    path: 'events/create',
+    component: CreateEvent,
     exact: true,
   },
 ];

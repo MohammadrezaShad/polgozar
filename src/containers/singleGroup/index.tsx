@@ -17,13 +17,14 @@ export default function SingleGroup(props: SingleGroupProps) {
     },
   } = props;
 
-  const { loading, data: groupByIdSlugResult } = useGroupByIdSlugQuery({
+  const { data: groupByIdSlugResult } = useGroupByIdSlugQuery({
     variables: { slug },
   });
   const [selectedTab, setSelectedTab] = useState('#aboutGroup');
   const clickHandler = (path: string) => {
     setSelectedTab(path);
   };
+
   return (
     <StyledWrapper>
       <StyledLayout>
@@ -51,9 +52,11 @@ export default function SingleGroup(props: SingleGroupProps) {
               members={groupByIdSlugResult?.group?.members}
               organizers={groupByIdSlugResult?.group?.organizers}
               city={groupByIdSlugResult?.group?.address?.city}
+              name={groupByIdSlugResult?.group?.name}
+              slug={groupByIdSlugResult?.group?.slug}
             />
             <SingleGroupContent events={groupByIdSlugResult?.group?.events} />
-            <SingleGroupBottom />
+            <SingleGroupBottom name={groupByIdSlugResult?.group?.name} slug={groupByIdSlugResult?.group?.slug} />
           </StyledContent>
         </StyledWrap>
       </StyledLayout>

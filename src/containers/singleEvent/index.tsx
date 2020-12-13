@@ -33,8 +33,8 @@ export default function SingleEvent(props: SingleEventProps) {
 
   return (
     <StyledWrapper>
-      {/* Single Event {loading && 'loading...'}
-      <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre> */}
+      {/* Single Event {loading && 'loading...'} */}
+      <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre>
       <StyledHead>
         <SingleEventHead
           address={eventByIdResult?.event.address}
@@ -59,10 +59,10 @@ export default function SingleEvent(props: SingleEventProps) {
         <Comments />
       </StyledComments>
       <StyledAlbum>
-        <SingleEventAlbum photos={eventByIdResult?.event.photos} />
+        <SingleEventAlbum photos={eventByIdResult?.event?.photos || []} />
       </StyledAlbum>
       <StyledEvents>
-        <EventList photos={eventByIdResult?.event.photos} title="Relate Events" />
+        <EventList photos={eventByIdResult?.event.photos || []} title="Relate Events" />
       </StyledEvents>
     </StyledWrapper>
   );
