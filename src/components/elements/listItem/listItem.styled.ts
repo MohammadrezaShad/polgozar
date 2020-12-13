@@ -1,4 +1,4 @@
-import { spacer, fontSize, fontWeight, colors, radius } from 'settings/style';
+import { spacer, fontSize, fontWeight, colors, radius, media } from 'settings/style';
 import styled from 'styled-components';
 
 interface ListItemProp {
@@ -22,4 +22,7 @@ export const StlyedText = styled.span`
   margin-left: 100px;
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.light};
+  ${media.lg`
+    margin-left: 60px;
+    `}
 `;

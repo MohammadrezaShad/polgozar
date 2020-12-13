@@ -4,6 +4,7 @@ import { fonts, colors, spacer, fontSize, rgba } from 'settings/style';
 const GlobalStyle = createGlobalStyle`
   html {
     box-sizing: border-box;
+    scroll-behavior:smooth;
   }
 
   *,

@@ -117,6 +117,7 @@ const radius = {
   lg: '1rem',
   xl: '2rem',
   alt: '1.1875rem',
+  alt2: '1.5rem',
 };
 
 const heights = {
