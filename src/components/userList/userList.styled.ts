@@ -1,10 +1,11 @@
-import { spacer, colors, fontType, fontSize, fontWeight } from 'settings/style';
+import { spacer, colors, fontType, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledHead = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  margin-bottom: ${spacer.xl};
 `;
 
 export const StyledTitle = styled.span`
@@ -13,6 +14,7 @@ export const StyledTitle = styled.span`
   font-size: ${fontSize.lg};
   font-weight: ${fontWeight.normal};
   margin-bottom: ${spacer.md};
+  white-space: nowrap;
 `;
 
 export const StyledContent = styled.div``;
@@ -35,6 +37,12 @@ export const StyledWrap = styled.div`
 export const StyledItem = styled.div<{ size?: number }>`
   flex: ${({ size }) => (size === 3 ? '0 0 33.33%' : '0 0 50%')};
   padding: ${spacer.md};
+  ${media.xl`
+    flex: 0 0 50%;
+     `}
+  ${media.lg`
+    flex: 0 0 100%;
+     `}
 `;
 
 export const StyledHeadWrap = styled.div<{ bgColor?: string }>`

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyledTab } from './tabs.styled';
+import { StyledTab, StyledWrapper } from './tabs.styled';
 
 interface TabsItem {
   path: string;
@@ -14,16 +14,18 @@ interface TabsProps {
   width?: string;
   matchParent?: boolean;
   items?: TabsItem[];
+  refTag?: boolean;
 }
 
-const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent }: TabsProps) => {
+const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent, refTag }: TabsProps) => {
   return (
-    <>
+    <StyledWrapper>
       {items.map(({ text, path }) => {
         return (
           <StyledTab
+            as={refTag ? 'a' : 'div'}
             key={path}
-            path={path}
+            href={path}
             height={height}
             matchParent={matchParent}
             width={width}
@@ -34,7 +36,7 @@ const Tabs = ({ onClick, items = [], selectedTab, height, width, matchParent }: 
           </StyledTab>
         );
       })}
-    </>
+    </StyledWrapper>
   );
 };
 
