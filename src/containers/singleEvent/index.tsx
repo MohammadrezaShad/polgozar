@@ -1,7 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { useGetEventByIdQuery } from 'graphql/types';
-
 import { Comments, SliderList as EventList } from 'components/elements';
 import SingleEventList from 'components/userList';
 import SingleEventHead from 'components/singleEventHead';
@@ -33,8 +32,6 @@ export default function SingleEvent(props: SingleEventProps) {
 
   return (
     <StyledWrapper>
-      {/* Single Event {loading && 'loading...'} */}
-      <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre>
       <StyledHead>
         <SingleEventHead
           address={eventByIdResult?.event.address}
