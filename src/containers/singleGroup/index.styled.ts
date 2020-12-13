@@ -17,6 +17,10 @@ export const StyledTabs = styled.div`
 export const StyledContent = styled.div`
   overflow: hidden;
   padding-left: ${spacer.xl};
+  ${media.lg`
+      padding-right: 1.5rem;
+
+  `}
 `;
 
 export const StyledWrap = styled.div`

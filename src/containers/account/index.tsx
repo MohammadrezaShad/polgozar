@@ -26,7 +26,7 @@ export default function Account({ match }: RouteComponentProps) {
             ]}
             matchParent
             width="105px"
-            height="200px"
+            height="100px"
             selectedTab={selectedTab}
             onClick={clickHandler}
           />

@@ -10,6 +10,9 @@ interface DescriptionProp {
 export const StyledWrapper = styled.div`
   padding: ${spacer.xl} 0;
   border-bottom: 1px solid ${colors.gray1500};
+  ${media.xl`
+    padding-top:38px;
+    `}
 `;
 
 export const StyledDescription = styled.div`

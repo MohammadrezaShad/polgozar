@@ -16,6 +16,7 @@ export const StyledWrapper = styled.div`
   flex-flow: column;
   ${media.lg`
     flex-flow:row;
+    flex-wrap:wrap;
   `}
 `;
 
@@ -23,7 +24,7 @@ export const StyledTab = styled.div<TabProp>`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 150px;
+  min-height: ${({ height }) => height || '150px'};
   width: ${({ width }) => width};
   flex: ${({ matchParent }) => (matchParent ? 1 : 'none')};
   overflow-wrap: anywhere;
@@ -38,10 +39,14 @@ export const StyledTab = styled.div<TabProp>`
     border-bottom: ${({ selectedTab, href }) => (selectedTab === href ? 'none' : `1px solid ${colors.primary400}`)};
   }
   ${media.lg`
+    font-size: 16px;
     flex:1;
     border-bottom:none !important;
     height:auto;
     min-height:auto;
 
+  `}
+  ${media.lg`
+    font-size: 12px;
   `}
 `;

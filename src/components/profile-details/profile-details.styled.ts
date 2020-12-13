@@ -1,6 +1,5 @@
-import { colors, spacer, fontSize, fontWeight, radius, fontType } from 'settings/style';
+import { colors, spacer, fontSize, fontWeight, radius, fontType, media } from 'settings/style';
 import styled from 'styled-components';
-import { sizes } from '../../settings/style';
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -17,21 +16,24 @@ export const StyledWrapper = styled.div`
   border-top-right-radius: ${radius.lg};
   border-right: 11px solid ${colors.accent};
   padding: ${spacer.xl} 78px ${spacer.xl} 215px;
-  @media only screen and (max-width: ${sizes.lg}) {
-    padding: ${spacer.xl} ${spacer.xs} ${spacer.xl} 165px;
-  }
-  @media only screen and (max-width: ${sizes.md}) {
-    padding: 6.5rem 0.25rem 1.5rem 100px;
-  }
+
+  ${media.lg`
+      padding: 1.5rem 4px 1.5rem 165px;
+  `}
+
+  ${media.md`
+        padding: 6.5rem 0.25rem 1.5rem 100px;
+    `}
 `;
 
 export const StyledImgWrap = styled.div`
   position: absolute;
   top: -20%;
   left: 0;
-  @media only screen and (max-width: ${sizes.xl}) {
+
+  ${media.xl`
     left: -40px;
-  }
+    `}
 `;
 
 export const StyledBlock = styled.div`
@@ -39,9 +41,10 @@ export const StyledBlock = styled.div`
   align-self: stretch;
   flex-flow: column;
   justify-content: space-between;
-  @media only screen and (max-width: ${sizes.xl}) {
+
+  ${media.xl`
     flex: 0 0 100%;
-  }
+    `}
 `;
 
 export const StyledInfo = styled.div`
@@ -77,9 +80,11 @@ export const StyledName = styled.span`
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.normal};
   color: ${colors.font};
-  @media only screen and (max-width: ${sizes.lg}) {
+
+  ${media.md`
     flex: 0 0 100%;
-  }
+    padding-left: 36px;
+    `}
 `;
 
 export const StyledTextWrap = styled.div`
@@ -93,13 +98,15 @@ export const StyledTextWrap = styled.div`
     :first-child {
       margin-bottom: ${spacer.sm};
     }
-    @media only screen and (max-width: ${sizes.lg}) {
-      flex: 0 0 100%;
-    }
+    ${media.md`
+    flex: 0 0 100%;
+    padding-left: 36px;
+    `}
   }
-  @media only screen and (max-width: ${sizes.xl}) {
-    margin: ${spacer.xl} 0;
-  }
+
+  ${media.lg`
+    margin: 1.5rem 0;
+    `}
 `;
 
 export const StyledText = styled.span`
@@ -109,9 +116,10 @@ export const StyledText = styled.span`
   white-space: nowrap;
   ${fontType.boldTitle};
   color: ${colors.font};
-  @media only screen and (max-width: ${sizes.lg}) {
+
+  ${media.lg`
     padding-right: 0;
-  }
+    `}
 `;
 export const StyledNameBold = styled.span`
   display: inline-flex;
@@ -119,9 +127,12 @@ export const StyledNameBold = styled.span`
   white-space: nowrap;
   font-weight: ${fontWeight.bolder};
   color: ${colors.font};
-  @media only screen and (max-width: ${sizes.lg}) {
-    ${fontType.md};
-  }
+
+  ${media.lg`
+    font-size:18px;
+    font-weight:600;
+    padding-left: 36px;
+    `}
 `;
 
 export const StyledSubText = styled.span`
@@ -130,7 +141,9 @@ export const StyledSubText = styled.span`
   font-size: ${fontSize.lg};
   font-weight: ${fontWeight.light};
   color: ${colors.gray1000};
-  @media only screen and (max-width: ${sizes.lg}) {
+
+  ${media.md`
     flex: 0 0 100%;
-  }
+    padding-left: 36px;
+    `}
 `;

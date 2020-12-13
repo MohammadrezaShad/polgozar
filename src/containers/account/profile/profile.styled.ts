@@ -1,6 +1,5 @@
-import { spacer, colors, fontSize, fontWeight, radius } from 'settings/style';
+import { spacer, colors, fontSize, fontWeight, radius, media } from 'settings/style';
 import styled from 'styled-components';
-import { sizes } from '../../../settings/style';
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -10,6 +9,9 @@ export const StyledWrapper = styled.div`
   margin-left: ${spacer.lg};
   flex: 1;
   align-self: stretch;
+  ${media.lg`
+    padding:0 1rem;
+  `}
 `;
 
 export const StyledProfile = styled.div`
@@ -31,9 +33,9 @@ export const StyledHead = styled.div`
   .icon-pen {
     font-size: ${fontSize.xl};
   }
-  @media only screen and (max-width: ${sizes.md}) {
-    font-size: ${fontSize.lg};
-  }
+  ${media.md`
+    font-size: 20px;
+  `}
 `;
 
 export const StyledContent = styled.div`
@@ -68,9 +70,10 @@ export const StyledButtonText = styled.span`
   font-size: ${fontSize.md};
   margin-left: ${spacer.md};
   font-weight: ${fontWeight.normal};
-  @media only screen and (max-width: ${sizes.md}) {
-    font-size: ${fontSize.sm};
-  }
+
+  ${media.md`
+    font-size: 14px;
+  `}
 `;
 
 export const StyledButtonWrap = styled.div`
