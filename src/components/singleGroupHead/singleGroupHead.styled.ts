@@ -1,6 +1,11 @@
-import { radius, spacer, colors, fontSize, fontWeight, fontType } from 'settings/style';
+import { radius, spacer, colors, fontSize, fontWeight, fontType, media } from 'settings/style';
 import styled from 'styled-components';
-import { sizes } from '../../settings/style';
+
+interface DescriptionProp {
+  elementMaxHeight?: number;
+  textExpand?: boolean;
+  elementHeight?: number;
+}
 
 export const StyledWrapper = styled.div`
   padding: ${spacer.xl} 0;
@@ -11,18 +16,18 @@ export const StyledDescription = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  @media only screen and (max-width: ${sizes.md}) {
+  ${media.md`
     flex-wrap: wrap;
-  }
+    `}
 `;
 
 export const StyledHead = styled.div`
   display: flex;
   flex-flow: column;
   flex: 0 0 40%;
-  @media only screen and (max-width: ${sizes.md}) {
+  ${media.md`
     flex: 1;
-  }
+    `}
 `;
 
 export const StyledHeadTop = styled.div``;
@@ -39,21 +44,25 @@ export const StyledTitle = styled.span`
   ${fontType.boldTitle};
 `;
 
-export const StyledDescriptionText = styled.p`
+export const StyledDescriptionText = styled.p<DescriptionProp>`
   font-weight: ${fontWeight.light};
   font-size: ${fontSize.lg};
+  max-height: ${({ elementMaxHeight, textExpand, elementHeight }) =>
+    textExpand ? `${elementHeight}px` : `${elementMaxHeight}px`};
+  overflow: hidden;
+  transition: all 0.5s;
 `;
 
 export const StyledDescriptionButton = styled.span`
   display: inline-flex;
-  margin-left: -${spacer.lg};
+  padding: ${spacer.xs} 0;
 `;
 
 export const StyledDescriptionWrap = styled.div`
   flex: 0 0 50%;
-  @media only screen and (max-width: ${sizes.md}) {
+  ${media.md`
     flex: 0 0 100%;
-  }
+    `}
 `;
 
 export const StyledDescriptionButtonWrap = styled.div`
@@ -70,26 +79,27 @@ export const StyledImg = styled.div<{ coverPhotoUrl?: string }>`
   border-radius: ${radius.mlg};
   overflow: hidden;
   margin-right: ${spacer.lg};
-  @media only screen and (max-width: ${sizes.md}) {
+  ${media.md`
     width: 100%;
-  }
+    `}
 `;
 
 export const StyledContainer = styled.div`
   display: flex;
   margin-bottom: ${spacer.xl};
-  @media only screen and (max-width: ${sizes.md}) {
+
+  ${media.md`
     flex-wrap: wrap;
-  }
+    `}
 `;
 export const StyledHeadTopContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  @media only screen and (max-width: ${sizes.md}) {
-    margin-top: ${spacer.md};
-    width: 100%;
-  }
+  ${media.md`
+   margin-top: ${spacer.md};
+    width: 100%;   
+     `}
 `;
 export const StyledHeadTopWrap = styled.div``;
 export const StyledHeadTopText = styled.span`
@@ -97,9 +107,9 @@ export const StyledHeadTopText = styled.span`
   font-size: ${fontSize.xxl};
   font-weight: ${fontWeight.bold};
   margin-right: ${spacer.lg};
-  @media only screen and (max-width: ${sizes.md}) {
-    margin-right: ${spacer.xs};
-  }
+  ${media.md`
+     margin-right: ${spacer.xs};
+     `}
 `;
 
 export const StyledHeadTopSubText = styled.span`

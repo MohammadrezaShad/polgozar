@@ -1,6 +1,5 @@
-import { spacer, fontSize, fontWeight, colors, radius } from 'settings/style';
+import { spacer, fontSize, fontWeight, colors, radius, media } from 'settings/style';
 import styled from 'styled-components';
-import { sizes } from '../../../settings/style';
 
 interface ListItemProp {
   bgColor?: 'primary' | 'accent100';
@@ -23,7 +22,7 @@ export const StlyedText = styled.span`
   margin-left: 100px;
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.light};
-  @media only screen and (max-width: ${sizes.lg}) {
+  ${media.lg`
     margin-left: 60px;
-  }
+    `}
 `;

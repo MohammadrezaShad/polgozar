@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { colors, fontWeight, fontSize, spacer } from 'settings/style';
+import { colors, fontWeight, fontSize, spacer, media } from 'settings/style';
 
 interface TabProp {
   href: string;
@@ -9,13 +9,21 @@ interface TabProp {
   matchParent?: boolean;
 }
 
-export const StyledWrapper = styled.div``;
+export const StyledWrapper = styled.div`
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-flow: column;
+  ${media.lg`
+    flex-flow:row;
+  `}
+`;
 
 export const StyledTab = styled.div<TabProp>`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: ${({ height }) => height};
+  min-height: 150px;
   width: ${({ width }) => width};
   flex: ${({ matchParent }) => (matchParent ? 1 : 'none')};
   overflow-wrap: anywhere;
@@ -29,4 +37,11 @@ export const StyledTab = styled.div<TabProp>`
   &:not(:last-child) {
     border-bottom: ${({ selectedTab, href }) => (selectedTab === href ? 'none' : `1px solid ${colors.primary400}`)};
   }
+  ${media.lg`
+    flex:1;
+    border-bottom:none !important;
+    height:auto;
+    min-height:auto;
+
+  `}
 `;

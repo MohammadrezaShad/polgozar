@@ -1,6 +1,5 @@
-import { fontSize, fontWeight, spacer, colors, radius } from 'settings/style';
+import { fontSize, fontWeight, spacer, colors, radius, media } from 'settings/style';
 import styled from 'styled-components';
-import { sizes } from '../../settings/style';
 
 export const StyledWrapper = styled.div`
   padding-left: ${spacer.xl};
@@ -28,9 +27,9 @@ export const StyledContentTopContainer = styled.div`
 export const StyledContentTopWrap = styled.div`
   flex: 0 0 40%;
 
-  @media only screen and (max-width: ${sizes.md}) {
+  ${media.md`
     flex: 0 0 100%;
-  }
+    `}
 `;
 export const StyledContentTopText = styled.span`
   display: inline-flex;
