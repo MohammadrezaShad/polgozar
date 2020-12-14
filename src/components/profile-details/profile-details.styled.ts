@@ -18,11 +18,11 @@ export const StyledWrapper = styled.div`
   padding: ${spacer.xl} 78px ${spacer.xl} 215px;
 
   ${media.lg`
-      padding: 1.5rem 4px 1.5rem 165px;
+      padding: ${spacer.xl} ${spacer.xs} ${spacer.xl} 165px;
   `}
 
   ${media.md`
-        padding: 6.5rem 0.25rem 1.5rem 100px;
+        padding: 6.5rem ${spacer.xs} ${spacer.xl} 100px;
     `}
 `;
 
@@ -83,7 +83,9 @@ export const StyledName = styled.span`
 
   ${media.md`
     flex: 0 0 100%;
-    padding-left: 36px;
+    padding-left: ${spacer.xl};
+        margin-left:${spacer.lg}
+
     `}
 `;
 
@@ -100,12 +102,14 @@ export const StyledTextWrap = styled.div`
     }
     ${media.md`
     flex: 0 0 100%;
-    padding-left: 36px;
+    padding-left: ${spacer.xl};
+        margin-left:${spacer.lg}
+
     `}
   }
 
   ${media.lg`
-    margin: 1.5rem 0;
+    margin: ${spacer.xl} 0;
     `}
 `;
 
@@ -114,7 +118,8 @@ export const StyledText = styled.span`
   padding-right: ${spacer.xl};
   padding-left: ${spacer.md};
   white-space: nowrap;
-  ${fontType.boldTitle};
+  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.normal};
   color: ${colors.font};
 
   ${media.lg`
@@ -129,9 +134,11 @@ export const StyledNameBold = styled.span`
   color: ${colors.font};
 
   ${media.lg`
-    font-size:18px;
-    font-weight:600;
-    padding-left: 36px;
+    font-size:${fontSize.md};
+    font-weight:${fontWeight.bold};
+    padding-left: ${spacer.xl};
+        margin-left:${spacer.lg}
+
     `}
 `;
 
@@ -144,6 +151,7 @@ export const StyledSubText = styled.span`
 
   ${media.md`
     flex: 0 0 100%;
-    padding-left: 36px;
+    padding-left: ${spacer.xl};
+    margin-left:${spacer.lg}
     `}
 `;

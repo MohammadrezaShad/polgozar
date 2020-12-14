@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
   flex: 1;
   align-self: stretch;
   ${media.lg`
-    padding:0 1rem;
+    padding:0 ${spacer.lg};
   `}
 `;
 
@@ -34,7 +34,7 @@ export const StyledHead = styled.div`
     font-size: ${fontSize.xl};
   }
   ${media.md`
-    font-size: 20px;
+    font-size: ${fontSize.md};
   `}
 `;
 
@@ -72,7 +72,7 @@ export const StyledButtonText = styled.span`
   font-weight: ${fontWeight.normal};
 
   ${media.md`
-    font-size: 14px;
+    font-size: ${fontSize.sm};
   `}
 `;
 

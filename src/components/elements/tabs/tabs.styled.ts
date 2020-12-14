@@ -39,7 +39,7 @@ export const StyledTab = styled.div<TabProp>`
     border-bottom: ${({ selectedTab, href }) => (selectedTab === href ? 'none' : `1px solid ${colors.primary400}`)};
   }
   ${media.lg`
-    font-size: 16px;
+    font-size: ${fontSize.base};
     flex:1;
     border-bottom:none !important;
     height:auto;
@@ -47,6 +47,6 @@ export const StyledTab = styled.div<TabProp>`
 
   `}
   ${media.lg`
-    font-size: 12px;
+    font-size: ${fontSize.sm};
   `}
 `;
