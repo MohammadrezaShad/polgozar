@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Button, AlbumSlider } from 'components/elements';
+import { Button, AlbumSlider, ImageInput } from 'components/elements';
+import { ResizeImageResult } from 'helpers';
 import {
   StyledWrapper,
   StyledItem,
@@ -20,16 +21,14 @@ interface Photos {
 }
 interface SingleEventAlbumProp {
   photos: Photos[];
+  onImport: (data: ResizeImageResult) => void;
 }
-const SingleEventAlbum = ({ photos = [] }: SingleEventAlbumProp) => {
-  const [setSelectedFile] = useState(null);
+const SingleEventAlbum = ({ photos = [], onImport }: SingleEventAlbumProp) => {
   const [showSlider, setShowSlider] = useState(false);
   const toggleSlider = () => {
     setShowSlider(!showSlider);
   };
-  const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedFile(event.target.files[0]);
-  };
+
   return (
     <StyledWrapper>
       <StyledHead>
@@ -47,8 +46,9 @@ const SingleEventAlbum = ({ photos = [] }: SingleEventAlbumProp) => {
       <StyledAlbumWrap>
         <StyledUploadContainer>
           <StyledUploadWrap>
-            <input type="file" onChange={onFileChange} />
-            <i className="icon-expanded-add-circle" />
+            <ImageInput width={900} height={900} cropping={false} onChange={onImport}>
+              <i className="icon-expanded-add-circle" />
+            </ImageInput>
           </StyledUploadWrap>
         </StyledUploadContainer>
         {photos.map(({ id, url }) => {
