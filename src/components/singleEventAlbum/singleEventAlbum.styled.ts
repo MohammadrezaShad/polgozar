@@ -1,32 +1,31 @@
-import { spacer, colors, radius, fontType, fontSize, fontWeight } from 'settings/style';
+import { spacer, colors, radius, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex: 1;
-  margin: -${spacer.md};
 `;
 
 export const StyledItem = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 25%;
-  border-radius: ${radius.mlg};
+  height: 40vh;
+  flex-grow: 1;
+  border-radius: ${radius.md};
   overflow: hidden;
-  padding: ${spacer.md};
+  margin: ${spacer.sm};
   cursor: pointer;
-`;
-
-export const StyledImgWrap = styled.div`
-  border-radius: ${radius.alt};
-  overflow: hidden;
+  ${media.md`
+    height: 30vh;
+  `}
+  ${media.xs`
+    height: 10vh;
+  `}
 `;
 
 export const StyledImg = styled.img`
+  max-height: 100%;
+  min-width: 100%;
   object-fit: cover;
-  cursor: pointer;
+  vertical-align: bottom;
 `;
 
 export const StyledUploadContainer = styled.div`
@@ -34,7 +33,7 @@ export const StyledUploadContainer = styled.div`
   align-items: center;
   justify-content: center;
   flex: 0 0 25%;
-  padding: ${spacer.md};
+  padding: ${spacer.sm};
 `;
 
 export const StyledUploadWrap = styled.label`
@@ -46,7 +45,7 @@ export const StyledUploadWrap = styled.label`
   height: 100%;
   border: 1px dashed ${colors.font};
   position: relative;
-  border-radius: ${radius.mlg};
+  border-radius: ${radius.md};
   overflow: hidden;
   cursor: pointer;
   i {
@@ -100,8 +99,8 @@ export const StyledAlbumWrap = styled.div`
   flex-wrap: wrap;
   flex: 1;
   background-color: ${colors.white};
-  padding: 0 ${spacer.xl};
+  padding: ${spacer.md};
   padding-bottom: ${spacer.md};
   margin-top: ${spacer.sm};
-  border-radius: ${radius.alt};
+  border-radius: ${radius.lg};
 `;

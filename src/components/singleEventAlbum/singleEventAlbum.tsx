@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import Bg from 'assets/images/bg.jpg';
 import { Button, AlbumSlider } from 'components/elements';
 import {
   StyledWrapper,
   StyledItem,
-  StyledImgWrap,
   StyledImg,
   StyledUploadWrap,
   StyledUploadContainer,
@@ -24,7 +22,7 @@ interface SingleEventAlbumProp {
   photos: Photos[];
 }
 const SingleEventAlbum = ({ photos = [] }: SingleEventAlbumProp) => {
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [setSelectedFile] = useState(null);
   const [showSlider, setShowSlider] = useState(false);
   const toggleSlider = () => {
     setShowSlider(!showSlider);
@@ -56,9 +54,7 @@ const SingleEventAlbum = ({ photos = [] }: SingleEventAlbumProp) => {
         {photos.map(({ id, url }) => {
           return (
             <StyledItem key={id} onClick={toggleSlider}>
-              <StyledImgWrap>
-                <StyledImg src={url} />
-              </StyledImgWrap>
+              <StyledImg src={url} />
             </StyledItem>
           );
         })}
