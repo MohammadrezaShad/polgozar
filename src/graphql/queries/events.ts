@@ -37,3 +37,15 @@ export const createEvent = gql`
   }
   ${basicEventDetails}
 `;
+
+export const updateEvent = gql`
+  mutation UpdateEvent($input: UpdateEventInput!) {
+    updateEvent(input: $input) {
+      errors
+      event {
+        ...basicEventDetails
+      }
+    }
+  }
+  ${basicEventDetails}
+`;

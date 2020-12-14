@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-import { useGetEventByIdQuery } from 'graphql/types';
-
+import { useGetEventByIdQuery, useUpdateEventMutation } from 'graphql/types';
 import { Comments, SliderList as EventList } from 'components/elements';
 import SingleEventList from 'components/userList';
 import SingleEventHead from 'components/singleEventHead';
 import SingleEventContent from 'components/singleEventContent';
+import { ResizeImageResult } from 'helpers';
+import { message } from 'antd';
 import {
   StyledWrapper,
   StyledHead,
@@ -30,11 +31,26 @@ export default function SingleEvent(props: SingleEventProps) {
   const { data: eventByIdResult } = useGetEventByIdQuery({
     variables: { id },
   });
+  const [updateEvent, { loading }] = useUpdateEventMutation();
 
+  const uploadPhoto = useCallback(
+    (data: ResizeImageResult) => {
+      const canUploadPhoto = false;
+      if (canUploadPhoto) {
+        try {
+          updateEvent({
+            variables: { input: { eventId: id, attributes: { photos: [data.blob] } } },
+          });
+        } catch (err) {
+          message.error(err.message);
+        }
+      }
+    },
+    [id, updateEvent],
+  );
+  console.log(loading);
   return (
     <StyledWrapper>
-      {/* Single Event {loading && 'loading...'} */}
-      <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre>
       <StyledHead>
         <SingleEventHead
           address={eventByIdResult?.event.address}
@@ -59,7 +75,7 @@ export default function SingleEvent(props: SingleEventProps) {
         <Comments />
       </StyledComments>
       <StyledAlbum>
-        <SingleEventAlbum photos={eventByIdResult?.event?.photos || []} />
+        <SingleEventAlbum photos={eventByIdResult?.event?.photos || []} onImport={uploadPhoto} />
       </StyledAlbum>
       <StyledEvents>
         <EventList photos={eventByIdResult?.event.photos || []} title="Relate Events" />

@@ -43,70 +43,64 @@ const Button = styled.button<ButtonComponentProps>`
     border-width: 1px;
     border-style: solid;
 
-    font-weight: ${fontWeight.bold}
+    font-weight: ${fontWeight.bold};
     border-radius: ${rounded ? radius.xl : 0};
-    padding:${size === 'lg' ? `${spacer.md} ${spacer.lg}` : `${spacer.sm} ${spacer.lg}`} ;
-    &:disabled{
+    padding: ${size === 'lg' ? `${spacer.md} ${spacer.lg}` : `${spacer.sm} ${spacer.lg}`};
+    &:disabled {
       cursor: not-allowed;
     }
-    .loading{
-      padding-right: ${spacer.md}
+    .loading {
+      padding-right: ${spacer.md};
     }
-    ${
-      shape === 'dark' &&
-      css`
-        border-color: ${colors[color]};
-        background: ${colors[color]};
+    ${shape === 'dark' &&
+    css`
+      border-color: ${colors[color]};
+      background: ${colors[color]};
+      color: ${color === 'danger' ? colors.white : colors.black};
+      .loading {
         color: ${color === 'danger' ? colors.white : colors.black};
+      }
+      &:hover {
+        background-color: ${colors.white};
+        border-color: ${colors.white};
+        color: ${color === 'danger' ? colors.black : colors[color]};
         .loading {
-          color: ${color === 'danger' ? colors.white : colors.black};
-        }
-        &:hover {
-          background-color: ${colors.white};
-          border-color: ${colors.white};
           color: ${color === 'danger' ? colors.black : colors[color]};
-          .loading {
-            color: ${color === 'danger' ? colors.black : colors[color]};
-          }
         }
-      `
-    }
+      }
+    `}
 
-    ${
-      ['outline', 'opacity'].includes(shape) &&
-      css`
-        border-color: ${shape === 'outline' ? colors[color] : 'transparent'};
-        background: ${shape === 'outline' ? 'transparent' : rgba(colors[color], 0.3)};
+    ${['outline', 'opacity'].includes(shape) &&
+    css`
+      border-color: ${shape === 'outline' ? colors[color] : 'transparent'};
+      background: ${shape === 'outline' ? 'transparent' : rgba(colors[color], 0.3)};
+      color: ${colors[color]};
+      .loading {
         color: ${colors[color]};
+      }
+      &:hover {
+        background-color: ${colors[color]};
+        color: ${colors.white};
         .loading {
-          color: ${colors[color]};
-        }
-        &:hover {
-          background-color: ${colors[color]};
           color: ${colors.white};
-          .loading {
-            color: ${colors.white};
-          }
         }
-      `
-    }
+      }
+    `}
 
-    ${
-      shape === 'link' &&
-      css`
-        border: none;
+    ${shape === 'link' &&
+    css`
+      border: none;
+      color: ${colors[color]};
+      .loading {
         color: ${colors[color]};
+      }
+      &:hover {
+        color: ${rgba(colors.accent, color === 'accent' ? 0.7 : 1)};
         .loading {
-          color: ${colors[color]};
-        }
-        &:hover {
           color: ${rgba(colors.accent, color === 'accent' ? 0.7 : 1)};
-          .loading {
-            color: ${rgba(colors.accent, color === 'accent' ? 0.7 : 1)};
-          }
         }
-      `
-    }
+      }
+    `}
   `}
 `;
 

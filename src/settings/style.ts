@@ -1,4 +1,4 @@
-import { css, ThemedCssFunction, DefaultTheme } from 'styled-components';
+import { css } from 'styled-components';
 import { breakpoints, colors, spacer } from './styleConfig';
 
 export {
@@ -31,14 +31,14 @@ export const maxWinSize = (size: SizeType) => {
 export const media = Object.keys(sizes).reduce(
   (acc, size) => ({
     ...acc,
-    [size]: (prop: any) => css`
+    [size]: (literals: TemplateStringsArray, ...placeholders: any[]) => css`
       @media only screen and (max-width: ${sizes[size as SizeType]}) {
-        ${css(prop)}
+        ${css(literals, ...placeholders)}
       }
     `,
   }),
   {},
-) as { [size in SizeType]: ThemedCssFunction<DefaultTheme> };
+) as { [size in SizeType]: (l: TemplateStringsArray, ...p: any[]) => string };
 
 export const snippet = {
   underline: (color = colors.font) => css`

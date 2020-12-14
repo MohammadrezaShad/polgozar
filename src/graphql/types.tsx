@@ -606,6 +606,23 @@ export type CreateEventMutation = (
   )> }
 );
 
+export type UpdateEventMutationVariables = Exact<{
+  input: UpdateEventInput;
+}>;
+
+
+export type UpdateEventMutation = (
+  { __typename?: 'Mutation' }
+  & { updateEvent?: Maybe<(
+    { __typename?: 'UpdateEventPayload' }
+    & Pick<UpdateEventPayload, 'errors'>
+    & { event?: Maybe<(
+      { __typename?: 'Event' }
+      & BasicEventDetailsFragment
+    )> }
+  )> }
+);
+
 export type GroupCardInfoFragment = (
   { __typename?: 'Group' }
   & Pick<Group, 'coverPhotoUrl' | 'status'>
@@ -1068,6 +1085,41 @@ export function useCreateEventMutation(baseOptions?: Apollo.MutationHookOptions<
 export type CreateEventMutationHookResult = ReturnType<typeof useCreateEventMutation>;
 export type CreateEventMutationResult = Apollo.MutationResult<CreateEventMutation>;
 export type CreateEventMutationOptions = Apollo.BaseMutationOptions<CreateEventMutation, CreateEventMutationVariables>;
+export const UpdateEventDocument = gql`
+    mutation UpdateEvent($input: UpdateEventInput!) {
+  updateEvent(input: $input) {
+    errors
+    event {
+      ...basicEventDetails
+    }
+  }
+}
+    ${BasicEventDetailsFragmentDoc}`;
+export type UpdateEventMutationFn = Apollo.MutationFunction<UpdateEventMutation, UpdateEventMutationVariables>;
+
+/**
+ * __useUpdateEventMutation__
+ *
+ * To run a mutation, you first call `useUpdateEventMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateEventMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateEventMutation, { data, loading, error }] = useUpdateEventMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useUpdateEventMutation(baseOptions?: Apollo.MutationHookOptions<UpdateEventMutation, UpdateEventMutationVariables>) {
+        return Apollo.useMutation<UpdateEventMutation, UpdateEventMutationVariables>(UpdateEventDocument, baseOptions);
+      }
+export type UpdateEventMutationHookResult = ReturnType<typeof useUpdateEventMutation>;
+export type UpdateEventMutationResult = Apollo.MutationResult<UpdateEventMutation>;
+export type UpdateEventMutationOptions = Apollo.BaseMutationOptions<UpdateEventMutation, UpdateEventMutationVariables>;
 export const GetAllGroupsDocument = gql`
     query GetAllGroups {
   groups {
