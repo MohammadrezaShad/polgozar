@@ -77,6 +77,11 @@ export const StyledHeadCard = styled.div`
   ${media.lg`
   width: 100%;
   `}
+      ${media.md`
+       margin-left: 0;
+       flex:0 0 100%;
+       margin-top:${spacer.md};
+  `}
 `;
 
 export const StyledHeadWrapper = styled.div`
@@ -84,6 +89,10 @@ export const StyledHeadWrapper = styled.div`
   align-items: center;
   margin-bottom: ${spacer.xl};
   align-self: normal;
+  ${media.md`
+     flex-wrap:wrap;
+     justify-content:center
+  `}
 `;
 
 export const StyledHeadWrap = styled.div`
