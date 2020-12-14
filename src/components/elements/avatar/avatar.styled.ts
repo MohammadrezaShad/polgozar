@@ -1,4 +1,4 @@
-import { colors, fontType, spacer, fontSize } from 'settings/style';
+import { colors, fontType, spacer, fontSize, media } from 'settings/style';
 import styled from 'styled-components';
 
 interface AvatarProps {
@@ -37,10 +37,18 @@ export const StyledImg = styled.img<AvatarProps>`
 export const StyledWrapper = styled.div`
   display: flex;
   align-items: flex-end;
+  ${media.xs`
+      flex-flow:column;
+      align-items: flex-start;
+    `}
 `;
 
 export const StyledText = styled.span`
   display: inline-flex;
   font-size: ${fontSize.md};
   margin-left: ${spacer.xl};
+  ${media.xs`
+        font-size: ${fontSize.sm};
+
+    `}
 `;

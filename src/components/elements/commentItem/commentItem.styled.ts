@@ -1,4 +1,4 @@
-import { colors, spacer, radius, fontSize, fontWeight } from 'settings/style';
+import { colors, spacer, radius, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledButton = styled.div<{ bg?: 'primary' | 'gray' }>`
@@ -30,6 +30,10 @@ export const StyledItem = styled.div<{ bg?: 'primary' | 'gray' }>`
       border-color: ${colors.primary200};
       box-shadow: none;
     }
+    ${media.xs`
+    padding: 60px ${spacer.sm} ${spacer.xs} ${spacer.md};
+
+    `}
   }
 `;
 
