@@ -17,13 +17,17 @@ export const StyledTabs = styled.div`
 export const StyledContent = styled.div`
   overflow: hidden;
   padding-left: ${spacer.xl};
+  ${media.lg`
+      padding-right: ${spacer.xl};
+
+  `}
 `;
 
 export const StyledWrap = styled.div`
   display: flex;
   ${media.lg`
     flex-flow:column;
-    margin:0 -1.5rem;
+    margin:0 -${spacer.xl};
 
   `}
 `;

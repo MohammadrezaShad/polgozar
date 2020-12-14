@@ -1,4 +1,4 @@
-import { radius, colors, spacer, fontSize, fontType, fontWeight } from 'settings/style';
+import { radius, colors, spacer, fontSize, fontType, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledContent = styled.div`
@@ -6,6 +6,11 @@ export const StyledContent = styled.div`
   flex-flow: column;
   flex: 0 0 54.7%;
   min-width: 0;
+
+  ${media.xl`
+      flex: 0 0 100%;
+
+  `}
 `;
 
 export const StyledFormHead = styled.div`
@@ -39,6 +44,11 @@ export const StyledFormWrap = styled.div`
   border-right: 11px solid ${colors.font};
   min-width: 0;
   margin-left: ${spacer.sm};
+
+  ${media.xl`
+      flex: 0 0 90%;
+
+  `}
 `;
 
 export const StyledText = styled.p`
@@ -48,6 +58,10 @@ export const StyledText = styled.p`
   font-weight: ${fontWeight.light};
   margin-bottom: ${spacer.sm};
   min-height: 440px !important;
+
+  ${media.xl`
+    min-height: auto !important;
+  `}
 `;
 
 export const StyledTitle = styled.span`

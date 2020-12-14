@@ -1,10 +1,11 @@
-import { colors, spacer, fontSize, fontWeight, radius, fontType } from 'settings/style';
+import { colors, spacer, fontSize, fontWeight, radius, fontType, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   position: relative;
   width: 100%;
   background: ${colors.primary700};
@@ -15,12 +16,25 @@ export const StyledWrapper = styled.div`
   border-top-right-radius: ${radius.lg};
   border-right: 11px solid ${colors.accent};
   padding: ${spacer.xl} 78px ${spacer.xl} 215px;
+
+  ${media.lg`
+      justify-content:center;
+      padding-top:160px;
+      padding-right:${spacer.xl}
+      padding-left:${spacer.xl};
+      padding-bottom:${spacer.xl};
+  `}
 `;
 
 export const StyledImgWrap = styled.div`
   position: absolute;
   top: -20%;
   left: 0;
+
+  ${media.xl`
+    left: 50%;
+    transform:translateX(-50%);
+    `}
 `;
 
 export const StyledBlock = styled.div`
@@ -28,11 +42,16 @@ export const StyledBlock = styled.div`
   align-self: stretch;
   flex-flow: column;
   justify-content: space-between;
+
+  ${media.xl`
+    flex: 0 0 100%;
+    `}
 `;
 
 export const StyledInfo = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   input {
     width: auto;
     color: ${colors.font};
@@ -45,6 +64,9 @@ export const StyledInfo = styled.div`
   i {
     font-size: ${fontSize.xl};
   }
+  ${media.lg`
+      justify-content:center;
+  `}
 `;
 
 export const StyledStar = styled.div`
@@ -55,6 +77,10 @@ export const StyledStar = styled.div`
   background-color: ${colors.font};
   padding: ${spacer.sm} ${spacer.md};
   border-radius: ${radius.alt};
+  ${media.lg`
+    margin:0 auto;
+
+    `}
 `;
 
 export const StyledName = styled.span`
@@ -62,6 +88,11 @@ export const StyledName = styled.span`
   font-size: ${fontSize.md};
   font-weight: ${fontWeight.normal};
   color: ${colors.font};
+
+  ${media.lg`
+    justify-content:center;
+
+    `}
 `;
 
 export const StyledTextWrap = styled.div`
@@ -75,26 +106,58 @@ export const StyledTextWrap = styled.div`
     :first-child {
       margin-bottom: ${spacer.sm};
     }
+    ${media.md`
+    flex: 0 0 100%;
+    padding-left: ${spacer.xl};
+        margin-left:${spacer.lg}
+
+    `}
   }
+
+  ${media.lg`
+    margin: ${spacer.xl} 0;
+    `}
 `;
 
 export const StyledText = styled.span`
   display: inline-flex;
-  margin-right: ${spacer.xl};
-  margin-left: ${spacer.md};
-  ${fontType.boldTitle};
+  padding-right: ${spacer.xl};
+  padding-left: ${spacer.md};
+  white-space: nowrap;
+  font-size: ${fontSize.lg};
+  font-weight: ${fontWeight.normal};
   color: ${colors.font};
+
+  ${media.lg`
+    padding-right: 0;
+    `}
 `;
 export const StyledNameBold = styled.span`
   display: inline-flex;
   font-size: ${fontSize.xl};
+  white-space: nowrap;
   font-weight: ${fontWeight.bolder};
   color: ${colors.font};
+
+  ${media.lg`
+    font-size:${fontSize.md};
+    font-weight:${fontWeight.bold};
+       justify-content:center;
+
+
+    `}
 `;
 
 export const StyledSubText = styled.span`
   display: inline-flex;
+  white-space: nowrap;
   font-size: ${fontSize.lg};
   font-weight: ${fontWeight.light};
   color: ${colors.gray1000};
+
+  ${media.md`
+    flex: 0 0 100%;
+        justify-content:center;
+
+    `}
 `;

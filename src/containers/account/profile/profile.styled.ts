@@ -1,4 +1,4 @@
-import { spacer, colors, fontSize, fontWeight, radius } from 'settings/style';
+import { spacer, colors, fontSize, fontWeight, radius, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
@@ -9,6 +9,9 @@ export const StyledWrapper = styled.div`
   margin-left: ${spacer.lg};
   flex: 1;
   align-self: stretch;
+  ${media.lg`
+    padding-right:${spacer.lg};
+  `}
 `;
 
 export const StyledProfile = styled.div`
@@ -20,21 +23,29 @@ export const StyledProfile = styled.div`
   border-bottom-left-radius: 107px;
   border-bottom-right-radius: ${radius.lg};
   border-top-right-radius: ${radius.lg};
+  ${media.md`
+       margin-top:3rem;
+  `}
 `;
 
 export const StyledHead = styled.div`
   display: flex;
   flex-flow: column;
   align-items: flex-end;
+  flex-wrap: wrap;
   .icon-pen {
     font-size: ${fontSize.xl};
   }
+  ${media.md`
+    font-size: ${fontSize.md};
+  `}
 `;
 
 export const StyledContent = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  flex-wrap: wrap;
   flex: 1;
   margin-top: ${spacer.xl};
   margin-bottom: ${spacer.xl};
@@ -42,6 +53,11 @@ export const StyledContent = styled.div`
   padding-bottom: ${spacer.xl};
   margin-left: ${spacer.xl};
   padding-left: ${spacer.xl};
+  ${media.lg`
+     margin-left: 0;
+     padding-left: 0;
+     justify-content:center;
+  `}
 `;
 
 export const StyledBottom = styled.div`
@@ -62,6 +78,10 @@ export const StyledButtonText = styled.span`
   font-size: ${fontSize.md};
   margin-left: ${spacer.md};
   font-weight: ${fontWeight.normal};
+
+  ${media.md`
+    font-size: ${fontSize.sm};
+  `}
 `;
 
 export const StyledButtonWrap = styled.div`

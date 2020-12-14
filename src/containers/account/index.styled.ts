@@ -1,4 +1,4 @@
-import { sizes, spacer } from 'settings/style';
+import { sizes, spacer, media, colors } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
@@ -8,8 +8,15 @@ export const StyledWrapper = styled.div`
 export const StyledTabsWrap = styled.div`
   display: flex;
   flex-flow: column;
-  padding-right: ${spacer.xl};
+  margin-right: ${spacer.xl};
+  background-color: ${colors.primary200};
   align-self: stretch;
+  ${media.lg`
+    position:sticky;
+    top:0;
+    margin-right: 0;
+    z-index:100;
+  `}
 `;
 
 export const StyledLayout = styled.div`
@@ -20,4 +27,9 @@ export const StyledLayout = styled.div`
   max-width: ${sizes.xxl};
   padding-right: ${spacer.xl};
   margin: 0 auto;
+  ${media.lg`
+    flex-flow:column;
+        padding-right: 0;
+
+  `}
 `;

@@ -38,7 +38,7 @@ export default function SingleGroup(props: SingleGroupProps) {
                 { text: 'Members', path: '#members' },
               ]}
               width="105px"
-              height="200px"
+              height="150px"
               selectedTab={selectedTab}
               onClick={clickHandler}
               refTag

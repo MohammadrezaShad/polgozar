@@ -64,7 +64,7 @@ const SingleGroupHead = ({
     setElementHeight(node.current.scrollHeight);
   }, [description]);
   return (
-    <StyledWrapper>
+    <StyledWrapper id="aboutGroup">
       <StyledContainer>
         <StyledImg coverPhotoUrl={coverPhotoUrl} />
         <StyledHead>
