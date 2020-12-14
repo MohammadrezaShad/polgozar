@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
   flex: 1;
   align-self: stretch;
   ${media.lg`
-    padding:0 ${spacer.lg};
+    padding-right:${spacer.lg};
   `}
 `;
 
@@ -23,6 +23,9 @@ export const StyledProfile = styled.div`
   border-bottom-left-radius: 107px;
   border-bottom-right-radius: ${radius.lg};
   border-top-right-radius: ${radius.lg};
+  ${media.md`
+       margin-top:3rem;
+  `}
 `;
 
 export const StyledHead = styled.div`
@@ -50,6 +53,11 @@ export const StyledContent = styled.div`
   padding-bottom: ${spacer.xl};
   margin-left: ${spacer.xl};
   padding-left: ${spacer.xl};
+  ${media.lg`
+     margin-left: 0;
+     padding-left: 0;
+     justify-content:center;
+  `}
 `;
 
 export const StyledBottom = styled.div`

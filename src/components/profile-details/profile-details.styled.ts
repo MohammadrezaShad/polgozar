@@ -18,12 +18,12 @@ export const StyledWrapper = styled.div`
   padding: ${spacer.xl} 78px ${spacer.xl} 215px;
 
   ${media.lg`
-      padding: ${spacer.xl} ${spacer.xs} ${spacer.xl} 165px;
+      justify-content:center;
+      padding-top:160px;
+      padding-right:${spacer.xl}
+      padding-left:${spacer.xl};
+      padding-bottom:${spacer.xl};
   `}
-
-  ${media.md`
-        padding: 6.5rem ${spacer.xs} ${spacer.xl} 100px;
-    `}
 `;
 
 export const StyledImgWrap = styled.div`
@@ -32,7 +32,8 @@ export const StyledImgWrap = styled.div`
   left: 0;
 
   ${media.xl`
-    left: -40px;
+    left: 50%;
+    transform:translateX(-50%);
     `}
 `;
 
@@ -63,6 +64,9 @@ export const StyledInfo = styled.div`
   i {
     font-size: ${fontSize.xl};
   }
+  ${media.lg`
+      justify-content:center;
+  `}
 `;
 
 export const StyledStar = styled.div`
@@ -73,6 +77,10 @@ export const StyledStar = styled.div`
   background-color: ${colors.font};
   padding: ${spacer.sm} ${spacer.md};
   border-radius: ${radius.alt};
+  ${media.lg`
+    margin:0 auto;
+
+    `}
 `;
 
 export const StyledName = styled.span`
@@ -81,10 +89,8 @@ export const StyledName = styled.span`
   font-weight: ${fontWeight.normal};
   color: ${colors.font};
 
-  ${media.md`
-    flex: 0 0 100%;
-    padding-left: ${spacer.xl};
-        margin-left:${spacer.lg}
+  ${media.lg`
+    justify-content:center;
 
     `}
 `;
@@ -136,8 +142,8 @@ export const StyledNameBold = styled.span`
   ${media.lg`
     font-size:${fontSize.md};
     font-weight:${fontWeight.bold};
-    padding-left: ${spacer.xl};
-        margin-left:${spacer.lg}
+       justify-content:center;
+
 
     `}
 `;
@@ -151,7 +157,7 @@ export const StyledSubText = styled.span`
 
   ${media.md`
     flex: 0 0 100%;
-    padding-left: ${spacer.xl};
-    margin-left:${spacer.lg}
+        justify-content:center;
+
     `}
 `;
