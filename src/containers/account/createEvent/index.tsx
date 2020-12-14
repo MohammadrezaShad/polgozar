@@ -38,10 +38,10 @@ function CreateGroup() {
     const attributes = {
       ...restValues,
       coverPhoto: values.coverPhoto.blob,
-      startTime: dates[0].format(),
-      endTime: dates[1].format(),
+      startTime: dates[0],
+      endTime: dates[1],
     };
-    console.log(attributes, 'attributes');
+
     try {
       const result = await createEvent({
         variables: { input: { attributes } },

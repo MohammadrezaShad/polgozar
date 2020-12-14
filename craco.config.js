@@ -3,6 +3,9 @@ const CracoLessPlugin = require('craco-less');
 const { colors, fonts, fontSize } = require('./src/settings/styleConfig');
 
 module.exports = {
+  babel: {
+    plugins: ['babel-plugin-styled-components'],
+  },
   plugins: [
     {
       plugin: CracoLessPlugin,

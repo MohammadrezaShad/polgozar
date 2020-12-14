@@ -35,7 +35,7 @@ export const StyledDetail = styled.div`
   flex: 0 0 38.9%;
   ${media.lg`
         flex: 0 0 100%;
-        margin-top:20px;
+        margin-top:${spacer.xl};
   `}
 `;
 

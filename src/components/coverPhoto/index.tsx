@@ -1,10 +1,8 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled, { css } from 'styled-components';
 import { colors, spacer, rgba, radius, fontWeight } from 'settings/style';
-import { useDropzone } from 'react-dropzone';
-import { resizeImg, ResizeImageResult } from 'helpers';
-import { message } from 'antd';
-import { Button } from 'components/elements';
+import { ResizeImageResult } from 'helpers';
+import { Button, ImageInput } from 'components/elements';
 import AddCircle from 'assets/images/add-circle.svg';
 
 interface CoverPhotoProps {
@@ -12,35 +10,20 @@ interface CoverPhotoProps {
   value?: ResizeImageResult;
 }
 
-function CoverPhoto({ onChange = () => {}, value, ...rest }: CoverPhotoProps) {
-  console.log(rest, value, 'NNNNNNN');
-  const onDrop = useCallback(
-    async (acceptedFiles) => {
-      try {
-        await resizeImg(acceptedFiles[0], 200, 200, true).then((data) => {
-          onChange(data);
-        });
-      } catch (err) {
-        message.error(err.message);
-      }
-    },
-    [onChange],
-  );
-
-  const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'image/*' });
-
+function CoverPhoto({ onChange = () => {}, value }: CoverPhotoProps) {
   return (
-    <CoverPhotoWrapper {...getRootProps()} imageUrl={value?.url}>
-      <input {...getInputProps()} />
-      {!value?.url && (
-        <CoverPhotoEmptyContent>
-          <img src={AddCircle} alt="" />
-          <Button onClick={() => {}} color="primary" shape="outline">
-            Add cover
-          </Button>
-        </CoverPhotoEmptyContent>
-      )}
-    </CoverPhotoWrapper>
+    <ImageInput width={900} height={600} cropping onChange={onChange}>
+      <CoverPhotoWrapper imageUrl={value?.url}>
+        {!value?.url && (
+          <CoverPhotoEmptyContent>
+            <img src={AddCircle} alt="" />
+            <Button onClick={() => {}} color="primary" shape="outline">
+              Add cover
+            </Button>
+          </CoverPhotoEmptyContent>
+        )}
+      </CoverPhotoWrapper>
+    </ImageInput>
   );
 }
 

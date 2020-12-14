@@ -1,45 +1,50 @@
 import { spacer, colors, radius, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
+const boxSize = '35vh';
+const boxSizeMd = '25vh';
+const boxSizexs = '10vh';
+
 export const StyledWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex: 1;
-  margin: -${spacer.md};
+  width: 100%;
 `;
 
 export const StyledItem = styled.div`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 25%;
-  border-radius: ${radius.mlg};
+  height: ${boxSize};
+  flex-grow: 1;
+  border-radius: ${radius.md};
   overflow: hidden;
-  padding: ${spacer.md};
+  margin: ${spacer.sm};
   cursor: pointer;
-  ${media.lg`
-      flex:0 0 50%;
+  ${media.md`
+    height:${boxSizeMd};
+  `}
+  ${media.xs`
+    height: ${boxSizexs}
   `}
 `;
 
-export const StyledImgWrap = styled.div`
-  border-radius: ${radius.alt};
-  overflow: hidden;
-`;
-
 export const StyledImg = styled.img`
+  max-height: 100%;
+  min-width: 100%;
   object-fit: cover;
-  cursor: pointer;
+  vertical-align: bottom;
 `;
 
 export const StyledUploadContainer = styled.div`
+  height: ${boxSize};
+  width: ${boxSize};
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 25%;
-  padding: ${spacer.md};
-  ${media.lg`
-      flex:0 0 50%;
+  margin: 0.5rem;
+  ${media.md`
+    height:${boxSizeMd};
+    width: ${boxSizeMd};
+  `}
+  ${media.xs`
+    height: ${boxSizexs}
+    width: ${boxSizexs};
   `}
 `;
 
@@ -52,7 +57,7 @@ export const StyledUploadWrap = styled.label`
   height: 100%;
   border: 1px dashed ${colors.font};
   position: relative;
-  border-radius: ${radius.mlg};
+  border-radius: ${radius.md};
   overflow: hidden;
   cursor: pointer;
   i {
@@ -61,6 +66,9 @@ export const StyledUploadWrap = styled.label`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    ${media.xs`
+     font-size:${fontSize.xl};
+  `}
   }
   input {
     position: absolute;
@@ -110,11 +118,8 @@ export const StyledAlbumWrap = styled.div`
   flex-wrap: wrap;
   flex: 1;
   background-color: ${colors.white};
-  padding: 0 ${spacer.xl};
+  padding: ${spacer.md};
   padding-bottom: ${spacer.md};
   margin-top: ${spacer.sm};
-  border-radius: ${radius.alt};
-  ${media.lg`
-  
-  `}
+  border-radius: ${radius.lg};
 `;

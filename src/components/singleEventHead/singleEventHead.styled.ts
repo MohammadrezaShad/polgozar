@@ -54,7 +54,7 @@ export const StyledBlock = styled.div`
     ${media.xl`
         flex: 0 0 100%;
         justify-content:center;
-        margin-top:16px;
+        margin-top:${spacer.lg};
         padding-left: 0;
   `}
     ${media.lg`

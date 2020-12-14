@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
   flex: 1;
   align-self: stretch;
   ${media.lg`
-    padding:0 1rem;
+    padding-right:${spacer.lg};
   `}
 `;
 
@@ -23,6 +23,14 @@ export const StyledProfile = styled.div`
   border-bottom-left-radius: 107px;
   border-bottom-right-radius: ${radius.lg};
   border-top-right-radius: ${radius.lg};
+  ${media.md`
+       margin-top:3rem;
+        border-top-left-radius: ${radius.lg};
+  border-bottom-left-radius: ${radius.lg};
+  `}
+  ${media.xs`
+       margin-top:6.5rem;
+  `}
 `;
 
 export const StyledHead = styled.div`
@@ -34,7 +42,7 @@ export const StyledHead = styled.div`
     font-size: ${fontSize.xl};
   }
   ${media.md`
-    font-size: 20px;
+    font-size: ${fontSize.md};
   `}
 `;
 
@@ -50,6 +58,11 @@ export const StyledContent = styled.div`
   padding-bottom: ${spacer.xl};
   margin-left: ${spacer.xl};
   padding-left: ${spacer.xl};
+  ${media.lg`
+     margin-left: 0;
+     padding-left: 0;
+     justify-content:center;
+  `}
 `;
 
 export const StyledBottom = styled.div`
@@ -72,7 +85,7 @@ export const StyledButtonText = styled.span`
   font-weight: ${fontWeight.normal};
 
   ${media.md`
-    font-size: 14px;
+    font-size: ${fontSize.sm};
   `}
 `;
 
