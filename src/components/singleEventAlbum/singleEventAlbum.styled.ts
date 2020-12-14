@@ -1,23 +1,28 @@
 import { spacer, colors, radius, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
+const boxSize = '35vh';
+const boxSizeMd = '25vh';
+const boxSizexs = '10vh';
+
 export const StyledWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 `;
 
 export const StyledItem = styled.div`
-  height: 40vh;
+  height: ${boxSize};
   flex-grow: 1;
   border-radius: ${radius.md};
   overflow: hidden;
   margin: ${spacer.sm};
   cursor: pointer;
   ${media.md`
-    height: 30vh;
+    height:${boxSizeMd};
   `}
   ${media.xs`
-    height: 10vh;
+    height: ${boxSizexs}
   `}
 `;
 
@@ -29,11 +34,18 @@ export const StyledImg = styled.img`
 `;
 
 export const StyledUploadContainer = styled.div`
+  height: ${boxSize};
+  width: ${boxSize};
   display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 25%;
-  padding: ${spacer.sm};
+  margin: 0.5rem;
+  ${media.md`
+    height:${boxSizeMd};
+    width: ${boxSizeMd};
+  `}
+  ${media.xs`
+    height: ${boxSizexs}
+    width: ${boxSizexs};
+  `}
 `;
 
 export const StyledUploadWrap = styled.label`
