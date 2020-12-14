@@ -34,7 +34,7 @@ export default function SingleEvent(props: SingleEventProps) {
   return (
     <StyledWrapper>
       {/* Single Event {loading && 'loading...'} */}
-      <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre>
+      {/* <pre>{JSON.stringify(eventByIdResult, null, 4)}</pre> */}
       <StyledHead>
         <SingleEventHead
           address={eventByIdResult?.event.address}

@@ -1,4 +1,4 @@
-import { sizes, spacer, colors, fontSize, fontWeight, radius } from 'settings/style';
+import { sizes, spacer, colors, fontSize, fontWeight, radius, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
@@ -7,6 +7,11 @@ export const StyledWrapper = styled.div`
   max-width: ${sizes.xxl};
   margin: 0 auto;
   padding: 0 ${spacer.xl};
+  overflow: hidden;
+  ${media.xl`
+   flex-wrap:wrap;
+   justify-content:space-between;
+  `}
 `;
 
 export const StyledTitle = styled.span`
@@ -28,12 +33,33 @@ export const StyledBlock = styled.div`
   &:first-child {
     flex-basis: 27%;
     flex-grow: 0;
-    margin-right: ${spacer.xl};
+    margin-right: ${spacer.lg};
+    ${media.xl`
+        flex:1;
+  `}
+    ${media.lg`
+        flex:0 0 100%;
+  `}
+  }
+  &:nth-child(2) {
+    ${media.lg`
+      flex:0 0 100%;
+      margin-top:16px;
+  `}
   }
   &:last-child {
     flex-basis: 35%;
     margin-left: auto;
-    padding-left: ${spacer.xl};
+    padding-left: ${spacer.lg};
+    ${media.xl`
+        flex: 0 0 100%;
+        justify-content:center;
+        margin-top:16px;
+        padding-left: 0;
+  `}
+    ${media.lg`
+        flex:0 0 100%;
+  `}
   }
 `;
 
@@ -45,6 +71,12 @@ export const StyledHeadCard = styled.div`
   border-radius: ${radius.lg};
   width: 100%;
   margin-left: ${spacer.lg};
+  ${media.xl`
+  width: 50%;
+  `}
+  ${media.lg`
+  width: 100%;
+  `}
 `;
 
 export const StyledHeadWrapper = styled.div`
@@ -137,10 +169,18 @@ export const StyledMapWrapper = styled.div`
   border-radius: ${radius.lg};
   overflow: hidden;
   margin: ${spacer.sm} 0 ${spacer.md} 0;
+  ${media.lg`
+          width: 100%;
+
+  `}
 `;
 
 export const StyledVideoWrap = styled.div`
   width: 310px;
+  ${media.lg`
+          width: 100%;
+
+  `}
 `;
 
 export const StyledHeadContent = styled.div`

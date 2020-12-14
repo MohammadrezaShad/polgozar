@@ -1,4 +1,4 @@
-import { spacer, sizes, colors } from 'settings/style';
+import { spacer, sizes, colors, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
@@ -24,6 +24,11 @@ export const StyledContent = styled.div`
   max-width: ${sizes.xxl};
   margin: ${spacer.xl} auto;
   padding: 0 ${spacer.xl};
+  ${media.lg`
+    flex-wrap:wrap;
+    justify-content:center;
+
+  `}
 `;
 
 export const StyledList = styled.div`

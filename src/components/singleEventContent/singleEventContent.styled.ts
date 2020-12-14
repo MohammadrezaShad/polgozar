@@ -1,4 +1,4 @@
-import { spacer, fontWeight, fontSize, colors, radius, fontType } from 'settings/style';
+import { spacer, fontWeight, fontSize, colors, radius, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledMapWrapper = styled.div`
@@ -13,6 +13,10 @@ export const StyledMapWrapper = styled.div`
 export const StyledContent = styled.div`
   flex: 0 0 54.7%;
   padding-right: ${spacer.lg};
+  ${media.lg`
+        flex: 0 0 100%;
+        padding-right: 0;
+  `}
 `;
 
 export const StyledTitle = styled.span`
@@ -29,6 +33,10 @@ export const StyledText = styled.p`
 
 export const StyledDetail = styled.div`
   flex: 0 0 38.9%;
+  ${media.lg`
+        flex: 0 0 100%;
+        margin-top:20px;
+  `}
 `;
 
 export const StyledImgWrap = styled.div<{ coverPhotoUrl?: string }>`

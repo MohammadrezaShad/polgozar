@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Bg from 'assets/images/bg.jpg';
 import { Button, AlbumSlider } from 'components/elements';
 import {
   StyledWrapper,
@@ -32,6 +31,7 @@ const SingleEventAlbum = ({ photos = [] }: SingleEventAlbumProp) => {
   const onFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedFile(event.target.files[0]);
   };
+  console.log(selectedFile);
   return (
     <StyledWrapper>
       <StyledHead>

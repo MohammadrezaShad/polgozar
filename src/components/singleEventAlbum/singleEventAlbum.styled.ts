@@ -1,4 +1,4 @@
-import { spacer, colors, radius, fontType, fontSize, fontWeight } from 'settings/style';
+import { spacer, colors, radius, fontSize, fontWeight, media } from 'settings/style';
 import styled from 'styled-components';
 
 export const StyledWrapper = styled.div`
@@ -17,6 +17,9 @@ export const StyledItem = styled.div`
   overflow: hidden;
   padding: ${spacer.md};
   cursor: pointer;
+  ${media.lg`
+      flex:0 0 50%;
+  `}
 `;
 
 export const StyledImgWrap = styled.div`
@@ -35,6 +38,9 @@ export const StyledUploadContainer = styled.div`
   justify-content: center;
   flex: 0 0 25%;
   padding: ${spacer.md};
+  ${media.lg`
+      flex:0 0 50%;
+  `}
 `;
 
 export const StyledUploadWrap = styled.label`
@@ -92,11 +98,15 @@ export const StyledButtonWrap = styled.div`
   align-items: center;
   justify-content: center;
   min-width: 350px;
+  ${media.lg`
+    min-width: auto;
+  `}
 `;
 export const StyledButtonText = styled.span``;
 
 export const StyledAlbumWrap = styled.div`
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   flex: 1;
   background-color: ${colors.white};
@@ -104,4 +114,7 @@ export const StyledAlbumWrap = styled.div`
   padding-bottom: ${spacer.md};
   margin-top: ${spacer.sm};
   border-radius: ${radius.alt};
+  ${media.lg`
+  
+  `}
 `;
