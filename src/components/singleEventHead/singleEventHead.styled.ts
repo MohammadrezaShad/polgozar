@@ -12,6 +12,10 @@ export const StyledWrapper = styled.div`
    flex-wrap:wrap;
    justify-content:space-between;
   `}
+  ${media.xs`
+    padding: 0 ${spacer.sm};
+
+  `}
 `;
 
 export const StyledTitle = styled.span`

@@ -1,5 +1,6 @@
 import { radius, colors, fontSize, spacer } from 'settings/style';
 import styled from 'styled-components';
+import { media } from '../../../settings/style';
 
 export const StyledWrapper = styled.div`
   height: 75vh;
@@ -21,7 +22,9 @@ export const StyledThumbSlider = styled.div`
   position: relative;
   display: flex;
   height: 20%;
-
+  ${media.xs`
+     height: 16%;
+   `}
   .swiper-container {
     width: 100%;
     height: 100%;
@@ -69,6 +72,13 @@ export const StyledArrow = styled.div`
     font-size: ${fontSize.xl};
     transform: translateY(5%);
   }
+  ${media.xs`
+    width: 30px;
+    height: 30px;
+    i{
+          font-size: ${fontSize.base};
+    }
+  `}
 `;
 
 export const StyledImg = styled.img`

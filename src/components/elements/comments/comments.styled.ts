@@ -1,5 +1,6 @@
 import { colors, spacer, radius, fontSize, fontWeight } from 'settings/style';
 import styled from 'styled-components';
+import { media } from '../../../settings/style';
 
 export const StyledWrapper = styled.div``;
 
@@ -26,12 +27,19 @@ export const StyledTitle = styled.span`
 
 export const StyledWrap = styled.div`
   margin: ${spacer.xl};
+  ${media.xs`
+    margin: ${spacer.lg};
+    padding:0 ${spacer.xs}
+  `}
 `;
 
 export const StyledContainer = styled.div`
   background-color: ${colors.gray1100};
   padding: ${spacer.xl};
   margin-top: ${spacer.md};
+  ${media.xs`
+    padding:${spacer.xs} 0;
+  `}
   .ant-pagination {
     text-align: right;
   }

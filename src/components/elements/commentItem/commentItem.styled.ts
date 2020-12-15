@@ -32,6 +32,10 @@ export const StyledItem = styled.div<{ bg?: 'primary' | 'gray' }>`
     }
     ${media.xs`
     padding: 60px ${spacer.sm} ${spacer.xs} ${spacer.md};
+    font-size: ${fontSize.xs};
+    `}
+    ${media.md`
+        font-size: ${fontSize.md};
 
     `}
   }
@@ -64,4 +68,11 @@ export const StyledTime = styled.div`
   bottom: 0px;
   z-index: 1;
   left: 14px;
+`;
+
+export const StyledButtonText = styled.div`
+  font-weight: ${fontWeight.bolder};
+  ${media.lg`
+   font-weight:${fontWeight.normal}
+  `}
 `;

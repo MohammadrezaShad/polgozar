@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, Input, Comment } from 'antd';
 
-import { StyledItem, StyledButton, StyledComment } from './commentItem.styled';
+import { StyledItem, StyledButton, StyledComment, StyledButtonText } from './commentItem.styled';
 import Button from '../button';
 import Avatar from '../avatar/avatar';
 
@@ -43,7 +43,7 @@ const Editor = ({
           </StyledItem>
           <StyledButton bg={bg}>
             <Button shape={comment ? 'link' : 'opacity'} color="font" onClick={comment ? onReplay : onSubmit}>
-              {comment ? 'Replay' : 'Send'}
+              <StyledButtonText>{comment ? 'Replay' : 'Send'}</StyledButtonText>
             </Button>
           </StyledButton>
         </>

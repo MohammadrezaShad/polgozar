@@ -67,7 +67,7 @@ export const StyledUploadWrap = styled.label`
     left: 50%;
     transform: translate(-50%, -50%);
     ${media.xs`
-     font-size:${fontSize.xl};
+     font-size:${fontSize.sm};
   `}
   }
   input {
@@ -110,7 +110,11 @@ export const StyledButtonWrap = styled.div`
     min-width: auto;
   `}
 `;
-export const StyledButtonText = styled.span``;
+export const StyledButtonText = styled.span`
+  ${media.xs`
+    font-size:${fontSize.sm};
+  `}
+`;
 
 export const StyledAlbumWrap = styled.div`
   display: flex;

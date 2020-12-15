@@ -1,5 +1,6 @@
 import { fontSize, fontWeight, radius, fontType, colors, spacer } from 'settings/style';
 import styled from 'styled-components';
+import { media } from '../../../settings/style';
 
 export const StyledWrapper = styled.div`
   display: flex;
@@ -9,6 +10,10 @@ export const StyledWrapper = styled.div`
   flex: 0 0 105px;
   height: 100px;
   overflow: hidden;
+  ${media.xs`
+  flex: 0 0 100%;
+
+  `}
 `;
 
 export const StyledBlock = styled.div`
